@@ -3,7 +3,7 @@ import Image from 'next/image'
 import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
 
-export default function Home() {
+export default function Home(props) {
   const image = [
     "https://images4.alphacoders.com/113/1133943.png",
     "https://images.alphacoders.com/113/1133684.jpg",
