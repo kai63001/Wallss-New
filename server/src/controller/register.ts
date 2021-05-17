@@ -3,10 +3,6 @@ import {User} from '../model/'
 
 const router:Router = express.Router()
 
-router.get('/',(req: Request, res: Response)=>{
-   res.send('register') 
-})
-
 const checkValidate = (req: Request, res: Response, next:NextFunction) => {
     if(!req.body.username) return res.json({status:"username require"})
     if(!req.body.name) return res.json({status:"name require"})

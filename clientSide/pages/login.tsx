@@ -5,10 +5,41 @@ import { useState } from "react";
 import Link from "next/link";
 
 const Login = () => {
+  const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const loginSystem = (e) => {
+  const onHanndleChangeValidate = (e) => {
+    const { name } = e.target;
+    setErrors({
+      ...errors,
+      [name]: "",
+    });
+  };
+
+  const inputValidate = (body) => {
+    let errorTag = {}
+    let isValid = true;
+    if(!body.username){
+      isValid = false
+      errorTag["username"] = "Username is required";
+    }
+
+    if(!body.password){
+      isValid = false
+      errorTag["password"] = "Password is required";
+    }
+    setErrors(errorTag)
+    return isValid
+  }
+
+  const loginSystem = async (e) => {
     e.preventDefault()
+    const body = {
+      username : e.target.username.value,
+      password : e.target.password.value,
+    }
+    if(!inputValidate(body)) return
+    
   }
 
   return (
@@ -22,11 +53,13 @@ const Login = () => {
           <br />
           <form onSubmit={loginSystem}>
             <Input
-              name="username "
+              name="username"
               label="Your email or username"
               placeholder="jose@singh.com"
+              error={errors["username"]}
+              onChange={onHanndleChangeValidate}
             />
-            <Input name="password" label="Password" placeholder="password" password />
+            <Input name="password" label="Password" placeholder="password" error={errors["password"]} onChange={onHanndleChangeValidate} password />
             <button
               className="flex bg-purple-500 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 text-white py-2 px-5 cursor-pointer"
               type="submit"
