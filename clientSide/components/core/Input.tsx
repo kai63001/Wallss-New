@@ -6,6 +6,7 @@ interface inputData {
   error?: string;
   placeholder?: string;
   password?: boolean;
+  onChange?: (e:any)=> any;
 }
 
 const Input = (props: inputData) => {
@@ -34,6 +35,7 @@ const Input = (props: inputData) => {
                 ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                 : "border-gray-200 focus:border-purple-500 focus:ring-purple-500"
             } py-1 pl-3`}
+            onChange={props.onChange}
             placeholder={props.placeholder}
         />
         {props.password && (
@@ -43,7 +45,7 @@ const Input = (props: inputData) => {
         )}
       </div>
       {props.error && (
-        <span className="text-sm text-red-500">{props.error}</span>
+          <div className="text-sm text-red-500">{props.error}</div>
       )}
     </div>
   );
