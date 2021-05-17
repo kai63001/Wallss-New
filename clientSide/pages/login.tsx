@@ -2,11 +2,17 @@ import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
 const Input = dynamic(import("@/components/core/Input"));
 import { useState } from "react";
+import {useRouter} from 'next/router';
 import Link from "next/link";
+import axios from "axios";
+import { Cookies } from 'react-cookie';
 
+const cookies = new Cookies();
 const Login = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  
+  const router = useRouter()
 
   const onHanndleChangeValidate = (e) => {
     const { name } = e.target;
@@ -33,13 +39,25 @@ const Login = () => {
   }
 
   const loginSystem = async (e) => {
+    let errorTag = {}
     e.preventDefault()
+    setLoading(true);
     const body = {
       username : e.target.username.value,
       password : e.target.password.value,
     }
     if(!inputValidate(body)) return
-    
+    const data = await axios.post(`${process.env.HOST}/login`,body)
+    console.log(data)
+    if(!data.data.jwt){
+      errorTag["username"] = "Username or Password is invalid"
+      errorTag["password"] = "Username or Password is invalid"
+      setErrors(errorTag)
+      setLoading(false)
+      return
+    }
+    cookies.set('token',data.data.jwt);
+    router.push('/profile')
   }
 
   return (
