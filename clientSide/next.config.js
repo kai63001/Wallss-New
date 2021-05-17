@@ -4,6 +4,9 @@ module.exports = {
   sassOptions: {
     includePaths: [path.join(__dirname, "styles")],
   },
+  env: {
+    HOST: 'http://localhost:3001',
+  },
   images: {
     domains: [
       "images.alphacoders.com", 

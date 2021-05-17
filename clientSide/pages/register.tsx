@@ -2,9 +2,14 @@ import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
 const Input = dynamic(import("@/components/core/Input"));
 import { useState } from "react";
+import axios from "axios";
+import {useRouter } from 'next/router'
 
 const Register = () => {
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const router = useRouter()
 
   const onHanndleChangeValidate = (e) => {
     const { name } = e.target;
@@ -17,48 +22,60 @@ const Register = () => {
   const inputValidate = (e) => {
     let formIsValid = true;
     let errorser = {};
-    console.log(e.target.name.value);
-
     if (e.target.name.value.length <= 0) {
       formIsValid = false;
       errorser["name"] = "Name is required";
     }
-
     if (e.target.username.value.length <= 0) {
       formIsValid = false;
       errorser["username"] = "Username is invalid";
     }
-
     if (e.target.email.value.length <= 0) {
       formIsValid = false;
       errorser["email"] = "Email is required";
-    }else{
-      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-      if(re.test(String(e.target.email.value).toLowerCase()) == false){
+    } else {
+      const re =
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (re.test(String(e.target.email.value).toLowerCase()) == false) {
         formIsValid = false;
         errorser["email"] = "Email is invalid";
       }
     }
-
     if (e.target.password.value.length <= 0) {
       formIsValid = false;
       errorser["password"] = "Password is required";
     }
-
     if (!e.target.checkbox.checked) {
       formIsValid = false;
-      errorser["checkbox"] = "You must read and agree to the Terms of Service to continue";
+      errorser["checkbox"] =
+        "You must read and agree to the Terms of Service to continue";
     }
-
     setErrors(errorser);
     return formIsValid;
   };
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     if (!inputValidate(e)) return;
-
-    console.log(e.target.checkbox.checked);
+    const body = {
+      username: e.target.username.value,
+      password: e.target.password.value,
+      email: e.target.email.value,
+      name: e.target.name.value,
+    };
+    setLoading(true);
+    const data = await axios.post(`${process.env.HOST}/register`, body);
+    if (data.data.status == "username already exit!!") {
+      const errorser = {};
+      setLoading(false);
+      errorser["username"] = "Username already exists";
+      setErrors(errorser);
+      return
+    }
+    if(data.data.status == "success"){
+      router.push('/login')
+    }
+    console.log(data);
   };
 
   return (
@@ -112,16 +129,46 @@ const Register = () => {
               <label htmlFor="checkbox" className="ml-2 select-none">
                 By creating an account, you agree to our Terms of Service and
                 Privacy Policy.
-                {errors["checkbox"] && (<div className="text-sm text-red-500">{errors["checkbox"]}</div>)}
+                {errors["checkbox"] && (
+                  <div className="text-sm text-red-500">
+                    {errors["checkbox"]}
+                  </div>
+                )}
               </label>
             </div>
-            <input
-              className="bg-purple-500 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 text-white py-2 px-5 cursor-pointer"
-              value="Create account"
+            <button
+              className="flex bg-purple-500 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 text-white py-2 px-5 cursor-pointer"
               type="submit"
-            />
+              disabled={loading}
+            >
+              {loading && (
+                <svg
+                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              )}
+              <span>Create account</span>
+            </button>
           </form>
         </div>
+        <br />
+        <br />
       </div>
     </Layout>
   );
