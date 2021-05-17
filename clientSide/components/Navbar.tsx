@@ -5,7 +5,7 @@ const Navbar = () => {
       <nav className="bg-white py-2">
         <div className="flex max-w-screen-xl mx-auto px-2 sm:px-0">
           <div className="flex-1 sm:flex-none w-2/12">
-            <div className={"logo text-3xl "}>
+            <div className={"logo text-3xl font-romeo2"}>
               <Link href="/">
                 <a>WALLSS</a>
               </Link>
@@ -34,15 +34,17 @@ const Navbar = () => {
             </form>
           </div>
           <div className="flex-1 sm:flex-none w-3/12 sm:block hidden">
-            <div className="flex justify-end pl-2 h-full">
-              <button className=" flex-grow h-full ml-1 text-purple focus:outline-none">Sign In</button>
-              <button className="flex justify-center items-center bg-purple-500 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex-grow h-full ml-2 text-white">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span className="ml-1"> Create Account</span>
-              </button>
-            </div>
+            <Link href={`/register`}>
+              <a className="flex justify-end pl-2 h-full">
+                <button className=" flex-grow h-full ml-1 text-purple focus:outline-none">Sign In</button>
+                <button className="flex justify-center items-center bg-purple-500 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex-grow h-full ml-2 text-white">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="ml-1"> Create Account</span>
+                </button>
+              </a>
+            </Link>
           </div>
         </div>
       </nav>

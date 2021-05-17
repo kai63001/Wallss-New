@@ -3,6 +3,10 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {},
+    fontFamily: {
+      'romeo': ['romeo'],
+      'romeo2': ['Fredoka One']
+     }
   },
   variants: {
     extend: {},

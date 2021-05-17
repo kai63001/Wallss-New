@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
 @font-face {
   font-family: "romeo";
   src: url("./fonts/proxima-nova-soft.otf");
@@ -21,3 +21,12 @@ div#__next > div {
   height: 100% !important;
 }
 
+footer {
+  background: white;
+  width: 100%;
+  padding: 15px 0px;
+}
+
+main {
+  min-height: 86% !important;
+}
