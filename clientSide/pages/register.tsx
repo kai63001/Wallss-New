@@ -4,6 +4,7 @@ const Input = dynamic(import("@/components/core/Input"));
 import { useState } from "react";
 import axios from "axios";
 import {useRouter } from 'next/router'
+import Link from 'next/link'
 
 const Register = () => {
   const [errors, setErrors] = useState({});
@@ -166,6 +167,8 @@ const Register = () => {
               <span>Create account</span>
             </button>
           </form>
+          <br />
+          <span>Already have an account? <Link href="/login"><a className="text-purple-600">Sign in</a></Link></span>
         </div>
         <br />
         <br />
