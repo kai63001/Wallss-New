@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
-const Profile = () => {
+const Profile = (props) => {
   const [showDropdown, setShowDropdown] = useState(false);
   const dropdown = useRef(null);
   useEffect(() => {
@@ -66,7 +66,31 @@ const Profile = () => {
           ref={dropdown}
           className="absolute bg-white right-0 top-10 z-10 shadow max-w-xs w-64"
         >
-          <div className="px-5 py-2">asdasdas</div>
+          <div className="px-2 py-2">
+            <div className="py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
+            <div className="grid grid-cols-3 gap-4">
+              <Image
+                className="bg-purple-300 rounded-full cursor-pointer col-span-2"
+                src={`https://avatarfiles.alphacoders.com/282/thumb-282572.png`}
+                alt="Picture of the author"
+                width={36}
+                height={60}
+                quality={100}
+                layout="intrinsic"
+              />
+              <div className="flex items-center justify-items-center capitalize truncate ">
+                {props.auth.name}
+              </div>
+            </div>
+            </div>
+            <hr />
+            <div className="py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
+              Settings
+            </div>
+            <div className="py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
+              Logout
+            </div>
+          </div>
         </div>
       )}
     </div>

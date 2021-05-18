@@ -42,7 +42,7 @@ const Navbar = (props) => {
         </div>
         <div suppressHydrationWarning={true} className={`flex-1 sm:flex-none ${auth ? ('w-2/12'):('w-3/12')} sm:block hidden`}>
           {auth ? (
-            <Profile />
+            <Profile auth={auth} />
           ) : (
             <div className="flex justify-end pl-2 h-full">
               <Link href={`/login`}>
