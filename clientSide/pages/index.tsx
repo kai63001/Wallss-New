@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 // import styles from '../styles/Home.module.css'
 import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
@@ -36,12 +37,14 @@ export default function Home(props) {
             is an image discovery platform. Share the things you create, or share the things you love.
             <br />
             <div className="flex justify-center">
-            <button className="flex justify-start bg-purple-700 text-white px-6 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-purple-400">
+            <Link href="/upload">
+            <a className="flex justify-start bg-purple-700 text-white px-6 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-purple-400">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
               </svg> 
               <span>Upload</span>
-            </button>
+            </a>
+            </Link>
             </div>
             <br />
           </div>

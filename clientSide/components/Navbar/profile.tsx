@@ -21,22 +21,24 @@ const Profile = (props) => {
     <div className="relative">
       <div className="flex justify-end h-full">
         <div className="flex items-center justify-center mr-3">
-          <div className="mr-3">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 text-purple-600 cursor-pointer"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-              />
-            </svg>
-          </div>
+          <Link href="/upload">
+            <a className="mr-3">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 text-purple-600 cursor-pointer"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                />
+              </svg>
+            </a>
+          </Link>
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -72,25 +74,26 @@ const Profile = (props) => {
         >
           <div className="px-2 py-2">
             <Link href="/profile">
-            <a className="py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1 block">
-              <div className="grid grid-cols-3 gap-4">
-                <Image
-                  className="bg-purple-300 rounded-full cursor-pointer col-span-1"
-                  src={props.auth.profile}
-                  alt={`profile ${props.auth.name}`}
-                  width={36}
-                  height={60}
-                  quality={100}
-                  layout="intrinsic"
-                />
-                <div className="flex items-center justify-items-center capitalize truncate col-span-2">
-                  {props.auth.name}
+              <a className="py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1 block">
+                <div className="grid grid-cols-3 gap-4">
+                  <Image
+                    className="bg-purple-300 rounded-full cursor-pointer col-span-1"
+                    src={props.auth.profile}
+                    alt={`profile ${props.auth.name}`}
+                    width={36}
+                    height={60}
+                    quality={100}
+                    layout="intrinsic"
+                  />
+                  <div className="flex items-center justify-items-center capitalize truncate col-span-2">
+                    {props.auth.name}
+                  </div>
                 </div>
-              </div>
-            </a>
+              </a>
             </Link>
             <hr />
-            <div className="flex justify-items-center items-center py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
+            <Link href='/upload'>
+            <a className="flex justify-items-center items-center py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
               <div className="bg-purple-300 mr-2 rounded-full p-1 text-w">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +111,8 @@ const Profile = (props) => {
                 </svg>
               </div>
               <div className="">Upload</div>
-            </div>
+            </a>
+            </Link>
             <div className="flex justify-items-center items-center py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
               <div className="bg-purple-300 mr-2 rounded-full p-1 text-w">
                 <svg
