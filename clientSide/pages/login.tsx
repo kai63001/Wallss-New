@@ -73,7 +73,7 @@ const Login = () => {
             <Input
               name="username"
               label="Your email or username"
-              placeholder="jose@singh.com"
+              placeholder="example@winters.com"
               error={errors["username"]}
               onChange={onHanndleChangeValidate}
             />

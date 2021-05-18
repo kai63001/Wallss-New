@@ -93,21 +93,21 @@ const Register = () => {
             <Input
               name="name"
               label="* Name"
-              placeholder="E.g. Jose Singh"
+              placeholder="E.g. Ethan Winters"
               onChange={onHanndleChangeValidate}
               error={errors["name"]}
             />
             <Input
               name="username"
               label="* Username"
-              placeholder="E.g. joseSingh"
+              placeholder="E.g. ethanWinters"
               error={errors["username"]}
               onChange={onHanndleChangeValidate}
             />
             <Input
               name="email"
               label="* Email"
-              placeholder="E.g. jose@singh.com"
+              placeholder="E.g. ethan@blueum.com"
               error={errors["email"]}
               onChange={onHanndleChangeValidate}
             />
