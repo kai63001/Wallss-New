@@ -7,7 +7,6 @@ const Profile = dynamic(import("@/components/Navbar/profile"));
 
 const cookies = new Cookies();
 const Navbar = (props) => {
-  console.log("romeoo:", props.romeo);
   const auth = isAuth(cookies.get("token"));
   return (
     <nav className="bg-white py-2">
@@ -15,7 +14,7 @@ const Navbar = (props) => {
         <div className="flex-1 sm:flex-none w-2/12">
           <div className={"logo text-3xl font-romeo2"}>
             <Link href="/">
-              <a>WALLSS {props.romeo}</a>
+              <a><span className="text-purple-600">W</span>ALLSS</a>
             </Link>
           </div>
         </div>
@@ -41,7 +40,7 @@ const Navbar = (props) => {
             />
           </form>
         </div>
-        <div suppressHydrationWarning={true} className="flex-1 sm:flex-none w-3/12 sm:block hidden">
+        <div suppressHydrationWarning={true} className={`flex-1 sm:flex-none ${auth ? ('w-2/12'):('w-3/12')} sm:block hidden`}>
           {auth ? (
             <Profile />
           ) : (

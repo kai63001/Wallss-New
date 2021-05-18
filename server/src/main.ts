@@ -25,5 +25,5 @@ app.use("/register", Register);
 app.use("/login", Login);
 
 app.listen(3001, () => {
-  console.log(colors.green("SERVER START ON PORT :"), colors.bgGreen(" 3000 "));
+  console.log(colors.green("SERVER START ON PORT :"), colors.bgGreen(" 3001 "));
 });
