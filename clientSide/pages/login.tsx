@@ -41,12 +41,12 @@ const Login = () => {
   const loginSystem = async (e) => {
     let errorTag = {}
     e.preventDefault()
-    setLoading(true);
     const body = {
       username : e.target.username.value,
       password : e.target.password.value,
     }
     if(!inputValidate(body)) return
+    setLoading(true);
     const data = await axios.post(`${process.env.HOST}/login`,body)
     console.log(data)
     if(!data.data.jwt){

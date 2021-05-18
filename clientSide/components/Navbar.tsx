@@ -40,34 +40,36 @@ const Navbar = (props) => {
             />
           </form>
         </div>
-        <div suppressHydrationWarning={true} className={`flex-1 sm:flex-none ${auth ? ('w-2/12'):('w-3/12')} sm:block hidden`}>
+        <div suppressHydrationWarning={true} className={`flex-1 sm:flex-none ${auth ? ('w-2/12'):('w-3/12')} `}>
           {auth ? (
             <Profile auth={auth} />
           ) : (
             <div className="flex justify-end pl-2 h-full">
               <Link href={`/login`}>
-                <a className="flex justify-center items-center flex-grow h-full ml-1 text-purple focus:outline-none">
+                <a className="flex justify-center bg-purple-600 text-white sm:bg-white sm:text-black items-center flex-grow h-full ml-1 text-purple focus:outline-none">
                   Sign In
                 </a>
               </Link>
               <Link href={`/register`}>
-                <a className="flex justify-center items-center bg-purple-500 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex-grow h-full ml-2 text-white">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
-                  <span className="ml-1"> Create Account</span>
-                </a>
+                <div className="hidden sm:inline-block cursor-pointer">
+                  <a className="flex justify-center items-center bg-purple-500 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-opacity-50 flex-grow h-full ml-2 text-white px-3">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                    <span className="ml-1"> Create Account</span>
+                  </a>
+                </div>
               </Link>
             </div>
           )}
