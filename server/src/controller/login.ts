@@ -10,11 +10,11 @@ router.post("/", async (req: Request, res: Response) => {
     $or: [{ username: req.body.username }, { email: req.body.username }],
     password: req.body.password,
   })
-    .select({ _id: 1, name: 1 })
+    .select({ _id: 1, name: 1,profile:1 })
     .lean();
   if (data) {
     jwter = jwt.sign(
-      { userId: data._id, name: data.name },
+      { userId: data._id, name: data.name,profile: data.profile },
       process.env.SECRET || "shadow"
     );
   }

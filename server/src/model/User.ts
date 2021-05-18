@@ -17,6 +17,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    profile: {
+        type: String,
+        required: true,
+        default: '/astronaut.png'
+    }
 })
 
 const User = mongoose.model('User', UserSchema);

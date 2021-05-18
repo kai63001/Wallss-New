@@ -57,7 +57,7 @@ const Profile = (props) => {
         <Image
           onClick={() => setShowDropdown((b) => !b)}
           className="bg-purple-300 rounded-full cursor-pointer"
-          src={`https://avatarfiles.alphacoders.com/282/thumb-282572.png`}
+          src={props.auth.profile}
           alt={props.auth.name}
           width={36}
           height={36}
@@ -74,15 +74,15 @@ const Profile = (props) => {
             <div className="py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
               <div className="grid grid-cols-3 gap-4">
                 <Image
-                  className="bg-purple-300 rounded-full cursor-pointer col-span-2"
-                  src={`https://avatarfiles.alphacoders.com/282/thumb-282572.png`}
+                  className="bg-purple-300 rounded-full cursor-pointer col-span-1"
+                  src={props.auth.profile}
                   alt={`profile ${props.auth.name}`}
                   width={36}
                   height={60}
                   quality={100}
                   layout="intrinsic"
                 />
-                <div className="flex items-center justify-items-center capitalize truncate ">
+                <div className="flex items-center justify-items-center capitalize truncate col-span-2">
                   {props.auth.name}
                 </div>
               </div>
