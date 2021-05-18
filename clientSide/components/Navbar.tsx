@@ -2,9 +2,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { Cookies } from "react-cookie";
 import { isAuth } from "@/lib/auth";
+import dynamic from "next/dynamic";
+const Profile = dynamic(import("@/components/Navbar/profile"));
 
 const cookies = new Cookies();
 const Navbar = (props) => {
+  console.log("romeoo:", props.romeo);
   const auth = isAuth(cookies.get("token"));
   return (
     <nav className="bg-white py-2">
@@ -12,7 +15,7 @@ const Navbar = (props) => {
         <div className="flex-1 sm:flex-none w-2/12">
           <div className={"logo text-3xl font-romeo2"}>
             <Link href="/">
-              <a>WALLSS {props.stars}</a>
+              <a>WALLSS {props.romeo}</a>
             </Link>
           </div>
         </div>
@@ -38,24 +41,10 @@ const Navbar = (props) => {
             />
           </form>
         </div>
-        {auth ? (
-          <>
-          <div className="flex-1 sm:flex-none w-2/12 sm:block hidden">
-            <div className="flex justify-end h-full">
-              <Image
-                className="bg-purple-300 rounded-full"
-                src={`https://avatarfiles.alphacoders.com/282/thumb-282572.png`}
-                alt="Picture of the author"
-                width={36}
-                height={36}
-                quality={100}
-                layout="intrinsic"
-              />
-            </div>
-          </div>
-          </>
-        ) : (
-          <div className="flex-1 sm:flex-none w-3/12 sm:block hidden">
+        <div suppressHydrationWarning={true} className="flex-1 sm:flex-none w-3/12 sm:block hidden">
+          {auth ? (
+            <Profile />
+          ) : (
             <div className="flex justify-end pl-2 h-full">
               <Link href={`/login`}>
                 <a className="flex justify-center items-center flex-grow h-full ml-1 text-purple focus:outline-none">
@@ -82,8 +71,8 @@ const Navbar = (props) => {
                 </a>
               </Link>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </nav>
   );

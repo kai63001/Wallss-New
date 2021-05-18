@@ -3,7 +3,11 @@ const SECRET = process.env.SECRET || 'shadow';
 
 export const isAuth =  (token:string) => {
     if(token) {
-        return jwt.verify(token, SECRET);
+        try {
+            return jwt.verify(token, SECRET);
+        } catch (error) {
+            return null
+        }
     }
     return null
 };
