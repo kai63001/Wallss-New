@@ -6,6 +6,8 @@ const Input = dynamic(import("@/components/core/Input"));
 import { isAuth } from "@/lib/auth";
 
 const UploadPage = (props) => {
+  const [type, setType] = useState(0);
+
   // console.log(props.romeo)
   return (
     <Layout>
@@ -26,10 +28,17 @@ const UploadPage = (props) => {
         </div>
         <div className="border-dashed border-4 border-purple-300 mt-4 p-3">
           <div className="flex flex-row mb-2 space-x-4">
-            <div className="w-32 h-32 rounded-md bg-purple-700 text-white flex items-center justify-center flex-col cursor-pointer">
+            <div
+              onClick={() => setType(0)}
+              className={`w-32 h-32  ${
+                type == 0 ? "bg-purple-700 text-white" : "bg-white text-black"
+              }  flex items-center justify-center flex-col cursor-pointer`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
+                className={`h-6 w-6 ${
+                  type == 0 ? "text-white" : "text-purple-700"
+                }`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -44,10 +53,17 @@ const UploadPage = (props) => {
               <div>Desktop</div>
               <div className="text-sm text-gray-400 -mt-1">JPG,PNG,GIF</div>
             </div>
-            <div className="w-32 h-32 rounded-m text-black flex items-center justify-center flex-col cursor-pointer">
+            <div
+              onClick={() => setType(1)}
+              className={`w-32 h-32 ${
+                type == 1 ? "bg-purple-700 text-white" : "bg-white text-black"
+              } flex items-center justify-center flex-col cursor-pointer`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-purple-700"
+                className={`h-6 w-6 ${
+                  type == 1 ? "text-white" : "text-purple-700"
+                }`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
