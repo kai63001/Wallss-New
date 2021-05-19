@@ -7,6 +7,7 @@ import { isAuth } from "@/lib/auth";
 
 const UploadPage = (props) => {
   const [type, setType] = useState(0);
+  const [hasAuthor, setHasAuthor] = useState(false);
 
   // console.log(props.romeo)
   return (
@@ -30,7 +31,7 @@ const UploadPage = (props) => {
           <div className="flex flex-row mb-2 space-x-4">
             <div
               onClick={() => setType(0)}
-              className={`w-32 h-32  ${
+              className={`w-32 h-32 ${
                 type == 0 ? "bg-purple-700 text-white" : "bg-white text-black"
               }  flex items-center justify-center flex-col cursor-pointer`}
             >
@@ -103,25 +104,30 @@ const UploadPage = (props) => {
         <div className="my-5">
           <div className="bg-purple-500 px-5 py-2 text-white">Wall Details</div>
           <div className="bg-white p-5">
-            Author
-            <label className="block cursor-pointer select-none">
-              <input
-                type="checkbox"
-                name="author"
-                className="mr-2 form-checkbox border-purple-700 text-purple-700 outline-none"
-                id="author"
-              />
-              Has an author
-            </label>
-            {/* <input
-              type="text"
-              className={` focus:ring-1  focus:outline-none w-full text-black placeholder-gray-500 border ${
-                false
-                  ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                  : "border-gray-200 focus:border-purple-500 focus:ring-purple-500"
-              } py-1 pl-3`}
-              placeholder="What is your wall called"
-            /> */}
+            <div className="">
+              <span className="text-lg">Author</span>
+              <label className="block cursor-pointer select-none text-gray-700">
+                <input
+                  onClick={() => setHasAuthor(!hasAuthor)}
+                  type="checkbox"
+                  name="author"
+                  className="mr-2 form-checkbox border-purple-700 text-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                  id="author"
+                />
+                Has an author
+              </label>
+              {hasAuthor && (
+                <input
+                  type="text"
+                  className={` mt-1 focus:ring-1  focus:outline-none w-full text-black placeholder-gray-500 border-gray-200 focus:border-purple-500 focus:ring-purple-500 py-1 pl-3`}
+                  placeholder="Author name"
+                />
+              )}
+            </div>
+            <div className="mt-2">
+              <span className="text-lg">Category</span>
+              
+            </div>
           </div>
         </div>
       </div>
