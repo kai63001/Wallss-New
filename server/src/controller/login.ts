@@ -18,7 +18,7 @@ router.post("/", async (req: Request, res: Response) => {
       process.env.SECRET || "shadow"
     );
   }
-  console.log(data);
+  // console.log(data);
   res.json({ jwt: jwter });
 });
 
