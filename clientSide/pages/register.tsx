@@ -3,14 +3,14 @@ const Layout = dynamic(import("@/components/Layout"));
 const Input = dynamic(import("@/components/core/Input"));
 import { useState } from "react";
 import axios from "axios";
-import {useRouter } from 'next/router'
-import Link from 'next/link'
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const Register = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const onHanndleChangeValidate = (e) => {
     const { name } = e.target;
@@ -71,10 +71,10 @@ const Register = () => {
       setLoading(false);
       errorser["username"] = "Username already exists";
       setErrors(errorser);
-      return
+      return;
     }
-    if(data.data.status == "success"){
-      router.push('/login')
+    if (data.data.status == "success") {
+      router.push("/login");
     }
     console.log(data);
   };
@@ -122,7 +122,7 @@ const Register = () => {
             <div className="mb-2 block">
               <input
                 name="checkbox"
-                className="checked:bg-purple-500"
+                className="form-checkbox border-purple-700 text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600"
                 id="checkbox"
                 type="checkbox"
                 onChange={onHanndleChangeValidate}
@@ -168,7 +168,12 @@ const Register = () => {
             </button>
           </form>
           <br />
-          <span>Already have an account? <Link href="/login"><a className="text-purple-600">Sign in</a></Link></span>
+          <span>
+            Already have an account?{" "}
+            <Link href="/login">
+              <a className="text-purple-600">Sign in</a>
+            </Link>
+          </span>
         </div>
         <br />
         <br />
