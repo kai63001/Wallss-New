@@ -100,6 +100,30 @@ const UploadPage = (props) => {
             </button>
           </div>
         </div>
+        <div className="my-5">
+          <div className="bg-purple-500 px-5 py-2 text-white">Wall Details</div>
+          <div className="bg-white p-5">
+            Author
+            <label className="block cursor-pointer select-none">
+              <input
+                type="checkbox"
+                name="author"
+                className="mr-2 form-checkbox border-purple-700 text-purple-700 outline-none"
+                id="author"
+              />
+              Has an author
+            </label>
+            {/* <input
+              type="text"
+              className={` focus:ring-1  focus:outline-none w-full text-black placeholder-gray-500 border ${
+                false
+                  ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                  : "border-gray-200 focus:border-purple-500 focus:ring-purple-500"
+              } py-1 pl-3`}
+              placeholder="What is your wall called"
+            /> */}
+          </div>
+        </div>
       </div>
     </Layout>
   );
