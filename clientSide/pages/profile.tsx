@@ -1,7 +1,12 @@
-const ProfilePage = () => {
-    return (
-        <div className="">Profile</div>
-    )
-}
+import dynamic from "next/dynamic";
+const Layout = dynamic(import("@/components/Layout"));
 
-export default ProfilePage
+const ProfilePage = () => {
+  return (
+    <Layout>
+      <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">asd</div>
+    </Layout>
+  );
+};
+
+export default ProfilePage;
