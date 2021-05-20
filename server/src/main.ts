@@ -1,6 +1,6 @@
 import express, { Application, Request, Response } from "express";
 import colors from "colors";
-import { Register,Login } from "./controller";
+import { Register,Login, Upload } from "./controller";
 import db from "./db/connect";
 import cors from 'cors'
 
@@ -23,6 +23,7 @@ app.get("/", (req: Request, res: Response) => {
 
 app.use("/register", Register);
 app.use("/login", Login);
+app.use("/upload", Upload);
 
 app.listen(3001, () => {
   console.log(colors.green("SERVER START ON PORT :"), colors.bgGreen(" 3001 "));
