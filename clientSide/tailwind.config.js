@@ -9,7 +9,10 @@ module.exports = {
      }
   },
   variants: {
-    extend: {},
+    extend: {
+      backgroundColor: ['group-focus'],
+      scale: ['focus-within'],
+    }
   },
   plugins: [require('@tailwindcss/forms'),]
 }

@@ -3,6 +3,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
 const Input = dynamic(import("@/components/core/Input"));
+const InputCategory = dynamic(import("@/components/core/InputCategory"));
 import { isAuth } from "@/lib/auth";
 
 const UploadPage = (props) => {
@@ -126,10 +127,14 @@ const UploadPage = (props) => {
             </div>
             <div className="mt-2">
               <span className="text-lg">Category</span>
-              
+              <InputCategory />
             </div>
           </div>
         </div>
+        <br /><br /><br />
+        <br /><br /><br />
+        <br /><br /><br />
+        <br /><br /><br />
       </div>
     </Layout>
   );
