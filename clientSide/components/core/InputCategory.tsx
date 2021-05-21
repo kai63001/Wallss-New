@@ -2,29 +2,17 @@ import axios from "@/lib/axios";
 import { useState, useEffect } from "react";
 
 const InputCategory = (props) => {
-  const [list, setList] = useState([]);
+  // const [list, setList] = useState([]);
   const [input, setInput] = useState("");
 
   const [listSearch, setListSearch] = useState([]);
   const [rawlistSearch, setRawListSearch] = useState([]);
 
-  const mockUp = [
-    {
-      name: "romeo",
-    },
-    {
-      name: "romeo2",
-    },
-    {
-      name: "anime",
-    },
-  ];
-
   const onSearchCategory = async (e) => {
     if (e.target.value.length >= 3) {
       if (e.target.value.length == 3) {
         const data = await axios.get(`${process.env.HOST}/upload/category?name=${e.target.value}`)
-        console.log(data.data)
+        // console.log(data.data)
         setRawListSearch([...data.data])
         setListSearch([...data.data]);
       }
@@ -32,8 +20,8 @@ const InputCategory = (props) => {
         const data = listSearch.filter((data, i) => {
           return data.name.search(new RegExp(e.target.value, "i")) > -1;
         });
-        console.log("data:",data);
-        console.log("input:",e.target.value);
+        // console.log("data:",data);
+        // console.log("input:",e.target.value);
         setListSearch([...data]);
       }
     }
@@ -42,16 +30,16 @@ const InputCategory = (props) => {
   const onInputListChange = (e) => {
     if (e.keyCode == 13 && e.target.value) {
       console.log("enterrr");
-      if (!(list.indexOf(e.target.value) >= 0)) {
-        setList([...list, e.target.value]);
+      if (!(props.list.indexOf(e.target.value) >= 0)) {
+        props.setList([...props.list, e.target.value]);
       }
       e.target.value = "";
       setInput("");
     }
     if (e.keyCode == 8 && !e.target.value) {
-      let data = list;
+      let data = props.list;
       data.pop();
-      setList([...data]);
+      props.setList([...data]);
       setInput("");
     }
     if(e.keyCode == 8 && e.target.value) {
@@ -64,7 +52,7 @@ const InputCategory = (props) => {
       <div
         className={`flex overflow-auto items-center relative pl-1 focus-within:ring-1 focus-within:outline-none w-full text-black placeholder-gray-500 border border-gray-200 focus-within:border-purple-500 focus-within:ring-purple-500 p-0`}
       >
-        {list.map((data, i) => (
+        {props.list.map((data, i) => (
           <div
             key={i}
             className="bg-purple-600 text-white text-sm px-2 mr-1 whitespace-nowrap uppercase select-none cursor-pointer"

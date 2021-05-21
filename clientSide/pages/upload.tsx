@@ -10,6 +10,8 @@ const UploadPage = (props) => {
   const [type, setType] = useState(0);
   const [hasAuthor, setHasAuthor] = useState(false);
 
+  const [listCategory, setListCategory] = useState([])
+
   // console.log(props.romeo)
   return (
     <Layout>
@@ -127,7 +129,7 @@ const UploadPage = (props) => {
             </div>
             <div className="mt-2">
               <span className="text-lg">Category</span>
-              <InputCategory />
+              <InputCategory list={listCategory} setList={setListCategory} />
             </div>
           </div>
         </div>
