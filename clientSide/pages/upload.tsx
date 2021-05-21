@@ -127,7 +127,7 @@ const UploadPage = (props) => {
             </div>
             <div className="mt-2">
               <span className="text-lg">Category</span>
-              <InputCategory />
+              <InputCategory token={props.token} />
             </div>
           </div>
         </div>
@@ -166,6 +166,7 @@ export async function getServerSideProps({ req, res }) {
   }
   return {
     props: {
+      token
       // romeo: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined
     }, // will be passed to the page component as props
   };
