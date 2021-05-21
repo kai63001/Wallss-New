@@ -29,7 +29,7 @@ const InputCategory = (props) => {
 
   const onInputListChange = (e) => {
     if (e.keyCode == 13 && e.target.value) {
-      console.log("enterrr");
+      // console.log("enterrr");
       if (!(props.list.indexOf(e.target.value) >= 0)) {
         props.setList([...props.list, e.target.value]);
       }
@@ -46,6 +46,14 @@ const InputCategory = (props) => {
       setListSearch([...rawlistSearch])
     }
   };
+
+  const selectCategory = (name) => {
+    // console.log(name)
+    if (!(props.list.indexOf(name) >= 0)) {
+     props.setList([...props.list, name]);
+    }
+    setInput("");
+  }
 
   return (
     <div className="relative">
@@ -65,6 +73,7 @@ const InputCategory = (props) => {
           placeholder="E.g.Anime Gundam (Enter to add)"
           className="focus:outline-none w-full border-none focus:border-none outline-none focus:ring-0 py-1 pl-3"
           onKeyDown={onInputListChange}
+          value={input}
           onChange={(e) => {
             setInput(e.target.value);
             onSearchCategory(e);
@@ -76,6 +85,7 @@ const InputCategory = (props) => {
           {listSearch.map((data, i) => {
             return (
               <div
+                onClick={()=>selectCategory(data.name)}
                 key={i}
                 className="bg-purple-600 text-white text-sm mb-2 px-2 mr-1 whitespace-nowrap uppercase select-none cursor-pointer"
               >
