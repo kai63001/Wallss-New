@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "@/lib/axios";
 import { useState, useEffect } from "react";
 
 const InputCategory = (props) => {
@@ -23,11 +23,7 @@ const InputCategory = (props) => {
   const onSearchCategory = async (e) => {
     if (e.target.value.length >= 3) {
       if (e.target.value.length == 3) {
-        const data = await axios.get(`${process.env.HOST}/upload/category?name=${e.target.value}` ,{
-          headers: {
-            'Authorization': props.token
-          }
-        })
+        const data = await axios.get(`${process.env.HOST}/upload/category?name=${e.target.value}`)
         console.log(data.data)
         setRawListSearch([...data.data])
         setListSearch([...data.data]);

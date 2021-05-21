@@ -127,7 +127,7 @@ const UploadPage = (props) => {
             </div>
             <div className="mt-2">
               <span className="text-lg">Category</span>
-              <InputCategory token={props.token} />
+              <InputCategory />
             </div>
           </div>
         </div>

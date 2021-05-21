@@ -7,7 +7,7 @@ const router:Router = express.Router()
 router.get('/category',  async (req: Request, res: Response) => {
     // console.log(req.headers.authorization)
     const {name} =req.query
-    // if(!checkAuth(req.headers ? req.headers.authorization : undefined)) return res.json({status:"auth"})
+    if(!checkAuth(req.headers ? req.headers.authorization : undefined)) return res.json({status:"auth"})
     if(!name)
         return res.json({status:"name request"})
     const finded = await Category.find({name: {$regex: name, $options: 'i'}}).select({name:1,_id:0}).lean();
