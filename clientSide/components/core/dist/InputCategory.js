@@ -127,11 +127,11 @@ var InputCategory = function (props) {
     return (React.createElement("div", { className: "relative" },
         React.createElement("div", { className: "flex overflow-auto items-center relative pl-1 focus-within:ring-1 focus-within:outline-none w-full text-black placeholder-gray-500 border border-gray-200 focus-within:border-purple-500 focus-within:ring-purple-500 p-0" },
             props.list.map(function (data, i) { return (React.createElement("div", { key: i, className: "bg-purple-600 text-white text-sm px-2 mr-1 whitespace-nowrap uppercase select-none cursor-pointer" }, data)); }),
-            React.createElement("input", { type: "text", placeholder: "E.g.Anime Gundam (Enter to add)", className: "focus:outline-none w-full border-none focus:border-none outline-none focus:ring-0 py-1 pl-3", onKeyDown: onInputListChange, value: input, onChange: function (e) {
+            React.createElement("input", { type: "text", placeholder: props.placeholder || 'placeholder', className: "focus:outline-none w-full border-none focus:border-none outline-none focus:ring-0 py-1 pl-3", onKeyDown: onInputListChange, value: input, onChange: function (e) {
                     setInput(e.target.value);
                     onSearchCategory(e);
                 } })),
-        input.length >= 3 && (React.createElement("div", { className: "bg-white shadow absolute top-10 w-full p-3 flex flex-wrap" },
+        input.length >= 3 && props.type != 'tags' ? (React.createElement("div", { className: "bg-white shadow absolute top-10 w-full p-3 flex flex-wrap z-10" },
             listSearch.map(function (data, i) {
                 return (React.createElement("div", { onClick: function () { return selectCategory(data.name); }, key: i, className: "bg-purple-600 text-white text-sm mb-2 px-2 mr-1 whitespace-nowrap uppercase select-none cursor-pointer" }, data.name));
             }),
@@ -141,6 +141,6 @@ var InputCategory = function (props) {
                     React.createElement("div", { className: "border-purple-700 ring-2 ring-purple-700 px-2 ml-0.5 text-sm whitespace-nowrap uppercase select-none cursor-pointer hover:bg-purple-200 delay-75", onClick: addCategory },
                         "ADD ",
                         React.createElement("span", { className: "text-purple-700" }, input),
-                        " TO CATEGORY")))))));
+                        " TO CATEGORY"))))) : ('')));
 };
 exports["default"] = InputCategory;

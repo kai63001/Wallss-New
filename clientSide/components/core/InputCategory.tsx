@@ -83,7 +83,7 @@ const InputCategory = (props) => {
         ))}
         <input
           type="text"
-          placeholder="E.g.Anime Gundam (Enter to add)"
+          placeholder={props.placeholder || 'placeholder'}
           className="focus:outline-none w-full border-none focus:border-none outline-none focus:ring-0 py-1 pl-3"
           onKeyDown={onInputListChange}
           value={input}
@@ -93,8 +93,8 @@ const InputCategory = (props) => {
           }}
         />
       </div>
-      {input.length >= 3 && (
-        <div className="bg-white shadow absolute top-10 w-full p-3 flex flex-wrap">
+      {input.length >= 3 && props.type != 'tags' ? (
+        <div className="bg-white shadow absolute top-10 w-full p-3 flex flex-wrap z-10">
           {listSearch.map((data, i) => {
             return (
               <div
@@ -118,7 +118,7 @@ const InputCategory = (props) => {
             </div>
           </div>
         </div>
-      )}
+      ):('')}
     </div>
   );
 };

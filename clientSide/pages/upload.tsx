@@ -11,6 +11,7 @@ const UploadPage = (props) => {
   const [hasAuthor, setHasAuthor] = useState(false);
 
   const [listCategory, setListCategory] = useState([])
+  const [listTags, setListTags] = useState([])
 
   // console.log(props.romeo)
   return (
@@ -129,7 +130,13 @@ const UploadPage = (props) => {
             </div>
             <div className="mt-2">
               <span className="text-lg">Category</span>
-              <InputCategory list={listCategory} setList={setListCategory} />
+              <div className="text-sm text-gray-600 -mt-2">What walls category</div>
+              <InputCategory list={listCategory} setList={setListCategory} placeholder="E.g.Anime Gundam (Enter to add)" />
+            </div>
+            <div className="mt-2">
+              <span className="text-lg">Tags</span>
+              <div className="text-sm text-gray-600 -mt-2">Use tags to add more detailed</div>
+              <InputCategory type="tags" list={listTags} setList={setListTags} placeholder="E.g.Space Wing Star Flighter (Enter to add)"/>
             </div>
           </div>
         </div>
