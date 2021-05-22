@@ -17,9 +17,9 @@ router.get('/category',  async (req: Request, res: Response) => {
 router.post('/category', async (req: Request, res: Response)=> {
     const { name } = req.body
     const findCat = await Category.findOne({name: {$regex: "^"+name+"$", $options: 'i'}}).lean()
-    console.log(await findCat)
+    // console.log(await findCat)
     if(findCat){
-      console.log('return findCat')
+    //   console.log('return findCat')
       return  res.send(findCat)
     }
     const addCat = await Category.create({ name });

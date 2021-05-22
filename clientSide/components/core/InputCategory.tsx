@@ -11,9 +11,11 @@ const InputCategory = (props) => {
   const onSearchCategory = async (e) => {
     if (e.target.value.length >= 3) {
       if (e.target.value.length == 3) {
-        const data = await axios.get(`${process.env.HOST}/upload/category?name=${e.target.value}`)
+        const data = await axios.get(
+          `${process.env.HOST}/upload/category?name=${e.target.value}`
+        );
         // console.log(data.data)
-        setRawListSearch([...data.data])
+        setRawListSearch([...data.data]);
         setListSearch([...data.data]);
       }
       if (e.target.value.length > 3) {
@@ -42,18 +44,29 @@ const InputCategory = (props) => {
       props.setList([...data]);
       setInput("");
     }
-    if(e.keyCode == 8 && e.target.value) {
-      setListSearch([...rawlistSearch])
+    if (e.keyCode == 8 && e.target.value) {
+      setListSearch([...rawlistSearch]);
     }
   };
 
   const selectCategory = (name) => {
     // console.log(name)
     if (!(props.list.indexOf(name) >= 0)) {
-     props.setList([...props.list, name]);
+      props.setList([...props.list, name]);
     }
     setInput("");
-  }
+  };
+
+  const addCategory = async () => {
+    if (!(props.list.indexOf(input) >= 0)) {
+      const data = await axios.post(`${process.env.HOST}/upload/category`,{
+        name: input
+      })
+      console.log(data)
+      props.setList([...props.list, input]);
+    }
+    setInput("");
+  };
 
   return (
     <div className="relative">
@@ -85,7 +98,7 @@ const InputCategory = (props) => {
           {listSearch.map((data, i) => {
             return (
               <div
-                onClick={()=>selectCategory(data.name)}
+                onClick={() => selectCategory(data.name)}
                 key={i}
                 className="bg-purple-600 text-white text-sm mb-2 px-2 mr-1 whitespace-nowrap uppercase select-none cursor-pointer"
               >
@@ -93,6 +106,17 @@ const InputCategory = (props) => {
               </div>
             );
           })}
+          <div className="block w-full">
+            <hr />
+            <div className="flex mt-2.5">
+              <div
+                className="border-purple-700 ring-2 ring-purple-700 px-2 ml-0.5 text-sm whitespace-nowrap uppercase select-none cursor-pointer hover:bg-purple-200 delay-75"
+                onClick={addCategory}
+              >
+                ADD <span className="text-purple-700">{input}</span> TO CATEGORY
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>
