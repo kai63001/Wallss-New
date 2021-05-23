@@ -71,10 +71,11 @@ var UploadPage = function (props) {
                         React.createElement("div", { className: "text-sm text-gray-400 -mt-1" }, "JPG,PNG,GIF"))),
                 React.createElement("hr", null),
                 React.createElement("div", { className: "flex items-center justify-center h-64" },
-                    React.createElement("button", { className: "flex justify-start bg-purple-700 text-white px-6 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-purple-400" },
+                    React.createElement("label", { htmlFor: "imgUpload", className: "cursor-pointer flex justify-start bg-purple-700 text-white px-6 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-purple-400" },
                         React.createElement("svg", { xmlns: "http://www.w3.org/2000/svg", className: "h-6 w-6", fill: "none", viewBox: "0 0 24 24", stroke: "currentColor" },
                             React.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", strokeWidth: "2", d: "M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" })),
-                        React.createElement("span", null, "Upload")))),
+                        React.createElement("span", null, "Upload"),
+                        React.createElement("input", { type: "file", id: "imgUpload", className: "hidden" })))),
             React.createElement("div", { className: "my-5" },
                 React.createElement("div", { className: "bg-purple-500 px-5 py-2 text-white" }, "Wall Details"),
                 React.createElement("div", { className: "bg-white p-5" },
@@ -133,7 +134,6 @@ function getServerSideProps(_a) {
             return [2 /*return*/, {
                     props: {
                         token: token
-                        // romeo: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined
                     }
                 }];
         });

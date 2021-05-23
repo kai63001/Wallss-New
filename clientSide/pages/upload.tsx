@@ -10,8 +10,8 @@ const UploadPage = (props) => {
   const [type, setType] = useState(0);
   const [hasAuthor, setHasAuthor] = useState(false);
 
-  const [listCategory, setListCategory] = useState([])
-  const [listTags, setListTags] = useState([])
+  const [listCategory, setListCategory] = useState([]);
+  const [listTags, setListTags] = useState([]);
 
   // console.log(props.romeo)
   return (
@@ -86,7 +86,10 @@ const UploadPage = (props) => {
           </div>
           <hr />
           <div className="flex items-center justify-center h-64">
-            <button className="flex justify-start bg-purple-700 text-white px-6 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-purple-400">
+            <label
+              htmlFor="imgUpload"
+              className="cursor-pointer flex justify-start bg-purple-700 text-white px-6 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6"
@@ -102,7 +105,8 @@ const UploadPage = (props) => {
                 />
               </svg>
               <span>Upload</span>
-            </button>
+              <input type="file" id="imgUpload" className="hidden" />
+            </label>
           </div>
         </div>
         <div className="my-5">
@@ -130,20 +134,41 @@ const UploadPage = (props) => {
             </div>
             <div className="mt-2">
               <span className="text-lg">Category</span>
-              <div className="text-sm text-gray-600 -mt-2">What walls category</div>
-              <InputCategory list={listCategory} setList={setListCategory} placeholder="E.g.Anime Gundam (Enter to add)" />
+              <div className="text-sm text-gray-600 -mt-2">
+                What walls category
+              </div>
+              <InputCategory
+                list={listCategory}
+                setList={setListCategory}
+                placeholder="E.g.Anime Gundam (Enter to add)"
+              />
             </div>
             <div className="mt-2">
               <span className="text-lg">Tags</span>
-              <div className="text-sm text-gray-600 -mt-2">Use tags to add more detailed</div>
-              <InputCategory type="tags" list={listTags} setList={setListTags} placeholder="E.g.Space Wing Star Flighter (Enter to add)"/>
+              <div className="text-sm text-gray-600 -mt-2">
+                Use tags to add more detailed
+              </div>
+              <InputCategory
+                type="tags"
+                list={listTags}
+                setList={setListTags}
+                placeholder="E.g.Space Wing Star Flighter (Enter to add)"
+              />
             </div>
           </div>
         </div>
-        <br /><br /><br />
-        <br /><br /><br />
-        <br /><br /><br />
-        <br /><br /><br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     </Layout>
   );
@@ -175,7 +200,7 @@ export async function getServerSideProps({ req, res }) {
   }
   return {
     props: {
-      token
+      token,
       // romeo: ctx.req ? { cookie: ctx.req.headers.cookie } : undefined
     }, // will be passed to the page component as props
   };
