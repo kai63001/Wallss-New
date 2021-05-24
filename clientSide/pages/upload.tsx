@@ -13,6 +13,61 @@ const UploadPage = (props) => {
   const [listCategory, setListCategory] = useState([]);
   const [listTags, setListTags] = useState([]);
 
+  const [image, setImage] = useState("");
+
+  const checkTypeImage = (type: string) => {
+    const support = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
+    if (support.includes(type)) return true;
+    return false;
+  };
+  const uploadImage = (e) => {
+    console.log("upload");
+    const files = e.target.files || e.dataTransfer.files;
+    console.log(files);
+    const readAndPreview = (file) => {
+      console.log("readANdPrv");
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        let imagerr: any = new Image();
+        imagerr.src = e.target.result;
+        imagerr.onload = function () {
+          // console.log(e.target.result)
+          setImage(e.target.result.toString());
+          // console.log('image : ',image)
+          // setImage((image) => [
+          //   ...image,
+          //   {
+          //     base64: e.target.result,
+          //     name: "",
+          //     tags: "",
+          //     categoly: "",
+          //     author: "",
+          //     resolution: `${this.width}X${this.height}`,
+          //   },
+          // ]);
+        };
+      };
+      reader.readAsDataURL(file);
+    };
+    if (files) {
+      for (let i = 0; i < files.length; i++) {
+        console.log("size Image:", files[i].size);
+        if (files[i].size > 10000000) {
+          // setErrorFile(true);
+          // setErrorText('Error: size limit 10mb');
+        } else if (checkTypeImage(files[i].type)) {
+          readAndPreview(files[i]);
+        } else {
+          console.log("😞 error file");
+        }
+      }
+    }
+  };
+
+  const deleteImage = () => {
+    setImage('')
+  }
+
   // console.log(props.romeo)
   return (
     <Layout>
@@ -85,28 +140,60 @@ const UploadPage = (props) => {
             </div>
           </div>
           <hr />
-          <div className="flex items-center justify-center h-64">
-            <label
-              htmlFor="imgUpload"
-              className="cursor-pointer flex justify-start bg-purple-700 text-white px-6 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+          <div className="flex items-center justify-center h-96">
+            {image ? (
+              <div className="block h-full w-full relative mt-1">
+                <img
+                  src={image}
+                  className="block h-full w-full"
+                  width="100%"
+                  height="100%"
                 />
-              </svg>
-              <span>Upload</span>
-              <input type="file" id="imgUpload" className="hidden" />
-            </label>
+                <div className="absolute top-1 right-1">
+                  <button onClick={deleteImage} className="focus:outline-none focus:ring-0 focus:border-none">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 text-purple-700"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <label
+                htmlFor="imgUpload"
+                className="cursor-pointer select-none flex justify-start bg-purple-700 text-white px-6 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                  />
+                </svg>
+                <span>Upload</span>
+                <input
+                  onChange={uploadImage}
+                  type="file"
+                  id="imgUpload"
+                  className="hidden"
+                />
+              </label>
+            )}
           </div>
         </div>
         <div className="my-5">
