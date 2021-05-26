@@ -15,6 +15,7 @@ const UploadPage = (props) => {
   const [type, setType] = useState(0);
   const [listTags, setListTags] = useState([]);
   const [image, setImage] = useState("");
+  const [resolution, setResolution] = useState("");
   const [author, setAnthor] = useState("");
 
   const [errors,setErrors] = useState({});
@@ -48,6 +49,7 @@ const UploadPage = (props) => {
         imagerr.onload = function () {
           // console.log(e.target.result)
           setImage(e.target.result.toString());
+          setResolution(`${this.width}X${this.height}`)
           // console.log('image : ',image)
           // setImage((image) => [
           //   ...image,
@@ -122,7 +124,8 @@ const UploadPage = (props) => {
       author: author,
       type: type,
       categories: listCategory,
-      tags: listTags
+      tags: listTags,
+      resolution: resolution
     }
     console.log(body)
     console.log('gogogo')
