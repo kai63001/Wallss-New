@@ -14,6 +14,10 @@ const UploadPage = (props) => {
   const [listTags, setListTags] = useState([]);
 
   const [image, setImage] = useState("");
+  const [errors,setErrors] = useState({
+    upload: ''
+  });
+
 
   const checkTypeImage = (type: string) => {
     const support = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
@@ -21,6 +25,10 @@ const UploadPage = (props) => {
     return false;
   };
   const uploadImage = (e) => {
+    setErrors({
+      ...errors,
+      upload: ''
+    })
     console.log("upload");
     const files = e.target.files || e.dataTransfer.files;
     console.log(files);
@@ -53,11 +61,19 @@ const UploadPage = (props) => {
       for (let i = 0; i < files.length; i++) {
         console.log("size Image:", files[i].size);
         if (files[i].size > 10000000) {
+          setErrors({
+            ...errors,
+            upload: 'Error: size limit 10mb'
+          })
           // setErrorFile(true);
           // setErrorText('Error: size limit 10mb');
         } else if (checkTypeImage(files[i].type)) {
           readAndPreview(files[i]);
         } else {
+          setErrors({
+            ...errors,
+            upload: 'Error: file type support only png,jpg and gif'
+          })
           console.log("😞 error file");
         }
       }
@@ -142,11 +158,10 @@ const UploadPage = (props) => {
           <hr />
           <div className="flex items-center justify-center h-96">
             {image ? (
-              <div className="block h-full w-full relative mt-1">
+              <div className="h-full w-full flex items-center justify-center relative mt-1">
                 <img
                   src={image}
-                  className="block h-full w-full"
-                  width="100%"
+                  className="block h-full"
                   height="100%"
                 />
                 <div className="absolute top-1 right-1">
@@ -167,6 +182,7 @@ const UploadPage = (props) => {
                 </div>
               </div>
             ) : (
+              <div>
               <label
                 htmlFor="imgUpload"
                 className="cursor-pointer select-none flex justify-start bg-purple-700 text-white px-6 py-2 mt-2 focus:outline-none focus:ring-2 focus:ring-purple-400"
@@ -193,6 +209,9 @@ const UploadPage = (props) => {
                   className="hidden"
                 />
               </label>
+
+              {errors.upload && <span className="block text-center text-red-700 text-sm">{errors.upload}</span>}
+              </div>
             )}
           </div>
         </div>
