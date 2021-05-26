@@ -1,6 +1,7 @@
 import express, { Router, Request, Response,NextFunction } from 'express'
 import {Category, WallpaperDesktop } from '../model/'
 import { checkAuth } from '../lib/auth'
+import {uploadDrive} from '../upload/upload.middleware.js';
 
 const router:Router = express.Router()
 
@@ -28,7 +29,9 @@ router.post('/category', async (req: Request, res: Response)=> {
 })
 
 router.post('/', async (req: Request, res: Response)=> {
-    res.send()
+    const { title,image,author,type,categories,tags,resolution } = req.body
+
+    res.send(title)
 })
 
 export default router
