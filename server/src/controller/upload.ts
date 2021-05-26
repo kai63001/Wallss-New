@@ -27,4 +27,8 @@ router.post('/category', async (req: Request, res: Response)=> {
     res.json({ name: name, __v: 0 });
 })
 
+router.post('/', async (req: Request, res: Response)=> {
+    
+})
+
 export default router
