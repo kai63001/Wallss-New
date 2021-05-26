@@ -7,17 +7,24 @@ const InputCategory = dynamic(import("@/components/core/InputCategory"));
 import { isAuth } from "@/lib/auth";
 
 const UploadPage = (props) => {
-  const [type, setType] = useState(0);
   const [hasAuthor, setHasAuthor] = useState(false);
 
+  //! input body
+  const [title, setTitle] = useState('')
   const [listCategory, setListCategory] = useState([]);
+  const [type, setType] = useState(0);
   const [listTags, setListTags] = useState([]);
-
   const [image, setImage] = useState("");
-  const [errors,setErrors] = useState({
-    upload: ''
-  });
+  const [author, setAnthor] = useState("");
 
+  const [errors,setErrors] = useState({});
+
+  const onChangeInputError = (e) => {
+    setErrors({
+      ...errors,
+      [e.target.name]: ''
+    })
+  }
 
   const checkTypeImage = (type: string) => {
     const support = ["image/jpg", "image/jpeg", "image/png", "image/gif"];
@@ -84,6 +91,43 @@ const UploadPage = (props) => {
     setImage('')
   }
 
+  const validate = ():boolean => {
+    let valid = true
+    let error = {}
+    console.log(title.length)
+    if(title.length == 0){
+      error["title"] = "Error: Title required"
+      valid = false
+    }
+    console.log(errors)
+    if(!image){
+      error["upload"] = "Error: Image required"
+      valid = false
+    }
+    if(listCategory.length == 0){
+      console.log('error categiry')
+      error["category"] = "Error: Category required"
+      valid = false
+    }
+    setErrors(error)
+    return valid
+  }
+
+  const submit = () =>{
+    if(!validate())
+      return
+    const body = {
+      title: title,
+      image: image,
+      author: author,
+      type: type,
+      categories: listCategory,
+      tags: listTags
+    }
+    console.log(body)
+    console.log('gogogo')
+  }
+
   // console.log(props.romeo)
   return (
     <Layout>
@@ -92,14 +136,20 @@ const UploadPage = (props) => {
           <div className="bg-purple-500 px-5 py-2 text-white">Wall Title</div>
           <div className="bg-white p-5">
             <input
+              name="title"
+              onChange={(e)=>{
+                onChangeInputError(e)
+                setTitle(e.target.value)
+              }}
               type="text"
               className={` focus:ring-1  focus:outline-none w-full text-black placeholder-gray-500 border ${
-                false
+                errors["title"]
                   ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                   : "border-gray-200 focus:border-purple-500 focus:ring-purple-500"
               } py-1 pl-3`}
               placeholder="What is your wall called"
             />
+            {errors["title"] && <span className="block text-red-500 text-sm">{errors["title"]}</span>}
           </div>
         </div>
         <div className="border-dashed border-4 border-purple-300 mt-4 p-3">
@@ -210,7 +260,7 @@ const UploadPage = (props) => {
                 />
               </label>
 
-              {errors.upload && <span className="block text-center text-red-700 text-sm">{errors.upload}</span>}
+              {errors["upload"] && <span className="block text-center text-red-500 text-sm">{errors["upload"]}</span>}
               </div>
             )}
           </div>
@@ -232,6 +282,7 @@ const UploadPage = (props) => {
               </label>
               {hasAuthor && (
                 <input
+                  onChange={e=>setAnthor(e.target.value)}
                   type="text"
                   className={` mt-1 focus:ring-1  focus:outline-none w-full text-black placeholder-gray-500 border-gray-200 focus:border-purple-500 focus:ring-purple-500 py-1 pl-3`}
                   placeholder="Author name"
@@ -248,6 +299,7 @@ const UploadPage = (props) => {
                 setList={setListCategory}
                 placeholder="E.g.Anime Gundam (Enter to add)"
               />
+              {errors["category"] && <span className="block text-red-500 text-sm">{errors["category"]}</span>}
             </div>
             <div className="mt-2">
               <span className="text-lg">Tags</span>
@@ -263,7 +315,9 @@ const UploadPage = (props) => {
             </div>
           </div>
         </div>
-        <br />
+        <div className="flex items-end justify-end">
+          <button onClick={submit} className="bg-purple-600 text-white px-6 py-2">Public</button>
+        </div>
         <br />
         <br />
         <br />
