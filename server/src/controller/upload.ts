@@ -1,12 +1,12 @@
 import express, { Router, Request, Response,NextFunction } from 'express'
-import {Category} from '../model/'
+import {Category, WallpaperDesktop } from '../model/'
 import { checkAuth } from '../lib/auth'
 
 const router:Router = express.Router()
 
 router.get('/category',  async (req: Request, res: Response) => {
     // console.log(req.headers.authorization)
-    const {name} =req.query
+    const {name} = req.query
     if(!checkAuth(req.headers ? req.headers.authorization : undefined)) return res.json({status:"auth"})
     if(!name)
         return res.json({status:"name request"})
@@ -28,7 +28,7 @@ router.post('/category', async (req: Request, res: Response)=> {
 })
 
 router.post('/', async (req: Request, res: Response)=> {
-    
+    res.send()
 })
 
 export default router

@@ -1,4 +1,6 @@
 import User from "./User";
 import Category from "./Category";
+import WallpaperDesktop from "./Desktop/wallpaper";
 
-export { User, Category };
+
+export { User, Category, WallpaperDesktop };
