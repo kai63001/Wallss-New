@@ -3,8 +3,8 @@ import { WallpaperDesktop } from "../../model";
 
 const router: Router = express.Router();
 
-router.get("/", async (req: Request, res: Response) => {
-  const wall = await WallpaperDesktop.find({}).lean();
+router.get("/index", async (req: Request, res: Response) => {
+  const wall = await WallpaperDesktop.find({}).select({image:1,name:1}).limit(12).lean();
   return res.send(wall);
 });
 
