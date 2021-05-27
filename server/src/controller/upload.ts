@@ -50,7 +50,7 @@ router.post("/", async (req: Request, res: Response) => {
     author,
     resolution,
     date,
-    image: `https://drive.google.com/thumbnail?id=${upload}`,
+    image: `https://drive.google.com/thumbnail?id=${upload}&sz=w0-h0`,
     user: auth.userId,
     uuid: random,
   });
