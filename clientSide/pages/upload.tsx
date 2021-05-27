@@ -131,7 +131,7 @@ const UploadPage = (props) => {
     console.log(body)
     console.log('gogogo')
     const data = await axios.post(`${process.env.HOST}/upload`,body)
-    console.log(data)
+    console.log(await data.data)
   }
 
   // console.log(props.romeo)

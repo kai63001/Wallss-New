@@ -11,7 +11,7 @@ app.use(cors());
 app.use(
   express.urlencoded({
     extended: true,
-    limit: "10mb",
+    limit: "15mb",
   })
 );
 

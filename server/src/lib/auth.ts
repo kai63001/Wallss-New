@@ -1,6 +1,5 @@
 import jwt from "jsonwebtoken";
 
-
 export const checkAuth = (token: string | undefined) => {
     if(token) {
         try {
