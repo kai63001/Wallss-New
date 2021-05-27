@@ -27,7 +27,10 @@ const WallpaperSchema = new mongoose.Schema({
     },
     categoly: [{
         type: String
-    }]
+    }],
+    uuid : {
+        type: String
+    }
 })
 
 const Wallpaper = mongoose.model('Wallpaper', WallpaperSchema);

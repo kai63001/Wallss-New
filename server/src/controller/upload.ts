@@ -52,6 +52,7 @@ router.post("/", async (req: Request, res: Response) => {
     date,
     image: `https://drive.google.com/thumbnail?id=${upload}`,
     user: auth.userId,
+    uuid: random,
   });
 // console.log(auth.name)      
   res.send(wallpaperDeskData);
