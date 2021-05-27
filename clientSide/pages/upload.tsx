@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
+import {useRouter} from 'next/router';
 import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
 const Input = dynamic(import("@/components/core/Input"));
@@ -8,7 +9,10 @@ import { isAuth } from "@/lib/auth";
 import axios from "@/lib/axios"
 
 const UploadPage = (props) => {
+  const router = useRouter()
+
   const [hasAuthor, setHasAuthor] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   //! input body
   const [title, setTitle] = useState('')
@@ -117,8 +121,11 @@ const UploadPage = (props) => {
   }
 
   const submit = async () =>{
-    if(!validate())
+    setLoading(true)
+    if(!validate()){
+      setLoading(false)
       return
+    }
     const body = {
       title: title,
       image: image,
@@ -132,6 +139,8 @@ const UploadPage = (props) => {
     console.log('gogogo')
     const data = await axios.post(`${process.env.HOST}/upload`,body)
     console.log(await data.data)
+    router.push('/')
+    
   }
 
   // console.log(props.romeo)
@@ -143,6 +152,7 @@ const UploadPage = (props) => {
           <div className="bg-white p-5">
             <input
               name="title"
+              value={title}
               onChange={(e)=>{
                 onChangeInputError(e)
                 setTitle(e.target.value)
@@ -322,7 +332,30 @@ const UploadPage = (props) => {
           </div>
         </div>
         <div className="flex items-end justify-end">
-          <button onClick={submit} className="bg-purple-600 text-white px-6 py-2">Public</button>
+          <button disabled={loading} onClick={submit} className="bg-purple-600 text-white px-6 py-2 flex items-center focus:outline-none focus:ring-2 focus:ring-purple-600">
+            {!loading ? (<svg id="bold" fill="currentColor" className="text-white h-4 w-4 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m23.508.003c-4.685-.084-10.028 2.365-13.41 6.164-3.232.061-6.379 1.386-8.696 3.703-.135.133-.183.332-.124.512.06.181.216.312.404.339l3.854.552-.476.533c-.177.198-.168.499.02.687l6.427 6.427c.097.097.225.146.354.146.119 0 .238-.042.333-.127l.533-.476.552 3.854c.027.188.175.326.354.386.046.015.094.022.143.022.142 0 .287-.062.387-.161 2.285-2.285 3.61-5.432 3.671-8.664 3.803-3.389 6.272-8.73 6.163-13.409-.007-.266-.222-.481-.489-.488zm-4.608 8.632c-.487.487-1.127.731-1.768.731s-1.281-.244-1.768-.731c-.974-.975-.974-2.561 0-3.536.975-.975 2.561-.975 3.536 0s.975 2.562 0 3.536z"/><path d="m2.724 16.905c-1.07 1.07-2.539 5.904-2.703 6.451-.053.176-.004.367.125.497.096.096.223.147.354.147.048 0 .096-.007.144-.021.547-.164 5.381-1.633 6.451-2.703 1.205-1.205 1.205-3.166 0-4.371-1.206-1.205-3.166-1.204-4.371 0z"/></svg>):(<svg
+                  className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>)}
+            
+            Publish
+          </button>
         </div>
         <br />
         <br />
