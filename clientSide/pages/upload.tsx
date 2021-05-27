@@ -5,6 +5,7 @@ const Layout = dynamic(import("@/components/Layout"));
 const Input = dynamic(import("@/components/core/Input"));
 const InputCategory = dynamic(import("@/components/core/InputCategory"));
 import { isAuth } from "@/lib/auth";
+import axios from "@/lib/axios"
 
 const UploadPage = (props) => {
   const [hasAuthor, setHasAuthor] = useState(false);
@@ -115,7 +116,7 @@ const UploadPage = (props) => {
     return valid
   }
 
-  const submit = () =>{
+  const submit = async () =>{
     if(!validate())
       return
     const body = {
@@ -129,6 +130,8 @@ const UploadPage = (props) => {
     }
     console.log(body)
     console.log('gogogo')
+    const data = await axios.post(`${process.env.HOST}/upload`,body)
+    console.log(data)
   }
 
   // console.log(props.romeo)
@@ -321,15 +324,6 @@ const UploadPage = (props) => {
         <div className="flex items-end justify-end">
           <button onClick={submit} className="bg-purple-600 text-white px-6 py-2">Public</button>
         </div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
         <br />
         <br />
       </div>

@@ -2,6 +2,7 @@ import express, { Router, Request, Response,NextFunction } from 'express'
 import {Category, WallpaperDesktop } from '../model/'
 import { checkAuth } from '../lib/auth'
 import {uploadDrive} from '../upload/upload.middleware.js';
+import { v4 as uuidv4 } from 'uuid';
 
 const router:Router = express.Router()
 
@@ -30,8 +31,9 @@ router.post('/category', async (req: Request, res: Response)=> {
 
 router.post('/', async (req: Request, res: Response)=> {
     const { title,image,author,type,categories,tags,resolution } = req.body
-
-    res.send(title)
+    const random = uuidv4()
+    const upload = await uploadDrive(image,random.toString())
+    res.send(random)
 })
 
 export default router

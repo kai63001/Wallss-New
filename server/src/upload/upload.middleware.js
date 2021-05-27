@@ -13,7 +13,7 @@ const TOKEN_PATH = 'src/upload/token.json';
 
 // Load client secrets from a local file.
 
-export function uploadDrive(img) {
+export function uploadDrive(img,name) {
     return new Promise((resolve, reject) => {
         fs.readFile('src/upload/credentials.json', (err, content) => {
             if (err) return console.log('Error loading client secret file:', err);
@@ -21,7 +21,7 @@ export function uploadDrive(img) {
             // authorize(JSON.parse(content), listFiles);
             const n = 1;
             if (n == 1) {
-                resolve(authorize(JSON.parse(content), img));
+                resolve(authorize(JSON.parse(content), img, name));
             } else {
                 reject('555');
             }
@@ -37,17 +37,17 @@ export function uploadDrive(img) {
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials, img) {
+function authorize(credentials, img, name) {
     return new Promise((resolve, reject) => {
         const { client_secret, client_id, redirect_uris } = credentials.web;
         const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
         // Check if we have previously stored a token.
         fs.readFile(TOKEN_PATH, async (err, token) => {
-            if (err) return getAccessToken(oAuth2Client, uploadFile(oAuth2Client, img));
+            if (err) return getAccessToken(oAuth2Client, uploadFile(oAuth2Client, img,name));
             oAuth2Client.setCredentials(JSON.parse(token));
             // return await uploadFile(oAuth2Client, img);
-            resolve(uploadFile(oAuth2Client, img));
+            resolve(uploadFile(oAuth2Client, img, name));
         });
     });
 }
@@ -121,7 +121,7 @@ function listFiles(auth) {
  * @param {Object} img base64 image can be change to stram object
  * @param {authorize} auth callback from authorize
  */
-async function uploadFile(auth, img) {
+async function uploadFile(auth, img,name) {
     return new Promise((resolve, reject) => {
         // if base on base64
         const uploadImg = img.split(/,(.+)/)[1];
@@ -134,7 +134,7 @@ async function uploadFile(auth, img) {
         // console.log(fs.createReadStream('files/image2.png'))
         const drive = google.drive({ version: 'v3', auth });
         var fileMetadata = {
-            name: 'romeo.png',
+            name: `${name}.png`,
             driveId: '0AGp3NkK6sayBUk9PVA',
             teamDriveId: '0AGp3NkK6sayBUk9PVA',
             parents: ['0AGp3NkK6sayBUk9PVA'],
