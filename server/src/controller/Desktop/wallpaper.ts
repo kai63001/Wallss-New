@@ -8,4 +8,10 @@ router.get("/index", async (req: Request, res: Response) => {
   return res.send(wall);
 });
 
+router.get("/:id", async (req: Request, res: Response) => {
+  const {id} = req.params
+  const wall = await WallpaperDesktop.findOne({_id:id}).lean()
+  return res.send(wall)
+});
+
 export default router;
