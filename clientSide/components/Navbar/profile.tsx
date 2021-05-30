@@ -56,7 +56,7 @@ const Profile = (props) => {
             </svg>
           </div>
         </div>
-        <div className="w-8 h-8 p-0 m-0">
+        <div className="w-9 h-9 p-0 m-0">
           <Image
             onClick={() => setShowDropdown((b) => !b)}
             className="bg-purple-300 rounded-full cursor-pointer "

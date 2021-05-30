@@ -138,10 +138,10 @@ export default function Home(props) {
         </div>
         <br />
         <h2 className="text-2xl">DESKTOP WALLPAPERS</h2>
-        <div className="grid sm:grid-cols-3 grid-cols-2 gap-2">
+        <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
           {data?.map((data, key) => {
             return (
-              <Link key={key} href="/">
+              <Link key={key} href={`/desktop/wall/${data._id}`}>
                 <a className={``}>
                   <Image
                     className="bg-purple-300"
