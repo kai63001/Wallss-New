@@ -4,6 +4,8 @@ import { Cookies } from "react-cookie";
 import { isAuth } from "@/lib/auth";
 import dynamic from "next/dynamic";
 const Profile = dynamic(import("@/components/Navbar/profile"));
+// import Profile from '@/components/Navbar'
+
 
 const cookies = new Cookies();
 const Navbar = (props) => {

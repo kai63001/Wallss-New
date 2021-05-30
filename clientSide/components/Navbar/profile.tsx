@@ -56,16 +56,17 @@ const Profile = (props) => {
             </svg>
           </div>
         </div>
-        <Image
-          onClick={() => setShowDropdown((b) => !b)}
-          className="bg-purple-300 rounded-full cursor-pointer"
-          src={props.auth.profile}
-          alt={props.auth.name}
-          width={36}
-          height={36}
-          quality={100}
-          layout="intrinsic"
-        />
+        <div className="w-8 h-8 p-0 m-0">
+          <Image
+            onClick={() => setShowDropdown((b) => !b)}
+            className="bg-purple-300 rounded-full cursor-pointer "
+            src={"/astronaut.png"}
+            width={1000}
+            height={1000}
+            quality={100}
+            layout="intrinsic"
+          />
+        </div>
       </div>
       {showDropdown && (
         <div
@@ -80,8 +81,8 @@ const Profile = (props) => {
                     className="bg-purple-300 rounded-full cursor-pointer col-span-1"
                     src={props.auth.profile}
                     alt={`profile ${props.auth.name}`}
-                    width={36}
-                    height={60}
+                    width={640}
+                    height={640}
                     quality={100}
                     layout="intrinsic"
                   />
@@ -92,26 +93,26 @@ const Profile = (props) => {
               </a>
             </Link>
             <hr />
-            <Link href='/upload'>
-            <a className="flex justify-items-center items-center py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
-              <div className="bg-purple-300 mr-2 rounded-full p-1 text-w">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 text-purple-900 cursor-pointer"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                  />
-                </svg>
-              </div>
-              <div className="">Upload</div>
-            </a>
+            <Link href="/upload">
+              <a className="flex justify-items-center items-center py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
+                <div className="bg-purple-300 mr-2 rounded-full p-1 text-w">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-purple-900 cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
+                    />
+                  </svg>
+                </div>
+                <div className="">Upload</div>
+              </a>
             </Link>
             <div className="flex justify-items-center items-center py-2 px-2 cursor-pointer hover:bg-purple-200 mb-1">
               <div className="bg-purple-300 mr-2 rounded-full p-1 text-w">

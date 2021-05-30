@@ -5,6 +5,14 @@ import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
 import { useState } from "react";
 import axios from "axios";
+import useSWR from 'swr';
+
+
+async function fetcher(url) {
+  const res = await fetch(url);
+  const json = await res.json();
+  return json;
+}
 
 export default function Home(props) {
   const image = [
@@ -16,11 +24,17 @@ export default function Home(props) {
   const [wallpaperDesktop, setWallpaperDesktop] = useState([]);
 
   const getWallpaperDesktop = async () => {
-    const data = await axios.get(`${process.env.HOST}/desktop/index`);
+    const data = await axios.get(``);
     const raw = await data.data;
-    setWallpaperDesktop(raw);
+    return raw;
   };
-  getWallpaperDesktop();
+
+  const { data, error } = useSWR(`${process.env.HOST}/desktop/index`, fetcher);
+  console.log(data)
+  if (error) return <div>failed to load</div>;
+  // if (!data) return <div>loading...</div>;
+
+  // getWallpaperDesktop();
   return (
     <Layout>
       <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
@@ -125,13 +139,13 @@ export default function Home(props) {
         <br />
         <h2 className="text-2xl">DESKTOP WALLPAPERS</h2>
         <div className="grid sm:grid-cols-3 grid-cols-2 gap-2">
-          {wallpaperDesktop.map((data, key) => {
+          {data?.map((data, key) => {
             return (
-              <Link href="/">
-                <a key={key} className={``}>
+              <Link key={key} href="/">
+                <a className={``}>
                   <Image
                     className="bg-purple-300"
-                    src={data.image}
+                    src={data.image.replaceAll('=w0-h0','=w533-h300')}
                     alt={`wallpaper desktop ${data.name}`}
                     width={500}
                     height={300}
