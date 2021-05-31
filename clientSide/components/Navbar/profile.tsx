@@ -60,7 +60,7 @@ const Profile = (props) => {
           <Image
             onClick={() => setShowDropdown((b) => !b)}
             className="bg-purple-300 rounded-full cursor-pointer "
-            src={"/astronaut.png"}
+            src={props.auth.profile}
             width={1000}
             height={1000}
             quality={100}
