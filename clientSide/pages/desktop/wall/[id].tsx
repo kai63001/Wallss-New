@@ -6,7 +6,9 @@ const DesktopWallpaperPage = (props) => {
     console.log(props.data)
   return (
     <Layout>
-      <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">asd</div>
+      <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
+          <h1 className="text-4xl uppercase">{props.data?.name}</h1>
+      </div>
     </Layout>
   );
 };

@@ -1,5 +1,8 @@
 import mongoose from 'mongoose';
-
+interface IAccessStatsSchema {
+    type: string;
+    views: number;
+  }
 const WallpaperSchema = new mongoose.Schema({
     resolution: {
         type: String,
@@ -30,9 +33,13 @@ const WallpaperSchema = new mongoose.Schema({
     }],
     uuid : {
         type: String
+    },
+    views:{
+        type: Number,
+        default: 0 
     }
 })
 
-const Wallpaper = mongoose.model('Wallpaper', WallpaperSchema);
+const Wallpaper = mongoose.model<IAccessStatsSchema>('Wallpaper', WallpaperSchema);
 
 export default Wallpaper;
