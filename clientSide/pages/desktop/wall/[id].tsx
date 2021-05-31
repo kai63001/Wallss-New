@@ -8,11 +8,11 @@ const DesktopWallpaperPage = (props) => {
   return (
     <Layout>
       <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
-        <div className="flex justify-between">
+        <div className="sm:flex sm:justify-between justify-start">
           <div className="">
             {/* <h1 className="text-4xl uppercase">{props.data?.name}</h1> */}
             <div className="grid grid-rows-4 grid-flow-col">
-              <div className="row-span-4">
+              <div className="row-span-4 hidden sm:block">
                 <div className="w-16">
                   <Image
                     src={props.data?.user?.profile}
@@ -36,8 +36,8 @@ const DesktopWallpaperPage = (props) => {
               </div>
             </div>
           </div>
-          <div className="flex items-center">
-            <button className="bg-purple-600 text-white px-5 py-2 flex">
+          <div className="flex items-center mb-1">
+            <button className="bg-purple-600 text-white px-5 py-2 flex w-full sm:w-auto items-center justify-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 mr-1"
@@ -72,12 +72,12 @@ const DesktopWallpaperPage = (props) => {
         {/* end Image */}
         <div className="flex">
           {props.data?.categoly.map((data, i) => {
-            return <div className="bg-purple-600 text-white mr-2 px-2 py-1 select-none uppercase cursor-pointer mb-1">{data}</div>;
+            return <div className="bg-purple-600 whitespace-nowrap inline-block text-white mr-2 px-2 py-1 select-none uppercase cursor-pointer mb-2">{data}</div>;
           })}
         </div>
         <div className="flex">
           {props.data?.tags.map((data, i) => {
-            return <div className="bg-purple-200 text-purple-900 mr-2 px-2 py-0 select-none uppercase cursor-pointer mb-1">{data}</div>;
+            return <div className="bg-purple-200 whitespace-nowrap inline-block text-purple-900 mr-2 px-2 py-0 select-none uppercase cursor-pointer mb-2">{data}</div>;
           })}
         </div>
         asdas
