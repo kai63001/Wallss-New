@@ -56,6 +56,31 @@ const DesktopWallpaperPage = (props) => {
             </button>
           </div>
         </div>
+        {/* end header */}
+        <Image
+          src={props.data?.image}
+          className="bg-purple-300"
+          alt={`${props.data?.name} Wallpaper`}
+          title={`${props.data?.name} Wallpaper`}
+          width={1600}
+          height={900}
+          quality={100}
+          objectFit="cover"
+          objectPosition="center center"
+          layout="intrinsic"
+        />
+        {/* end Image */}
+        <div className="flex">
+          {props.data?.categoly.map((data, i) => {
+            return <div className="bg-purple-600 text-white mr-2 px-2 py-1 select-none uppercase cursor-pointer mb-1">{data}</div>;
+          })}
+        </div>
+        <div className="flex">
+          {props.data?.tags.map((data, i) => {
+            return <div className="bg-purple-200 text-purple-900 mr-2 px-2 py-0 select-none uppercase cursor-pointer mb-1">{data}</div>;
+          })}
+        </div>
+        asdas
       </div>
     </Layout>
   );
