@@ -70,7 +70,7 @@ const DesktopWallpaperPage = (props) => {
           </div>
           <div className="flex items-center mb-1">
             <a
-              href={`/_next/image?url=${encodeURIComponent(props.data?.image)}&w=3840&q=100`}
+              href={`/_next/image?url=${encodeURIComponent(props.data?.image.replace(/thumb-1920-/g,''))}&w=3840&q=100`}
               download={`${props.data?.name} - wallss`}
               // onClick={(e) => download(e)}
               className="bg-purple-600 text-white px-5 py-2 flex w-full sm:w-auto items-center justify-center"
@@ -103,13 +103,11 @@ const DesktopWallpaperPage = (props) => {
           title={`${props.data?.name} ${props.data?.categoly.join(
             " "
           )} Wallpaper`}
-          width={1600}
-          height={900}
+          width={props.data?.resolution?props.data?.resolution?.split('X')[0]?.replace(/x/g,''):'1600'}
+          height={props.data?.resolution?props.data?.resolution?.split('X')[1]?.replace(/x/g,''):'900'}
           loading="eager"
           priority={true}
           quality={100}
-          objectFit="cover"
-          objectPosition="center center"
           layout="intrinsic"
         />
         {/* end Image */}

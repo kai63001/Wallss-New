@@ -145,7 +145,7 @@ export default function Home(props) {
                 <a className={``}>
                   <Image
                     className="bg-purple-300"
-                    src={data.image.replaceAll('=w0-h0','=w533-h300')}
+                    src={data.image.replace(/=w0-h0/g,'=w533-h300').replace(/-1920-/g,'big-')}
                     alt={`wallpaper desktop ${data.name}`}
                     width={500}
                     height={300}
