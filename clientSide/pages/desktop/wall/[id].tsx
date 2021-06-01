@@ -103,7 +103,6 @@ const DesktopWallpaperPage = (props) => {
           title={`${props.data?.name} ${props.data?.categoly.join(
             " "
           )} Wallpaper`}
-          unoptimized={true}
           width={1600}
           height={900}
           loading="eager"
