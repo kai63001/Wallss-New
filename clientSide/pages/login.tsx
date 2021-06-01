@@ -2,17 +2,17 @@ import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
 const Input = dynamic(import("@/components/core/Input"));
 import { useState } from "react";
-import {useRouter} from 'next/router';
+import { useRouter } from "next/router";
 import Link from "next/link";
 import axios from "axios";
-import { Cookies } from 'react-cookie';
+import { Cookies } from "react-cookie";
 
 const cookies = new Cookies();
 const Login = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  
-  const router = useRouter()
+
+  const router = useRouter();
 
   const onHanndleChangeValidate = (e) => {
     const { name } = e.target;
@@ -23,45 +23,48 @@ const Login = () => {
   };
 
   const inputValidate = (body) => {
-    let errorTag = {}
+    let errorTag = {};
     let isValid = true;
-    if(!body.username){
-      isValid = false
+    if (!body.username) {
+      isValid = false;
       errorTag["username"] = "Username is required";
     }
 
-    if(!body.password){
-      isValid = false
+    if (!body.password) {
+      isValid = false;
       errorTag["password"] = "Password is required";
     }
-    setErrors(errorTag)
-    return isValid
-  }
+    setErrors(errorTag);
+    return isValid;
+  };
 
   const loginSystem = async (e) => {
-    let errorTag = {}
-    e.preventDefault()
+    let errorTag = {};
+    e.preventDefault();
     const body = {
-      username : e.target.username.value,
-      password : e.target.password.value,
-    }
-    if(!inputValidate(body)) return
+      username: e.target.username.value,
+      password: e.target.password.value,
+    };
+    if (!inputValidate(body)) return;
     setLoading(true);
-    const data = await axios.post(`${process.env.HOST}/login`,body)
-    console.log(data)
-    if(!data.data.jwt){
-      errorTag["username"] = "Username or Password is invalid"
-      errorTag["password"] = "Username or Password is invalid"
-      setErrors(errorTag)
-      setLoading(false)
-      return
+    const data = await axios.post(`${process.env.HOST}/login`, body);
+    console.log(data);
+    if (!data.data.jwt) {
+      errorTag["username"] = "Username or Password is invalid";
+      errorTag["password"] = "Username or Password is invalid";
+      setErrors(errorTag);
+      setLoading(false);
+      return;
     }
-    cookies.set('token',data.data.jwt);
-    router.push('/profile')
-  }
+    cookies.set("token", data.data.jwt);
+    router.push("/profile");
+  };
 
   return (
-    <Layout>
+    <Layout
+      title="Login - Wallss download wallpapers 4k"
+      des="Login to wallpaper community share the things you create, or share the things you love. download wallpaper 4k hd"
+    >
       <div className="max-w-2xl mx-auto mt-14 px-2 sm:px-0">
         <div className="bg-white sm:p-11 p-5 shadow-md">
           <h1 className="text-3xl font-romeo2">Sign In</h1>
@@ -77,7 +80,14 @@ const Login = () => {
               error={errors["username"]}
               onChange={onHanndleChangeValidate}
             />
-            <Input name="password" label="Password" placeholder="password" error={errors["password"]} onChange={onHanndleChangeValidate} password />
+            <Input
+              name="password"
+              label="Password"
+              placeholder="password"
+              error={errors["password"]}
+              onChange={onHanndleChangeValidate}
+              password
+            />
             <button
               className="flex bg-purple-500 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 text-white py-2 px-5 cursor-pointer"
               type="submit"

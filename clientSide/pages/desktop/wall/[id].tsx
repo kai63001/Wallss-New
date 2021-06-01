@@ -2,11 +2,43 @@ import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
 
 const DesktopWallpaperPage = (props) => {
   console.log(props.data);
+  const download = (e) => {
+    // e.preventDefault()
+    // console.log(e.target.href);
+    // fetch(e.target.href, {
+    //   method: "GET",
+    //   headers: {},
+    // })
+    //   .then((response) => {
+    //     response.arrayBuffer().then(function (buffer) {
+    //       const url = window.URL.createObjectURL(new Blob([buffer]));
+    //       const link = document.createElement("a");
+    //       link.href = url;
+    //       link.setAttribute("download", "image.png"); //or any other extension
+    //       document.body.appendChild(link);
+    //       link.click();
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //   });
+  };
   return (
-    <Layout>
+    <Layout
+      title={`${props.data.name
+        .trim()
+        .toLowerCase()
+        .replace(/\w\S*/g, (w) =>
+          w.replace(/^\w/, (c) => c.toUpperCase())
+        )} - Download`}
+      des={`download wallpaper ${props.data.categoly.join(
+        " "
+      )} ${props.data.tags.join(" ")} hd 4k`}
+    >
       <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
         <div className="sm:flex sm:justify-between justify-start">
           <div className="">
@@ -37,7 +69,12 @@ const DesktopWallpaperPage = (props) => {
             </div>
           </div>
           <div className="flex items-center mb-1">
-            <button className="bg-purple-600 text-white px-5 py-2 flex w-full sm:w-auto items-center justify-center">
+            <a
+              href={`/_next/image?url=${encodeURIComponent(props.data?.image)}&w=3840&q=100`}
+              download={`${props.data?.name} - wallss`}
+              // onClick={(e) => download(e)}
+              className="bg-purple-600 text-white px-5 py-2 flex w-full sm:w-auto items-center justify-center"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5 mr-1"
@@ -53,17 +90,24 @@ const DesktopWallpaperPage = (props) => {
                 />
               </svg>{" "}
               DOWNLOAD
-            </button>
+            </a>
           </div>
         </div>
         {/* end header */}
         <Image
-          src={props.data?.image}
+          src={props.data?.image.replace(/=w0-h0/g, "=w1600-h600")}
           className="bg-purple-300"
-          alt={`${props.data?.name} Wallpaper`}
-          title={`${props.data?.name} Wallpaper`}
+          alt={`${props.data?.name} ${props.data?.categoly.join(
+            " "
+          )} Wallpaper`}
+          title={`${props.data?.name} ${props.data?.categoly.join(
+            " "
+          )} Wallpaper`}
+          unoptimized={true}
           width={1600}
           height={900}
+          loading="eager"
+          priority={true}
           quality={100}
           objectFit="cover"
           objectPosition="center center"
@@ -72,13 +116,66 @@ const DesktopWallpaperPage = (props) => {
         {/* end Image */}
         <div className="flex">
           {props.data?.categoly.map((data, i) => {
-            return <div className="bg-purple-600 whitespace-nowrap inline-block text-white mr-2 px-2 py-1 select-none uppercase cursor-pointer mb-2">{data}</div>;
+            return (
+              <Link
+                href={`/desktop/category/${data?.replace(/ /g, "+")}`}
+                key={i}
+              >
+                <a className="bg-purple-600 whitespace-nowrap inline-block text-white mr-2 px-2 py-1 select-none uppercase cursor-pointer mb-2">
+                  {data}
+                </a>
+              </Link>
+            );
           })}
         </div>
         <div className="flex">
           {props.data?.tags.map((data, i) => {
-            return <div className="bg-purple-200 whitespace-nowrap inline-block text-purple-900 mr-2 px-2 py-0 select-none uppercase cursor-pointer mb-2">{data}</div>;
+            return (
+              <Link href={`/desktop/tag/${data?.replace(/ /g, "+")}`} key={i}>
+                <a className="bg-purple-200 whitespace-nowrap inline-block text-purple-900 mr-2 px-2 py-0 select-none uppercase cursor-pointer mb-2">
+                  {data}
+                </a>
+              </Link>
+            );
           })}
+        </div>
+        {/* end category and tags */}
+        <div className="grid grid-cols-6 gap-4">
+          <div className="bg-white sm:col-span-5 col-span-6 p-3 order-2 sm:order-1">
+            <div className="text-2xl uppercase">LEAVE A COMMENT</div>
+            <textarea
+              name="comments"
+              id="comments"
+              cols={30}
+              rows={5}
+              className="bg-purple-100 my-1 border-none w-full focus:border-none focus:outline-none"
+            ></textarea>
+            <div className="flex justify-end">
+              <button className="bg-purple-800 text-white py-1 px-5">
+                SEND
+              </button>
+            </div>
+          </div>
+          <div className="sm:order-2 order-1 grid grid-rows-3 grid-flow-col gap-2 sm:block sm:col-span-1 col-span-6">
+            <button className="bg-white w-full mb-2 p-2 sm:col-span-1 col-span-6 text-center cursor-pointer select-none hover:bg-purple-200 focus:bg-purple-800 focus:text-white focus:outline-none">
+              WOW!!
+            </button>
+            <button className="bg-white w-full mb-2 p-2 sm:col-span-1 col-span-6 text-center cursor-pointer select-none hover:bg-purple-200 focus:bg-purple-800 focus:text-white focus:outline-none">
+              WOW!!
+            </button>
+            <button className="bg-white w-full mb-2 p-2 sm:col-span-1 col-span-6 text-center cursor-pointer select-none hover:bg-purple-200 focus:bg-purple-800 focus:text-white focus:outline-none">
+              WOW!!
+            </button>
+            <button className="bg-white w-full mb-2 p-2 sm:col-span-1 col-span-6 text-center cursor-pointer select-none hover:bg-purple-200 focus:bg-purple-800 focus:text-white focus:outline-none">
+              WOW!!
+            </button>
+            <button className="bg-white w-full mb-2 p-2 sm:col-span-1 col-span-6 text-center cursor-pointer select-none hover:bg-purple-200 focus:bg-purple-800 focus:text-white focus:outline-none">
+              WOW!!
+            </button>
+            <button className="bg-white w-full mb-2 p-2 sm:col-span-1 col-span-6 text-center cursor-pointer select-none hover:bg-purple-200 focus:bg-purple-800 focus:text-white focus:outline-none">
+              WOW!!
+            </button>
+          </div>
         </div>
         asdas
       </div>
