@@ -181,8 +181,10 @@ const DesktopWallpaperPage = (props) => {
 };
 
 export async function getServerSideProps({ params }) {
-  const res = await fetch(`${process.env.HOST}/desktop/${params.id}`);
-  const data = await res.json();
+  // const res = await fetch(`${process.env.HOST}/desktop/${params.id}`);
+  // const data = await res.json();
+  const res = await axios.get(`${process.env.HOST}/desktop/${params.id}`)
+  const data = await res.data
   return { props: { data } };
   // return
 }

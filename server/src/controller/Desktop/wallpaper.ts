@@ -23,4 +23,13 @@ router.get("/:id", async (req: Request, res: Response) => {
   return res.send(wall);
 });
 
+router.post("/more/random", async (req: Request, res: Response) => {
+  const { category } = req.body;
+  const data = [...category]
+  const wall:any = await WallpaperDesktop.find(
+    { categoly: {$in: data} }
+  ).lean();
+  return res.send(wall);
+});
+
 export default router;

@@ -24,12 +24,18 @@ const WallpaperSchema = new mongoose.Schema({
     },
     tags: [{
         type: String,
+        lowercase: true,
+        index: true,
+        trim: true
     }],
     author: {
         type: String
     },
     categoly: [{
-        type: String
+        type: String,
+        lowercase: true,
+        index: true,
+        trim: true
     }],
     uuid : {
         type: String
