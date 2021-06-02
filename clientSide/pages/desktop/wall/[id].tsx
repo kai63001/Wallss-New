@@ -70,7 +70,9 @@ const DesktopWallpaperPage = (props) => {
           </div>
           <div className="flex items-center mb-1">
             <a
-              href={`/_next/image?url=${encodeURIComponent(props.data?.image.replace(/thumb-1920-/g,''))}&w=3840&q=100`}
+              href={`/_next/image?url=${encodeURIComponent(
+                props.data?.image.replace(/thumb-1920-/g, "")
+              )}&w=3840&q=100`}
               download={`${props.data?.name} - wallss`}
               // onClick={(e) => download(e)}
               className="bg-purple-600 text-white px-5 py-2 flex w-full sm:w-auto items-center justify-center"
@@ -103,8 +105,16 @@ const DesktopWallpaperPage = (props) => {
           title={`${props.data?.name} ${props.data?.categoly.join(
             " "
           )} Wallpaper`}
-          width={props.data?.resolution?props.data?.resolution?.split('X')[0]?.replace(/x/g,''):'1600'}
-          height={props.data?.resolution?props.data?.resolution?.split('X')[1]?.replace(/x/g,''):'900'}
+          width={
+            props.data?.resolution
+              ? props.data?.resolution?.split("X")[0]?.replace(/x/g, "")
+              : "1600"
+          }
+          height={
+            props.data?.resolution
+              ? props.data?.resolution?.split("X")[1]?.replace(/x/g, "")
+              : "900"
+          }
           loading="eager"
           priority={true}
           quality={100}
@@ -145,6 +155,7 @@ const DesktopWallpaperPage = (props) => {
               id="comments"
               cols={30}
               rows={5}
+              placeholder="Comment...."
               className="bg-purple-100 my-1 border-none w-full focus:border-none focus:outline-none"
             ></textarea>
             <div className="flex justify-end">
@@ -174,7 +185,65 @@ const DesktopWallpaperPage = (props) => {
             </button>
           </div>
         </div>
-        asdas
+        <div className="text-2xl uppercase text-center my-6">
+          OTHER WALLPAPERS BY {props.data?.user?.name}
+        </div>
+        <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
+          {props.dataResMoreBy?.map((data, key) => {
+            return (
+              <Link key={key} href={`/desktop/wall/${data._id}`}>
+                <a className={``}>
+                  <Image
+                    className="bg-purple-300"
+                    src={data.image
+                      .replace(/=w0-h0/g, "=w533-h300")
+                      .replace(/-1920-/g, "big-")}
+                    title={`wallpaper desktop ${data.name} ${data.categoly.join(
+                      " "
+                    )} ${data.tags.join(" ")}`}
+                    alt={`wallpaper desktop ${data.name} ${data.categoly.join(
+                      " "
+                    )} ${data.tags.join(" ")}`}
+                    width={500}
+                    height={300}
+                    quality={100}
+                    layout="intrinsic"
+                  />
+                </a>
+              </Link>
+            );
+          })}
+        </div>
+        <div className="text-2xl uppercase text-center my-6">
+          Related HD wallpapers
+        </div>
+        <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
+          {props.dataMoreRandom?.map((data, key) => {
+            return (
+              <Link key={key} href={`/desktop/wall/${data._id}`}>
+                <a className={``}>
+                  <Image
+                    className="bg-purple-300"
+                    src={data.image
+                      .replace(/=w0-h0/g, "=w533-h300")
+                      .replace(/-1920-/g, "big-")}
+                    title={`wallpaper desktop ${data.name} ${data.categoly.join(
+                      " "
+                    )} ${data.tags.join(" ")}`}
+                    alt={`wallpaper desktop ${data.name} ${data.categoly.join(
+                      " "
+                    )} ${data.tags.join(" ")}`}
+                    width={500}
+                    height={300}
+                    quality={100}
+                    layout="intrinsic"
+                  />
+                </a>
+              </Link>
+            );
+          })}
+        </div>
+        <br />
       </div>
     </Layout>
   );
@@ -183,18 +252,29 @@ const DesktopWallpaperPage = (props) => {
 export async function getServerSideProps({ params }) {
   // const res = await fetch(`${process.env.HOST}/desktop/${params.id}`);
   // const data = await res.json();
-  console.time('find data');
-  const res = await axios.get(`${process.env.HOST}/desktop/${params.id}`)
-  const data = await res.data
-  console.timeEnd('find data');
+  console.time("find data");
+  const res = await axios.get(`${process.env.HOST}/desktop/${params.id}`);
+  const data = await res.data;
+  console.timeEnd("find data");
 
   console.time("more random");
-  const resMoreRandom = await axios.post(`${process.env.HOST}/desktop/more/random`,{
-    "category":[...data.categoly]
-  })
-  const dataMoreRandom = await resMoreRandom.data
+  const resMoreRandom = await axios.post(
+    `${process.env.HOST}/desktop/more/random`,
+    {
+      category: [...data.categoly],
+    }
+  );
+  const dataMoreRandom = await resMoreRandom.data;
   console.timeEnd("more random");
-  return { props: { data } };
+
+  console.time("more by id");
+  const resMoreBy = await axios.get(
+    `${process.env.HOST}/desktop/more/by/${data?.user?._id}`
+  );
+  const dataResMoreBy = await resMoreBy.data;
+  console.timeEnd("more by id");
+
+  return { props: { data, dataMoreRandom,dataResMoreBy } };
   // return
 }
 

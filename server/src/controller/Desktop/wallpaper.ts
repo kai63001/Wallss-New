@@ -1,5 +1,7 @@
 import express, { Router, Request, Response, NextFunction } from "express";
 import { WallpaperDesktop } from "../../model";
+import mongoose from 'mongoose'
+const ObjectId = mongoose.Types.ObjectId;
 
 const router: Router = express.Router();
 
@@ -33,6 +35,18 @@ router.post("/more/random", async (req: Request, res: Response) => {
     { $match: { categoly: { $in: data } } },
     { $sample: { size: 6 } },
     
+  ]);
+  return res.send(wall);
+});
+
+router.get("/more/by/:id", async (req: Request, res: Response) => {
+  const { id } = req.params;
+  // const wall:any = await WallpaperDesktop.find(
+  //   { categoly: {$in: data} }
+  // ).lean();
+  const wall: any = await WallpaperDesktop.aggregate([
+    { $match: { "user":  ObjectId(id) } },
+    { $sample: { size: 3 } },
   ]);
   return res.send(wall);
 });
