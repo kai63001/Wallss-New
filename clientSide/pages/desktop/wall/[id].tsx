@@ -183,8 +183,17 @@ const DesktopWallpaperPage = (props) => {
 export async function getServerSideProps({ params }) {
   // const res = await fetch(`${process.env.HOST}/desktop/${params.id}`);
   // const data = await res.json();
+  console.time('find data');
   const res = await axios.get(`${process.env.HOST}/desktop/${params.id}`)
   const data = await res.data
+  console.timeEnd('find data');
+
+  console.time("more random");
+  const resMoreRandom = await axios.post(`${process.env.HOST}/desktop/more/random`,{
+    "category":[...data.categoly]
+  })
+  const dataMoreRandom = await resMoreRandom.data
+  console.timeEnd("more random");
   return { props: { data } };
   // return
 }
