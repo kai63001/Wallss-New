@@ -14,9 +14,9 @@ router.get("/index", async (req: Request, res: Response) => {
 
 router.get("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
-  const wall:any = await WallpaperDesktop.findOneAndUpdate(
+  const wall: any = await WallpaperDesktop.findOneAndUpdate(
     { _id: id },
-    { $inc: { 'views': 1 } }
+    { $inc: { views: 1 } }
   )
     .populate("user", "name profile")
     .lean();
@@ -25,10 +25,15 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 router.post("/more/random", async (req: Request, res: Response) => {
   const { category } = req.body;
-  const data = [...category]
-  const wall:any = await WallpaperDesktop.find(
-    { categoly: {$in: data} }
-  ).lean();
+  const data = [...category];
+  // const wall:any = await WallpaperDesktop.find(
+  //   { categoly: {$in: data} }
+  // ).lean();
+  const wall: any = await WallpaperDesktop.aggregate([
+    { $match: { categoly: { $in: data } } },
+    { $sample: { size: 1 } },
+    
+  ]);
   return res.send(wall);
 });
 
