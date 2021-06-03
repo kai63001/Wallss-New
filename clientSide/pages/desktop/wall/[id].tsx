@@ -9,14 +9,14 @@ const DesktopWallpaperPage = (props) => {
   return (
     <Layout
       title={`${props.data.name
-        .trim()
-        .toLowerCase()
-        .replace(/\w\S*/g, (w) =>
+        ?.trim()
+        ?.toLowerCase()
+        ?.replace(/\w\S*/g, (w) =>
           w.replace(/^\w/, (c) => c.toUpperCase())
         )} - Download`}
-      des={`download wallpaper ${props.data.categoly.join(
+      des={`download wallpaper ${props.data?.categoly?.join(
         " "
-      )} ${props.data.tags.join(" ")} hd 4k`}
+      )} ${props.data?.tags?.join(" ")} hd 4k`}
     >
       <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
         <div className="sm:flex sm:justify-between justify-start">
@@ -61,7 +61,7 @@ const DesktopWallpaperPage = (props) => {
           <div className="flex items-center mb-1">
             <a
               href={`/_next/image?url=${encodeURIComponent(
-                props.data?.image.replace(/thumb-1920-/g, "")
+                props.data?.image?.replace(/thumb-1920-/g, "")
               )}&w=3840&q=100`}
               download={`${props.data?.name} - wallss`}
               // onClick={(e) => download(e)}
@@ -87,22 +87,28 @@ const DesktopWallpaperPage = (props) => {
         </div>
         {/* end header */}
         <Image
-          src={props.data?.image.replace(/=w0-h0/g, "=w1600-h600")}
+          src={props.data?.image?.replace(/=w0-h0/g, "=w1600-h600")}
           className="bg-purple-300"
-          alt={`${props.data?.name} ${props.data?.categoly.join(
+          alt={`${props.data?.name} ${props.data?.categoly?.join(
             " "
           )} Wallpaper`}
-          title={`${props.data?.name} ${props.data?.categoly.join(
+          title={`${props.data?.name} ${props.data?.categoly?.join(
             " "
           )} Wallpaper`}
           width={
             props.data?.resolution
-              ? props.data?.resolution?.split("X")[0]?.replace(/x/g, "")
+              ? props.data?.resolution
+                  ?.toUpperCase()
+                  .split("X")[0]
+                  ?.replace(/x/g, "")
               : "1600"
           }
           height={
             props.data?.resolution
-              ? props.data?.resolution?.split("X")[1]?.replace(/x/g, "")
+              ? props.data?.resolution
+                  ?.toUpperCase()
+                  .split("X")[1]
+                  ?.replace(/x/g, "")
               : "900"
           }
           loading="eager"
@@ -112,7 +118,7 @@ const DesktopWallpaperPage = (props) => {
         />
         {/* end Image */}
         <div className="flex">
-          {props.data?.categoly.map((data, i) => {
+          {props.data?.categoly?.map((data, i) => {
             return (
               <Link
                 href={`/desktop/category/${data?.replace(/ /g, "+")}`}
@@ -126,7 +132,7 @@ const DesktopWallpaperPage = (props) => {
           })}
         </div>
         <div className="flex">
-          {props.data?.tags.map((data, i) => {
+          {props.data?.tags?.map((data, i) => {
             return (
               <Link href={`/desktop/tag/${data?.replace(/ /g, "+")}`} key={i}>
                 <a className="bg-purple-200 whitespace-nowrap inline-block text-purple-900 mr-2 px-2 py-0 select-none uppercase cursor-pointer mb-2">
@@ -188,10 +194,10 @@ const DesktopWallpaperPage = (props) => {
                     src={data.image
                       .replace(/=w0-h0/g, "=w533-h300")
                       .replace(/-1920-/g, "big-")}
-                    title={`wallpaper desktop ${data.name} ${data.categoly.join(
-                      " "
-                    )} ${data.tags.join(" ")}`}
-                    alt={`wallpaper desktop ${data.name} ${data.categoly.join(
+                    title={`wallpaper desktop ${
+                      data.name
+                    } ${data.categoly?.join(" ")} ${data.tags.join(" ")}`}
+                    alt={`wallpaper desktop ${data.name} ${data.categoly?.join(
                       " "
                     )} ${data.tags.join(" ")}`}
                     width={500}
@@ -217,10 +223,10 @@ const DesktopWallpaperPage = (props) => {
                     src={data.image
                       .replace(/=w0-h0/g, "=w533-h300")
                       .replace(/-1920-/g, "big-")}
-                    title={`wallpaper desktop ${data.name} ${data.categoly.join(
-                      " "
-                    )} ${data.tags.join(" ")}`}
-                    alt={`wallpaper desktop ${data.name} ${data.categoly.join(
+                    title={`wallpaper desktop ${
+                      data.name
+                    } ${data.categoly?.join(" ")} ${data.tags.join(" ")}`}
+                    alt={`wallpaper desktop ${data.name} ${data.categoly?.join(
                       " "
                     )} ${data.tags.join(" ")}`}
                     width={500}
@@ -247,22 +253,34 @@ export async function getServerSideProps({ params }) {
   const data = await res.data;
   console.timeEnd("find data");
 
-  console.time("more random");
-  const resMoreRandom = await axios.post(
-    `${process.env.HOST}/desktop/more/random`,
-    {
-      category: [...data.categoly],
-    }
-  );
-  const dataMoreRandom = await resMoreRandom.data;
-  console.timeEnd("more random");
+  let dataMoreRandom = [];
+  let dataResMoreBy = [];
+  if (data) {
+    console.time("more random");
+    const resMoreRandom = await axios.post(
+      `${process.env.HOST}/desktop/more/random`,
+      {
+        category: [...data?.categoly],
+      }
+    );
+    dataMoreRandom = await resMoreRandom.data;
+    console.timeEnd("more random");
 
-  console.time("more by id");
-  const resMoreBy = await axios.get(
-    `${process.env.HOST}/desktop/more/by/${data?.user?._id}`
-  );
-  const dataResMoreBy = await resMoreBy.data;
-  console.timeEnd("more by id");
+    console.time("more by id");
+    const resMoreBy = await axios.get(
+      `${process.env.HOST}/desktop/more/by/${data?.user?._id}`
+    );
+    dataResMoreBy = await resMoreBy.data;
+    console.timeEnd("more by id");
+  } else {
+    return {
+      redirect: {
+        permanent: false,
+        destination: "/",
+      },
+      props: {},
+    };
+  }
 
   return { props: { data, dataMoreRandom, dataResMoreBy } };
   // return

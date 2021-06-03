@@ -31,7 +31,7 @@ class Steal {
         } else {
           let listWallpaper: any = {};
           // title
-          listWallpaper["title"] =
+          listWallpaper["name"] =
             $("title")
               .text()
               ?.split("|")[0]
@@ -43,7 +43,8 @@ class Steal {
               .text()
               ?.split("|")[2]
               ?.replace(" - Wallpaper Abyss ", "")
-              ?.trim() || "resolution not found";
+              ?.replace("x", "X")
+              ?.trim() || "1920X1080";
           // tags
           const tags: any[] = [];
           $(".tag-element").each((i: any, elem: any) => {
@@ -58,7 +59,7 @@ class Steal {
           $category("a").each((i: any, elem: any) => {
             category[i] = $(elem).children().text();
           });
-          listWallpaper["category"] = category;
+          listWallpaper["categoly"] = category;
 
           // image
           listWallpaper["image"] =
@@ -82,15 +83,16 @@ class Steal {
               ).data;
               const $author = cheerio.load(auhorData);
               // console.log();
-              listWallpaper[
-                "authorLink"
-              ] = $author(".alert-link").attr("href") || '/';
+              listWallpaper["authorLink"] =
+                $author(".alert-link").attr("href") || "/";
             } else {
               listWallpaper[
                 "authorLink"
               ] = `https://wall.alphacoders.com/${link}`;
             }
           }
+          listWallpaper["date"] = new Date();
+          listWallpaper["user"] = "60a43e07a0af5b1e041d971f"
           console.log(listWallpaper);
           dataWallpaper.push(listWallpaper);
         }

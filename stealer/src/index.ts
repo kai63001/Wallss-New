@@ -3,6 +3,7 @@ const Stealer = new Steal();
 var myArgs = process.argv.slice(2);
 import db from "./db/connect";
 import colors from "colors";
+import WallpapersDesktop from './model/Desktop/wallpaper'
 
 db("mongodb://localhost:27017/wallss");
 
@@ -13,7 +14,8 @@ const main = async () => {
   } else {
     if (myArgs[0] == "wallpaper") {
       const data = await Stealer.stealWallpaperSetUp(myArgs[1],myArgs[2])
-      console.log("data:",data)
+      const insert = await WallpapersDesktop.create(data)
+      console.log("data:",insert)
     } else if (myArgs[0] == "mobile") {
     } else {
       console.log(colors.bold.red("only wallpaper and mobile"));
