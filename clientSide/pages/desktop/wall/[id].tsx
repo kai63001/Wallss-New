@@ -6,27 +6,6 @@ import Link from "next/link";
 
 const DesktopWallpaperPage = (props) => {
   console.log(props.data);
-  const download = (e) => {
-    // e.preventDefault()
-    // console.log(e.target.href);
-    // fetch(e.target.href, {
-    //   method: "GET",
-    //   headers: {},
-    // })
-    //   .then((response) => {
-    //     response.arrayBuffer().then(function (buffer) {
-    //       const url = window.URL.createObjectURL(new Blob([buffer]));
-    //       const link = document.createElement("a");
-    //       link.href = url;
-    //       link.setAttribute("download", "image.png"); //or any other extension
-    //       document.body.appendChild(link);
-    //       link.click();
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
-  };
   return (
     <Layout
       title={`${props.data.name
@@ -63,7 +42,18 @@ const DesktopWallpaperPage = (props) => {
               </div>
               <div className="row-span-2 ml-2 -mt-1">
                 <span className="text-gray-600">
-                  by {props.data?.user?.name}
+                  by{" "}
+                  <span className="text-purple-700">
+                    {props.data?.user?.name}
+                  </span>{" "}
+                  {props.data?.author && (
+                    <>
+                      · Author{" "}
+                      <span className="text-purple-700">
+                        {props.data?.author}
+                      </span>
+                    </>
+                  )}
                 </span>
               </div>
             </div>
@@ -274,7 +264,7 @@ export async function getServerSideProps({ params }) {
   const dataResMoreBy = await resMoreBy.data;
   console.timeEnd("more by id");
 
-  return { props: { data, dataMoreRandom,dataResMoreBy } };
+  return { props: { data, dataMoreRandom, dataResMoreBy } };
   // return
 }
 
