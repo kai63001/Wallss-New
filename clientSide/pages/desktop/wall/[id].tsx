@@ -10,12 +10,12 @@ const DesktopWallpaperPage = (props) => {
 
   return (
     <Layout
-      title={`${props.data.name
+      title={`${props.data?.name
         ?.trim()
         ?.toLowerCase()
         ?.replace(/\w\S*/g, (w) =>
           w.replace(/^\w/, (c) => c.toUpperCase())
-        )} - Download`}
+        )} ${props.data?.resolution} - Download`}
       des={`download wallpaper ${props.data?.categoly?.join(
         " "
       )} ${props.data?.tags?.join(" ")} hd 4k`}
@@ -39,7 +39,7 @@ const DesktopWallpaperPage = (props) => {
               </div>
               <div className="row-span-2 ml-2 mt-2">
                 <h1 className="text-2xl uppercase font-romeo2">
-                  {props.data?.name}
+                  {props.data?.name} {props.data?.resolution}
                 </h1>
               </div>
               <div className="row-span-2 ml-2 -mt-1">
@@ -198,10 +198,10 @@ const DesktopWallpaperPage = (props) => {
                     src={data.image
                       .replace(/=w0-h0/g, "=w533-h300")
                       .replace(/-1920-/g, "big-")}
-                    title={`wallpaper desktop ${
+                    title={`Wallpaper Desktop ${
                       data.name
                     } ${data.categoly?.join(" ")} ${data.tags.join(" ")}`}
-                    alt={`wallpaper desktop ${data.name} ${data.categoly?.join(
+                    alt={`Wallpaper Desktop ${data.name} ${data.categoly?.join(
                       " "
                     )} ${data.tags.join(" ")}`}
                     width={500}
@@ -228,10 +228,10 @@ const DesktopWallpaperPage = (props) => {
                     src={data.image
                       .replace(/=w0-h0/g, "=w533-h300")
                       .replace(/-1920-/g, "big-")}
-                    title={`wallpaper desktop ${
+                    title={`Wallpaper Desktop ${
                       data.name
                     } ${data.categoly?.join(" ")} ${data.tags.join(" ")}`}
-                    alt={`wallpaper desktop ${data.name} ${data.categoly?.join(
+                    alt={`Wallpaper Desktop ${data.name} ${data.categoly?.join(
                       " "
                     )} ${data.tags.join(" ")}`}
                     width={500}
