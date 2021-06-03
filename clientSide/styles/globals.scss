@@ -30,3 +30,16 @@ footer {
 main {
   min-height: 86% !important;
 }
+
+#nprogress .bar {
+  background: rgba(109, 40, 217,1) !important;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: rgba(109, 40, 217,1) !important;
+  border-left-color: rgba(109, 40, 217,1) !important;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px rgba(109, 40, 217,1), 0 0 5px rgba(109, 40, 217,1) !important;
+}
