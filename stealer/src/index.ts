@@ -15,7 +15,7 @@ const main = async () => {
     if (myArgs[0] == "wallpaper") {
       const data = await Stealer.stealWallpaperSetUp(myArgs[1],myArgs[2])
       const insert = await WallpapersDesktop.create(data)
-      console.log("data:",insert)
+      if(insert) console.log(colors.bgMagenta('All Done'))
     } else if (myArgs[0] == "mobile") {
     } else {
       console.log(colors.bold.red("only wallpaper and mobile"));

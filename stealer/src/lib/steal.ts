@@ -77,7 +77,7 @@ class Steal {
             const link = $("#author_container").children().attr("href");
             // console.log($('#author_container').children().attr('href'))
             if (link.indexOf("unregistered") >= 0) {
-              console.log("next axios");
+              // console.log("next axios");
               const auhorData = await (
                 await axios.get(`https://wall.alphacoders.com/${link}`)
               ).data;
@@ -93,7 +93,8 @@ class Steal {
           }
           listWallpaper["date"] = new Date();
           listWallpaper["user"] = "60a43e07a0af5b1e041d971f"
-          console.log(listWallpaper);
+          // console.log(listWallpaper);
+          console.log(colors.bold.blue(`${i} success`));
           dataWallpaper.push(listWallpaper);
         }
 
