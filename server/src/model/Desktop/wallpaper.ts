@@ -31,6 +31,9 @@ const WallpaperSchema = new mongoose.Schema({
     author: {
         type: String
     },
+    authorLink: {
+        type: String
+    },
     categoly: [{
         type: String,
         lowercase: true,

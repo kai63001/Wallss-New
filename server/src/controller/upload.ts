@@ -39,7 +39,7 @@ router.post("/", async (req: Request, res: Response) => {
     req.headers ? req.headers.authorization : undefined
   );
   if (!auth) return res.json({ status: "auth" });
-  const { title, image, author, type, categories, tags, resolution } = req.body;
+  const { title, image, author,authorLink, type, categories, tags, resolution } = req.body;
   const date = new Date();
   const random = uuidv4();
   const upload = await uploadDrive(image, random.toString());
@@ -48,6 +48,7 @@ router.post("/", async (req: Request, res: Response) => {
     tags: tags,
     categoly: categories,
     author,
+    authorLink,
     resolution,
     date,
     image: `https://drive.google.com/thumbnail?id=${upload}&sz=w0-h0`,

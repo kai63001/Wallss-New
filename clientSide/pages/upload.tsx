@@ -22,6 +22,7 @@ const UploadPage = (props) => {
   const [image, setImage] = useState("");
   const [resolution, setResolution] = useState("");
   const [author, setAnthor] = useState("");
+  const [authorLink, setAnthorLink] = useState("");
 
   const [errors, setErrors] = useState({});
 
@@ -130,6 +131,7 @@ const UploadPage = (props) => {
       title: title,
       image: image,
       author: author,
+      authorLink: authorLink,
       type: type,
       categories: listCategory,
       tags: listTags,
@@ -306,12 +308,20 @@ const UploadPage = (props) => {
                 Has an author
               </label>
               {hasAuthor && (
-                <input
-                  onChange={(e) => setAnthor(e.target.value)}
-                  type="text"
-                  className={` mt-1 focus:ring-1  focus:outline-none w-full text-black placeholder-gray-500 border-gray-200 focus:border-purple-500 focus:ring-purple-500 py-1 pl-3`}
-                  placeholder="Author name"
-                />
+                <div className="grid grid-cols-3 gap-2">
+                  <input
+                    onChange={(e) => setAnthor(e.target.value)}
+                    type="text"
+                    className={` mt-1 focus:ring-1  focus:outline-none w-full text-black placeholder-gray-500 border-gray-200 focus:border-purple-500 focus:ring-purple-500 py-1 pl-3`}
+                    placeholder="Author Name"
+                  />
+                  <input
+                    onChange={(e) => setAnthorLink(e.target.value)}
+                    type="url"
+                    className={` mt-1 focus:ring-1 col-span-2 focus:outline-none w-full text-black placeholder-gray-500 border-gray-200 focus:border-purple-500 focus:ring-purple-500 py-1 pl-3`}
+                    placeholder="Author Link"
+                  />
+                </div>
               )}
             </div>
             <div className="mt-2">
