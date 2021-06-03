@@ -3,9 +3,11 @@ const Layout = dynamic(import("@/components/Layout"));
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const DesktopWallpaperPage = (props) => {
   console.log(props.data);
+
   return (
     <Layout
       title={`${props.data.name
@@ -88,7 +90,7 @@ const DesktopWallpaperPage = (props) => {
         {/* end header */}
         <Image
           src={props.data?.image?.replace(/=w0-h0/g, "=w1600-h600")}
-          className="bg-purple-300"
+          className={`bg-purple-300`}
           alt={`${props.data?.name} ${props.data?.categoly?.join(
             " "
           )} Wallpaper`}
@@ -103,6 +105,7 @@ const DesktopWallpaperPage = (props) => {
                   ?.replace(/x/g, "")
               : "1600"
           }
+          hidden={true}
           height={
             props.data?.resolution
               ? props.data?.resolution
@@ -111,8 +114,8 @@ const DesktopWallpaperPage = (props) => {
                   ?.replace(/x/g, "")
               : "900"
           }
-          loading="eager"
           priority={true}
+          key={props.data?._id}
           quality={100}
           layout="intrinsic"
         />
@@ -190,6 +193,7 @@ const DesktopWallpaperPage = (props) => {
               <Link key={key} href={`/desktop/wall/${data._id}`}>
                 <a className={``}>
                   <Image
+                    key={data._id}
                     className="bg-purple-300"
                     src={data.image
                       .replace(/=w0-h0/g, "=w533-h300")
@@ -219,6 +223,7 @@ const DesktopWallpaperPage = (props) => {
               <Link key={key} href={`/desktop/wall/${data._id}`}>
                 <a className={``}>
                   <Image
+                    key={data._id}
                     className="bg-purple-300"
                     src={data.image
                       .replace(/=w0-h0/g, "=w533-h300")
