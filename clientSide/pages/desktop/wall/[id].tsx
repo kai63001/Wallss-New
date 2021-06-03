@@ -120,7 +120,7 @@ const DesktopWallpaperPage = (props) => {
           layout="intrinsic"
         />
         {/* end Image */}
-        <div className="flex">
+        <div className="flex flex-wrap">
           {props.data?.categoly?.map((data, i) => {
             return (
               <Link
@@ -134,7 +134,7 @@ const DesktopWallpaperPage = (props) => {
             );
           })}
         </div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           {props.data?.tags?.map((data, i) => {
             return (
               <Link href={`/desktop/tag/${data?.replace(/ /g, "+")}`} key={i}>
