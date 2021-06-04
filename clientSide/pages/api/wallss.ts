@@ -13,8 +13,15 @@ var mime: any = {
 };
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const url = req.query.id?.toString();
-  if(!url) return res.send('id request')
-  let newUrl = (new Buffer(url, "base64")).toString();
+  if (!url) return res.send("id request");
+  //   decode str rot13 to base64
+  let newUrl = url.replace(/[a-zA-Z]/g, function (c: any) {
+    return String.fromCharCode(
+      (c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26
+    );
+  });
+  //   decode base64
+  newUrl = new Buffer(newUrl, "base64").toString();
 
   const type = mime[newUrl.slice(-3)];
   console.log(newUrl.slice(-3));
