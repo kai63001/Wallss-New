@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
+import encode from '@/lib/encode'
 
 const CardDesktop = (props) => {
   const [onDownload, setOnDownload] = useState(false);

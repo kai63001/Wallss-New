@@ -20,8 +20,10 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       (c <= "Z" ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26
     );
   });
+  console.log('rot',newUrl)
   //   decode base64
   newUrl = new Buffer(newUrl, "base64").toString();
+  console.log('base64',newUrl)
 
   const type = mime[newUrl.slice(-3)];
   console.log(newUrl.slice(-3));
