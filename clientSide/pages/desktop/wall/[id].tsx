@@ -177,14 +177,14 @@ const DesktopWallpaperPage = (props) => {
               <>
                 <div className="text-2xl uppercase">LEAVE A COMMENT</div>
                 <div>
-                  You need to
+                  You need to 
                   <Link href="/login">
-                    <a className="text-purple-700">Sign in</a>
-                  </Link>
-                  or
+                    <a className="text-purple-700"> Sign in </a>
+                  </Link> 
+                  or 
                   <Link href="/register">
-                    <a className="text-purple-700">Create an account</a>
-                  </Link>
+                    <a className="text-purple-700"> Create an account </a>
+                  </Link> 
                   to write comments.
                 </div>
               </>
@@ -276,7 +276,7 @@ export async function getServerSideProps({ params, req }) {
   }
 
   const cookie = req ? req.headers.cookie : undefined;
-  const token = cookie.replace(
+  const token = cookie?.replace(
     /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
     "$1"
   );
