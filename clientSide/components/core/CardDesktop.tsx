@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
-import encode from '@/lib/encode'
+import encode from "@/lib/encode";
 
 const CardDesktop = (props) => {
   const [onDownload, setOnDownload] = useState(false);
@@ -37,19 +37,21 @@ const CardDesktop = (props) => {
           <Image
             key={props.data._id}
             className="bg-purple-300 h-full"
-            src={props.data.image
-              .replace(/=w0-h0/g, "=w533-h300")
-              .replace(/-1920-/g, "big-")}
-            title={`Wallpaper Desktop ${
-              props.data.name
-            }`}
-            alt={`Wallpaper Desktop ${
-              props.data.name
-            }`}
+            // src={props.data.image
+            //   .replace(/=w0-h0/g, "=w533-h300")
+            //   .replace(/-1920-/g, "big-")}
+            src={`/api/wallss?id=${encode(
+              props.data.image
+                .replace(/=w0-h0/g, "=w533-h300")
+                ?.replace(/-1920-/g, "big-")
+            )}`}
+            title={`Wallpaper Desktop ${props.data.name}`}
+            alt={`Wallpaper Desktop ${props.data.name}`}
             width={800}
             height={450}
+            unoptimized={true}
             layout="responsive"
-            quality={60}
+            quality={100}
           />
           {/* background hover */}
           <div className="absolute top-0 bg-black w-full h-full opacity-0 group-hover:opacity-50"></div>
@@ -111,9 +113,17 @@ const CardDesktop = (props) => {
               {num == 0 && (
                 <div className="text-center">
                   <Link
-                    href={props.data?.image?.replace(/thumb-1920-/g, "")}
+                    href={`/api/wallss?id=${encode(
+                      props.data.image
+                        ?.replace(/=w0-h0/g, "=w533-h300")
+                        ?.replace(/thumb-1920-/g, "")
+                    )}`}
                   >
-                    <a target="_blank" rel="nofollow" className="text-purple-800">
+                    <a
+                      target="_blank"
+                      rel="nofollow"
+                      className="text-purple-800"
+                    >
                       Watch full resolution image
                     </a>
                   </Link>

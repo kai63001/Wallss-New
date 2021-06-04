@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { isAuth } from "@/lib/auth";
+import encode from "@/lib/encode";
 
 const DesktopWallpaperPage = (props) => {
   console.log(props.data);
@@ -98,7 +99,10 @@ const DesktopWallpaperPage = (props) => {
         </div>
         {/* end header */}
         <Image
-          src={props.data?.image?.replace(/=w0-h0/g, "=w1600-h600")}
+          src={`/api/wallss?id=${encode(
+            props.data.image.replace(/=w0-h0/g, "=w1600-h600")
+          )}`}
+          // src={props.data?.image?.replace(/=w0-h0/g, "=w1600-h600")}
           className={`bg-purple-300`}
           alt={`${props.data?.name} ${props.data?.categoly?.join(
             " "
@@ -106,6 +110,7 @@ const DesktopWallpaperPage = (props) => {
           title={`${props.data?.name} ${props.data?.categoly?.join(
             " "
           )} Wallpaper`}
+          unoptimized={true}
           width={
             props.data?.resolution
               ? props.data?.resolution
@@ -177,14 +182,14 @@ const DesktopWallpaperPage = (props) => {
               <>
                 <div className="text-2xl uppercase">LEAVE A COMMENT</div>
                 <div>
-                  You need to 
+                  You need to
                   <Link href="/login">
                     <a className="text-purple-700"> Sign in </a>
-                  </Link> 
-                  or 
+                  </Link>
+                  or
                   <Link href="/register">
                     <a className="text-purple-700"> Create an account </a>
-                  </Link> 
+                  </Link>
                   to write comments.
                 </div>
               </>
@@ -216,9 +221,7 @@ const DesktopWallpaperPage = (props) => {
         </div>
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
           {props.dataResMoreBy?.map((data, key) => {
-            return (
-              <Card data={data} key={key} />
-            );
+            return <Card data={data} key={key} />;
           })}
         </div>
         <div className="text-2xl uppercase text-center my-6">
@@ -226,9 +229,7 @@ const DesktopWallpaperPage = (props) => {
         </div>
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
           {props.dataMoreRandom?.map((data, key) => {
-            return (
-              <Card data={data} key={key} />
-            );
+            return <Card data={data} key={key} />;
           })}
         </div>
         <br />
