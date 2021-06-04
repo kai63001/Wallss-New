@@ -141,7 +141,7 @@ export default function Home(props) {
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
           {data?.map((data, key) => {
             return (
-              <CardDesktop data={data} key={key} />
+              <CardDesktop key={key} data={data} />
             );
           })}
         </div>

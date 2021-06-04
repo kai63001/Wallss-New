@@ -32,7 +32,7 @@ const CardDesktop = (props) => {
   }, [onDownload, num]);
   return (
     <>
-      <Link key={props.key} href={`/desktop/wall/${props.data._id}`}>
+      <Link href={`/desktop/wall/${props.data._id}`}>
         <a className={`group relative overflow-hidden`}>
           <Image
             key={props.data._id}
