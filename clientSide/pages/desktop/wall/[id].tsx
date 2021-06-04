@@ -13,9 +13,9 @@ const DesktopWallpaperPage = (props) => {
       title={`${props.data?.name
         ?.trim()
         ?.toLowerCase()
-        ?.replace(/\w\S*/g, (w) =>
-          w.replace(/^\w/, (c) => c.toUpperCase())
-        )} ${props.data?.resolution} - Download`}
+        ?.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()))} ${
+        props.data?.resolution
+      } - Download`}
       des={`download wallpaper ${props.data?.categoly?.join(
         " "
       )} ${props.data?.tags?.join(" ")} hd 4k`}
@@ -51,9 +51,15 @@ const DesktopWallpaperPage = (props) => {
                   {props.data?.author && (
                     <>
                       · Author{" "}
-                      <span className="text-purple-700">
-                        {props.data?.author}
-                      </span>
+                      <Link href={props.data?.authorLink || "/"}>
+                        <a
+                          target="_blank"
+                          ref="nofollow"
+                          className="text-purple-700"
+                        >
+                          {props.data?.author}
+                        </a>
+                      </Link>
                     </>
                   )}
                 </span>
@@ -266,6 +272,7 @@ export async function getServerSideProps({ params }) {
       `${process.env.HOST}/desktop/more/random`,
       {
         category: [...data?.categoly],
+        tags: [...data?.tags]
       }
     );
     dataMoreRandom = await resMoreRandom.data;

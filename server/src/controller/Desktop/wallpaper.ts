@@ -31,7 +31,8 @@ router.post("/more/random", async (req: Request, res: Response) => {
   // const wall:any = await WallpaperDesktop.find(
   //   { categoly: {$in: data} }
   // ).lean();
-  const wall: any = await WallpaperDesktop.aggregate([
+  let wall:any = []
+  wall = await WallpaperDesktop.aggregate([
     { $match: { categoly: { $in: data } } },
     { $sample: { size: 6 } },
     
