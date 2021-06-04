@@ -1,9 +1,7 @@
 import { useEffect, useState, useRef } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
-const Input = dynamic(import("@/components/core/Input"));
 const InputCategory = dynamic(import("@/components/core/InputCategory"));
 import { isAuth } from "@/lib/auth";
 import axios from "@/lib/axios";

@@ -4,6 +4,7 @@ import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import { isAuth } from "@/lib/auth";
 
 const DesktopWallpaperPage = (props) => {
   console.log(props.data);
@@ -111,7 +112,6 @@ const DesktopWallpaperPage = (props) => {
                   ?.replace(/x/g, "")
               : "1600"
           }
-          hidden={true}
           height={
             props.data?.resolution
               ? props.data?.resolution
@@ -154,20 +154,39 @@ const DesktopWallpaperPage = (props) => {
         {/* end category and tags */}
         <div className="grid grid-cols-6 gap-4">
           <div className="bg-white sm:col-span-5 col-span-6 p-3 order-2 sm:order-1">
-            <div className="text-2xl uppercase">LEAVE A COMMENT</div>
-            <textarea
-              name="comments"
-              id="comments"
-              cols={30}
-              rows={5}
-              placeholder="Comment...."
-              className="bg-purple-100 my-1 border-none w-full focus:border-none focus:outline-none"
-            ></textarea>
-            <div className="flex justify-end">
-              <button className="bg-purple-800 text-white py-1 px-5">
-                SEND
-              </button>
-            </div>
+            {props?.authData ? (
+              <>
+                <div className="text-2xl uppercase">LEAVE A COMMENT</div>
+                <textarea
+                  name="comments"
+                  id="comments"
+                  cols={30}
+                  rows={5}
+                  placeholder="Comment...."
+                  className="bg-purple-100 my-1 border-none w-full focus:border-none focus:outline-none"
+                ></textarea>
+                <div className="flex justify-end">
+                  <button className="bg-purple-800 text-white py-1 px-5">
+                    SEND
+                  </button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="text-2xl uppercase">LEAVE A COMMENT</div>
+                <div>
+                  You need to
+                  <Link href="/login">
+                    <a className="text-purple-700">Sign in</a>
+                  </Link>
+                  or
+                  <Link href="/register">
+                    <a className="text-purple-700">Create an account</a>
+                  </Link>
+                  to write comments.
+                </div>
+              </>
+            )}
           </div>
           <div className="sm:order-2 order-1 grid grid-rows-3 grid-flow-col gap-2 sm:block sm:col-span-1 col-span-6">
             <button className="bg-white w-full mb-2 p-2 sm:col-span-1 col-span-6 text-center cursor-pointer select-none hover:bg-purple-200 focus:bg-purple-800 focus:text-white focus:outline-none">
@@ -256,7 +275,7 @@ const DesktopWallpaperPage = (props) => {
   );
 };
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req }) {
   // const res = await fetch(`${process.env.HOST}/desktop/${params.id}`);
   // const data = await res.json();
   console.time("find data");
@@ -272,7 +291,7 @@ export async function getServerSideProps({ params }) {
       `${process.env.HOST}/desktop/more/random`,
       {
         category: [...data?.categoly],
-        tags: [...data?.tags]
+        tags: [...data?.tags],
       }
     );
     dataMoreRandom = await resMoreRandom.data;
@@ -294,7 +313,13 @@ export async function getServerSideProps({ params }) {
     };
   }
 
-  return { props: { data, dataMoreRandom, dataResMoreBy } };
+  const cookie = req ? req.headers.cookie : undefined;
+  const token = cookie.replace(
+    /(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  const authData = isAuth(token);
+  return { props: { data, dataMoreRandom, dataResMoreBy, authData } };
   // return
 }
 
