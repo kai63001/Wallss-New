@@ -6,7 +6,7 @@ const Layout = dynamic(import("@/components/Layout"));
 import { useState } from "react";
 import axios from "axios";
 import useSWR from 'swr';
-
+import CardDesktop from '@/components/core/CardDesktop'
 
 async function fetcher(url) {
   const res = await fetch(url);
@@ -141,19 +141,7 @@ export default function Home(props) {
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
           {data?.map((data, key) => {
             return (
-              <Link key={key} href={`/desktop/wall/${data._id}`}>
-                <a className={``}>
-                  <Image
-                    className="bg-purple-300"
-                    src={data.image.replace(/=w0-h0/g,'=w533-h300').replace(/-1920-/g,'big-')}
-                    alt={`wallpaper desktop ${data.name}`}
-                    width={500}
-                    height={300}
-                    quality={100}
-                    layout="intrinsic"
-                  />
-                </a>
-              </Link>
+              <CardDesktop data={data} key={key} />
             );
           })}
         </div>

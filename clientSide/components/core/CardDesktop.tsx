@@ -41,10 +41,10 @@ const CardDesktop = (props) => {
               .replace(/-1920-/g, "big-")}
             title={`Wallpaper Desktop ${
               props.data.name
-            } ${props.data.categoly?.join(" ")} ${props.data.tags.join(" ")}`}
+            }`}
             alt={`Wallpaper Desktop ${
               props.data.name
-            } ${props.data.categoly?.join(" ")} ${props.data.tags.join(" ")}`}
+            }`}
             width={800}
             height={450}
             layout="responsive"
@@ -110,9 +110,7 @@ const CardDesktop = (props) => {
               {num == 0 && (
                 <div className="text-center">
                   <Link
-                    href={`/_next/image?url=${encodeURIComponent(
-                      props.data?.image?.replace(/thumb-1920-/g, "")
-                    )}&w=3840&q=100`}
+                    href={props.data?.image?.replace(/thumb-1920-/g, "")}
                   >
                     <a target="_blank" rel="nofollow" className="text-purple-800">
                       Watch full resolution image
