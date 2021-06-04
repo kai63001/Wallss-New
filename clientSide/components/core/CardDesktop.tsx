@@ -1,86 +1,118 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 const CardDesktop = (props) => {
   const [onDownload, setOnDownload] = useState(false);
+  const modle = useRef(null);
 
   const download = (e) => {
     e.preventDefault();
     setOnDownload(true);
   };
+
+  useEffect(() => {
+    if (!onDownload) return;
+    function handleClick(event) {
+      if (modle.current && !modle.current.contains(event.target)) {
+        setOnDownload(false);
+      }
+    }
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  }, [onDownload]);
   return (
-    <Link key={props.key} href={`/desktop/wall/${props.data._id}`}>
-      <a className={`group relative overflow-hidden`}>
-        <Image
-          key={props.data._id}
-          className="bg-purple-300 h-full"
-          src={props.data.image
-            .replace(/=w0-h0/g, "=w533-h300")
-            .replace(/-1920-/g, "big-")}
-          title={`Wallpaper Desktop ${
-            props.data.name
-          } ${props.data.categoly?.join(" ")} ${props.data.tags.join(" ")}`}
-          alt={`Wallpaper Desktop ${
-            props.data.name
-          } ${props.data.categoly?.join(" ")} ${props.data.tags.join(" ")}`}
-          width={800}
-          height={450}
-          layout="responsive"
-          quality={60}
-        />
-        {/* background hover */}
-        <div className="absolute top-0 bg-black w-full h-full opacity-0 group-hover:opacity-50"></div>
-        <div className="absolute top-3 p-1 right-3 bg-purple-700 text-white opacity-0 group-hover:opacity-100">
-          <a
-            target="_blank"
-            href={`/_next/image?url=${encodeURIComponent(
-              props.data?.image?.replace(/thumb-1920-/g, "")
-            )}&w=3840&q=100`}
-            onClick={(e) => download(e)}
-            download
-          >
-            {onDownload ? (
-              <svg
-                className="animate-spin h-6 w-6 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
+    <>
+      <Link key={props.key} href={`/desktop/wall/${props.data._id}`}>
+        <a className={`group relative overflow-hidden`}>
+          <Image
+            key={props.data._id}
+            className="bg-purple-300 h-full"
+            src={props.data.image
+              .replace(/=w0-h0/g, "=w533-h300")
+              .replace(/-1920-/g, "big-")}
+            title={`Wallpaper Desktop ${
+              props.data.name
+            } ${props.data.categoly?.join(" ")} ${props.data.tags.join(" ")}`}
+            alt={`Wallpaper Desktop ${
+              props.data.name
+            } ${props.data.categoly?.join(" ")} ${props.data.tags.join(" ")}`}
+            width={800}
+            height={450}
+            layout="responsive"
+            quality={60}
+          />
+          {/* background hover */}
+          <div className="absolute top-0 bg-black w-full h-full opacity-0 group-hover:opacity-50"></div>
+          <div className="absolute top-3 p-1 right-3 bg-purple-700 text-white opacity-0 group-hover:opacity-100">
+            <div onClick={(e) => download(e)}>
+              {onDownload ? (
+                <svg
+                  className="animate-spin h-6 w-6 text-white"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+              ) : (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 text-white"
+                  fill="none"
+                  viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth="4"
-                ></circle>
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                ></path>
-              </svg>
-            ) : (
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  />
+                </svg>
+              )}
+            </div>
+          </div>
+        </a>
+      </Link>
+      {onDownload && (
+        <div className="fixed bg-black bg-opacity-30 z-30 w-full h-full top-0 left-0 flex">
+          <div ref={modle} className="m-auto w-full max-w-md relative">
+            <div className="bg-white m-auto p-3 w-full">
+              <p className="text-2xl text-center">Download wallpaper</p>
+              {props.data.name}
+            </div>
+            {/* close */}
+            <div onClick={()=>setOnDownload(false)} className="absolute -top-3 bg-purple-500 text-white -right-3 p-2 cursor-pointer">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
               >
                 <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
                 />
               </svg>
-            )}
-          </a>
+            </div>
+          </div>
         </div>
-      </a>
-    </Link>
+      )}
+    </>
   );
 };
 
