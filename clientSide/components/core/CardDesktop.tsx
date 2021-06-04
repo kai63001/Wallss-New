@@ -5,6 +5,7 @@ import { useEffect, useState, useRef } from "react";
 const CardDesktop = (props) => {
   const [onDownload, setOnDownload] = useState(false);
   const modle = useRef(null);
+  const [num, setNum] = useState(5);
 
   const download = (e) => {
     e.preventDefault();
@@ -12,6 +13,13 @@ const CardDesktop = (props) => {
   };
 
   useEffect(() => {
+    if (num != 0 && onDownload) {
+      const id = setTimeout(() => {
+        setNum(num - 1);
+      }, 1000);
+    } else {
+      console.log("success");
+    }
     if (!onDownload) return;
     function handleClick(event) {
       if (modle.current && !modle.current.contains(event.target)) {
@@ -20,7 +28,7 @@ const CardDesktop = (props) => {
     }
     window.addEventListener("click", handleClick);
     return () => window.removeEventListener("click", handleClick);
-  }, [onDownload]);
+  }, [onDownload, num]);
   return (
     <>
       <Link key={props.key} href={`/desktop/wall/${props.data._id}`}>
@@ -92,10 +100,32 @@ const CardDesktop = (props) => {
           <div ref={modle} className="m-auto w-full max-w-md relative">
             <div className="bg-white m-auto p-3 w-full">
               <p className="text-2xl text-center">Download wallpaper</p>
-              {props.data.name}
+              <p className="text-md text-center">{props.data.name}</p>
+              {num != 0 && (
+                <div className="text-center">
+                  Please, wait while your link is generating … {num}
+                </div>
+              )}
+              {/* ads here */}
+              {num == 0 && (
+                <div className="text-center">
+                  <Link
+                    href={`/_next/image?url=${encodeURIComponent(
+                      props.data?.image?.replace(/thumb-1920-/g, "")
+                    )}&w=3840&q=100`}
+                  >
+                    <a target="_blank" rel="nofollow" className="text-purple-800">
+                      Watch full resolution image
+                    </a>
+                  </Link>
+                </div>
+              )}
             </div>
             {/* close */}
-            <div onClick={()=>setOnDownload(false)} className="absolute -top-3 bg-purple-500 text-white -right-3 p-2 cursor-pointer">
+            <div
+              onClick={() => setOnDownload(false)}
+              className="absolute -top-3 bg-purple-500 text-white -right-3 p-2 cursor-pointer"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
