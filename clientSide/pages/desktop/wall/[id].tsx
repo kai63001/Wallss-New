@@ -1,5 +1,6 @@
 import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
+const Card = dynamic(import("@/components/core/CardDesktop"));
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
@@ -215,27 +216,7 @@ const DesktopWallpaperPage = (props) => {
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
           {props.dataResMoreBy?.map((data, key) => {
             return (
-              <Link key={key} href={`/desktop/wall/${data._id}`}>
-                <a className={``}>
-                  <Image
-                    key={data._id}
-                    className="bg-purple-300"
-                    src={data.image
-                      .replace(/=w0-h0/g, "=w533-h300")
-                      .replace(/-1920-/g, "big-")}
-                    title={`Wallpaper Desktop ${
-                      data.name
-                    } ${data.categoly?.join(" ")} ${data.tags.join(" ")}`}
-                    alt={`Wallpaper Desktop ${data.name} ${data.categoly?.join(
-                      " "
-                    )} ${data.tags.join(" ")}`}
-                    width={500}
-                    height={300}
-                    quality={100}
-                    layout="intrinsic"
-                  />
-                </a>
-              </Link>
+              <Card data={data} key={key} />
             );
           })}
         </div>
@@ -245,27 +226,7 @@ const DesktopWallpaperPage = (props) => {
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
           {props.dataMoreRandom?.map((data, key) => {
             return (
-              <Link key={key} href={`/desktop/wall/${data._id}`}>
-                <a className={``}>
-                  <Image
-                    key={data._id}
-                    className="bg-purple-300"
-                    src={data.image
-                      .replace(/=w0-h0/g, "=w533-h300")
-                      .replace(/-1920-/g, "big-")}
-                    title={`Wallpaper Desktop ${
-                      data.name
-                    } ${data.categoly?.join(" ")} ${data.tags.join(" ")}`}
-                    alt={`Wallpaper Desktop ${data.name} ${data.categoly?.join(
-                      " "
-                    )} ${data.tags.join(" ")}`}
-                    width={500}
-                    height={300}
-                    quality={100}
-                    layout="intrinsic"
-                  />
-                </a>
-              </Link>
+              <Card data={data} key={key} />
             );
           })}
         </div>
