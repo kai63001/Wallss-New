@@ -38,7 +38,7 @@ const Category = (props) => {
 };
 
 export async function getServerSideProps({ params, req }) {
-  const categoryName = params.name;
+  const categoryName = params.name.replace(/\+/g,' ');
   return {
     props: {
       categoryName,

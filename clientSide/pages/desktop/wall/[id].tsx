@@ -21,6 +21,7 @@ const DesktopWallpaperPage = (props) => {
       des={`download wallpaper ${props.data?.categoly?.join(
         " "
       )} ${props.data?.tags?.join(" ")} hd 4k`}
+      image={props.data?.image}
     >
       <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
         <div className="sm:flex sm:justify-between justify-start">
