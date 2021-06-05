@@ -1,7 +1,10 @@
 import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2'
+
 interface IAccessStatsSchema {
     type: string;
     views: number;
+    paginate: ()=>{};
   }
 const WallpaperSchema = new mongoose.Schema({
     resolution: {
@@ -42,13 +45,11 @@ const WallpaperSchema = new mongoose.Schema({
     }],
     uuid : {
         type: String
-    },
-    views:{
-        type: Number,
-        default: 0 
     }
 })
 
-const Wallpaper = mongoose.model<IAccessStatsSchema>('Wallpaper', WallpaperSchema);
+WallpaperSchema.plugin(mongoosePaginate)
+
+const Wallpaper = mongoose.model('Wallpaper', WallpaperSchema);
 
 export default Wallpaper;

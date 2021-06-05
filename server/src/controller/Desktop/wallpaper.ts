@@ -17,11 +17,10 @@ router.get("/index", async (req: Request, res: Response) => {
   return res.send(wall);
 });
 
-router.get("/:id", async (req: Request, res: Response) => {
+router.get("/wall/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
-  const wall: any = await WallpaperDesktop.findOneAndUpdate(
-    { _id: id },
-    { $inc: { views: 1 } }
+  const wall: any = await WallpaperDesktop.findOne(
+    { _id: id }
   )
     .populate("user", "name profile")
     .lean();
