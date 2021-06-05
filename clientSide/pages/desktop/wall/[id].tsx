@@ -98,40 +98,28 @@ const DesktopWallpaperPage = (props) => {
           </div>
         </div>
         {/* end header */}
-        <Image
-          src={`/api/wallss?id=${encode(
-            props.data.image.replace(/=w0-h0/g, "=w1600-h600")
-          )}`}
-          // src={props.data?.image?.replace(/=w0-h0/g, "=w1600-h600")}
-          className={`bg-purple-300`}
-          alt={`${props.data?.name} ${props.data?.categoly?.join(
-            " "
-          )} Wallpaper`}
-          title={`${props.data?.name} ${props.data?.categoly?.join(
-            " "
-          )} Wallpaper`}
-          unoptimized={true}
-          width={
-            props.data?.resolution
-              ? props.data?.resolution
-                  ?.toUpperCase()
-                  .split("X")[0]
-                  ?.replace(/x/g, "")
-              : "1600"
-          }
-          height={
-            props.data?.resolution
-              ? props.data?.resolution
-                  ?.toUpperCase()
-                  .split("X")[1]
-                  ?.replace(/x/g, "")
-              : "900"
-          }
-          priority={true}
-          key={props.data?._id}
-          quality={100}
-          layout="intrinsic"
-        />
+        <div
+          className="imageContainer mb-2"
+        >
+          <Image
+            src={`/api/wallss?id=${encode(
+              props.data.image.replace(/=w0-h0/g, "=w1600-h600")
+            )}`}
+            // src={props.data?.image?.replace(/=w0-h0/g, "=w1600-h600")}
+            className={`bg-purple-300 w-full h-full image`}
+            alt={`${props.data?.name} ${props.data?.categoly?.join(
+              " "
+            )} Wallpaper`}
+            title={`${props.data?.name} ${props.data?.categoly?.join(
+              " "
+            )} Wallpaper`}
+            unoptimized={true}
+            priority={true}
+            key={props.data?._id}
+            quality={100}
+            layout="fill"
+          />
+        </div>
         {/* end Image */}
         <div className="flex flex-wrap">
           {props.data?.categoly?.map((data, i) => {
