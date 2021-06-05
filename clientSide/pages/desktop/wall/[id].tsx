@@ -4,12 +4,36 @@ const Card = dynamic(import("@/components/core/CardDesktop"));
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
 import { isAuth } from "@/lib/auth";
 import encode from "@/lib/encode";
+import { useEffect, useState, useRef } from "react";
 
 const DesktopWallpaperPage = (props) => {
   console.log(props.data);
+  const [onDownload, setOnDownload] = useState(false);
+  const modle = useRef(null);
+  const [num, setNum] = useState(5);
+
+  const download = (e) => {
+    setOnDownload(true);
+  };
+  useEffect(() => {
+    if (num != 0 && onDownload) {
+      const id = setTimeout(() => {
+        setNum(num - 1);
+      }, 1000);
+    } else {
+      console.log("success");
+    }
+    if (!onDownload) return;
+    function handleClick(event) {
+      if (modle.current && !modle.current.contains(event.target)) {
+        setOnDownload(false);
+      }
+    }
+    window.addEventListener("click", handleClick);
+    return () => window.removeEventListener("click", handleClick);
+  }, [onDownload, num]);
 
   return (
     <Layout
@@ -71,12 +95,12 @@ const DesktopWallpaperPage = (props) => {
             </div>
           </div>
           <div className="flex items-center mb-1">
-            <a
-              href={`/_next/image?url=${encodeURIComponent(
-                props.data?.image?.replace(/thumb-1920-/g, "")
-              )}&w=3840&q=100`}
-              download={`${props.data?.name} - wallss`}
-              // onClick={(e) => download(e)}
+            <button
+              // href={`/_next/image?url=${encodeURIComponent(
+              //   props.data?.image?.replace(/thumb-1920-/g, "")
+              // )}&w=3840&q=100`}
+              // download={`${props.data?.name} - wallss`}
+              onClick={(e) => download(e)}
               className="bg-purple-600 text-white px-5 py-2 flex w-full sm:w-auto items-center justify-center"
             >
               <svg
@@ -94,13 +118,11 @@ const DesktopWallpaperPage = (props) => {
                 />
               </svg>{" "}
               DOWNLOAD
-            </a>
+            </button>
           </div>
         </div>
         {/* end header */}
-        <div
-          className="imageContainer mb-2"
-        >
+        <div className="imageContainer mb-2">
           <Image
             src={`/api/wallss?id=${encode(
               props.data.image.replace(/=w0-h0/g, "=w1600-h600")
@@ -222,6 +244,59 @@ const DesktopWallpaperPage = (props) => {
         </div>
         <br />
       </div>
+      {onDownload && (
+        <div className="fixed bg-black bg-opacity-30 z-30 w-full h-full top-0 left-0 flex">
+          <div ref={modle} className="m-auto w-full max-w-md relative">
+            <div className="bg-white m-auto p-3 w-full">
+              <p className="text-2xl text-center">Download wallpaper</p>
+              <p className="text-md text-center">{props.data.name}</p>
+              {num != 0 && (
+                <div className="text-center">
+                  Please, wait while your link is generating … {num}
+                </div>
+              )}
+              {/* ads here */}
+              {num == 0 && (
+                <div className="text-center">
+                  <Link
+                    href={`/api/wallss?id=${encode(
+                      props.data.image
+                        ?.replace(/=w0-h0/g, "=w533-h300")
+                        ?.replace(/thumb-1920-/g, "")
+                    )}`}
+                  >
+                    <a
+                      target="_blank"
+                      rel="nofollow"
+                      className="text-purple-800"
+                    >
+                      Watch full resolution image
+                    </a>
+                  </Link>
+                </div>
+              )}
+            </div>
+            {/* close */}
+            <div
+              onClick={() => setOnDownload(false)}
+              className="absolute -top-3 bg-purple-500 text-white -right-3 p-2 cursor-pointer"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
