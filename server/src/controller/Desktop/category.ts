@@ -26,7 +26,7 @@ router.get("/", async (req: Request, res: Response) => {
 
   const options:any = {
     page: pageNow,
-    limit: 10,
+    limit: 21,
     sort: { _id: -1 },
     customLabels: myCustomLabels,
     lean: true,
