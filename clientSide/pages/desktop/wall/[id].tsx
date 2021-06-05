@@ -305,7 +305,7 @@ export async function getServerSideProps({ params, req }) {
   // const res = await fetch(`${process.env.HOST}/desktop/${params.id}`);
   // const data = await res.json();
   console.time("find data");
-  const res = await axios.get(`${process.env.HOST}/desktop/${params.id}`);
+  const res = await axios.get(`${process.env.HOST}/desktop/wall/${params.id}`);
   const data = await res.data;
   console.timeEnd("find data");
 
