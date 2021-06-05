@@ -82,7 +82,7 @@ const DesktopWallpaperPage = (props) => {
                       <Link href={props.data?.authorLink || "/"}>
                         <a
                           target="_blank"
-                          ref="nofollow"
+                          rel="nofollow"
                           className="text-purple-700"
                         >
                           {props.data?.author}
