@@ -311,7 +311,8 @@ export async function getServerSideProps({ params, req }) {
 
   let dataMoreRandom = [];
   let dataResMoreBy = [];
-  if (data) {
+  console.log(data._id)
+  if (data._id) {
     console.time("more random");
     const resMoreRandom = await axios.post(
       `${process.env.HOST}/desktop/more/random`,
