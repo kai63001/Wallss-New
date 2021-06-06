@@ -19,7 +19,7 @@ router.get("/index", async (req: Request, res: Response) => {
 
 router.get("/wall/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
-  console.log(mongoose.Types.ObjectId.isValid(id));
+  // console.log(mongoose.Types.ObjectId.isValid(id));
   if(!mongoose.Types.ObjectId.isValid(id)) return res.json({})
   const wall: any = await WallpaperDesktop.findOne({ _id: id })
     .populate("user", "name profile")

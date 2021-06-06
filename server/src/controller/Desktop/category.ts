@@ -35,7 +35,7 @@ router.get("/", async (req: Request, res: Response) => {
     { categoly: { $regex: "^" + name + "$", $options: "i" } },
     options,
     async function (err: any, result: any) {
-      console.log(result);
+      // console.log(result);
       return result;
     }
   );

@@ -3,16 +3,21 @@ import { useRouter } from "next/router";
 
 const Pagination = (props) => {
   const router = useRouter();
-  const allPage:number = parseInt(props.total) || 1
-  const pPage:number = parseInt(router.query.page.toString()) - 1 || 0
+  const allPage: number = parseInt(props.total) || 1;
+  const pPage: number = router.query?.page
+    ? parseInt(router.query?.page?.toString()) - 1
+    : 0;
 
   const pageChange = (page) => {
-    console.log(page?.selected)
-    const nextPage = page?.selected +1;
-    console.log(router.query)
-    const path = router.asPath.indexOf('?') >= 0? router.asPath.slice(0,router.asPath.indexOf('?')): router.asPath
-    router.push(`${path}?page=${nextPage}`)
-  }
+    // console.log(page?.selected);
+    const nextPage = page?.selected + 1;
+    // console.log(router.query);
+    const path =
+      router.asPath.indexOf("?") >= 0
+        ? router.asPath.slice(0, router.asPath.indexOf("?"))
+        : router.asPath;
+    router.push(`${path}?page=${nextPage}`);
+  };
   return (
     <>
       <div className="hidden sm:block text-purple">
