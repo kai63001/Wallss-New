@@ -5,7 +5,6 @@ import Link from "next/link";
 import axios from "axios";
 const Card = dynamic(import("@/components/core/CardDesktop"));
 const Pagination = dynamic(import("@/components/core/Pagination"));
-import ReactPaginate from "react-paginate";
 
 const Category = (props) => {
   return (

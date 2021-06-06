@@ -17,10 +17,46 @@ router.get("/index", async (req: Request, res: Response) => {
   return res.send(wall);
 });
 
+router.get("/all", async (req: Request, res: Response) => {
+  const { page } = req.query;
+  // if (!name) return res.send("name request query");
+  //   console.log(name);
+  const pageNow = page || 1;
+
+  const myCustomLabels = {
+    totalDocs: "itemCount",
+    docs: "itemsList",
+    limit: "perPage",
+    page: "currentPage",
+    nextPage: "next",
+    prevPage: "prev",
+    totalPages: "pageCount",
+    pagingCounter: "slNo",
+    meta: "paginator",
+  };
+
+  const options: any = {
+    page: pageNow,
+    limit: 21,
+    sort: { _id: -1 },
+    customLabels: myCustomLabels,
+    lean: true,
+  };
+  const data = await WallpaperDesktop.paginate(
+    {},
+    options,
+    async function (err: any, result: any) {
+      // console.log(result);
+      return result;
+    }
+  );
+  res.send(data);
+});
+
 router.get("/wall/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
   // console.log(mongoose.Types.ObjectId.isValid(id));
-  if(!mongoose.Types.ObjectId.isValid(id)) return res.json({})
+  if (!mongoose.Types.ObjectId.isValid(id)) return res.json({});
   const wall: any = await WallpaperDesktop.findOne({ _id: id })
     .populate("user", "name profile")
     .lean();
