@@ -45,17 +45,20 @@ const Category = (props) => {
           ))}
         </div>
         <br />
-        <Pagination/>
+        <Pagination total={props?.data?.paginator?.pageCount} />
       </div>
       <br />
     </Layout>
   );
 };
 
-export async function getServerSideProps({ params, req }) {
+export async function getServerSideProps({ params, req, query }) {
+  const page = query?.page || 1;
   const categoryName = params.name.replace(/\+/g, " ");
   const data = await (
-    await axios.get(`${process.env.HOST}/desktop/category?name=${categoryName}`)
+    await axios.get(
+      `${process.env.HOST}/desktop/category?name=${categoryName}&page=${page}`
+    )
   ).data;
   return {
     props: {

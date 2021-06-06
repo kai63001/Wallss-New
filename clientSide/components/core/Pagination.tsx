@@ -1,19 +1,23 @@
 import ReactPaginate from "react-paginate";
 import { useRouter } from "next/router";
 
-const Pagination = () => {
+const Pagination = (props) => {
   const router = useRouter();
+  const allPage:number = parseInt(props.total) || 1
+  const pPage:number = parseInt(router.query.page.toString()) - 1 || 0
+
   const pageChange = (page) => {
     console.log(page?.selected)
     const nextPage = page?.selected +1;
-    console.log(router.pathname)
-    router.push(`${router.asPath.slice(0,router.asPath.indexOf('?'))}?page=${nextPage}`)
+    console.log(router.query)
+    const path = router.asPath.indexOf('?') >= 0? router.asPath.slice(0,router.asPath.indexOf('?')): router.asPath
+    router.push(`${path}?page=${nextPage}`)
   }
   return (
     <>
       <div className="hidden sm:block text-purple">
         <ReactPaginate
-          pageCount={1000}
+          pageCount={allPage}
           pageRangeDisplayed={3}
           marginPagesDisplayed={2}
           containerClassName="flex items-center justify-center bg-white py-3 text-lg select-none"
@@ -28,7 +32,7 @@ const Pagination = () => {
           breakLabel="···"
           breakClassName="text-center text-purple-500"
           breakLinkClassName="px-2"
-          forcePage={1}
+          forcePage={pPage}
           onPageChange={pageChange}
         />
       </div>
