@@ -3,5 +3,6 @@ import Login from "./login";
 import Upload from "./upload";
 import WallpaperDesktop from "./Desktop/wallpaper";
 import CategoryDesktop from "./Desktop/category";
+import TagDesktop from "./Desktop/tag";
 
-export { Register, Login, Upload, WallpaperDesktop, CategoryDesktop };
+export { Register, Login, Upload, WallpaperDesktop, CategoryDesktop,TagDesktop };
