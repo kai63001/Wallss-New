@@ -5,8 +5,8 @@ import dynamic from "next/dynamic";
 const Layout = dynamic(import("@/components/Layout"));
 import { useState } from "react";
 import axios from "axios";
-import useSWR from 'swr';
-import CardDesktop from '@/components/core/CardDesktop'
+import useSWR from "swr";
+import CardDesktop from "@/components/core/CardDesktop";
 
 async function fetcher(url) {
   const res = await fetch(url);
@@ -30,7 +30,7 @@ export default function Home(props) {
   };
 
   const { data, error } = useSWR(`${process.env.HOST}/desktop/index`, fetcher);
-  console.log(data)
+  console.log(data);
   if (error) return <div>failed to load</div>;
   // if (!data) return <div>loading...</div>;
 
@@ -140,15 +140,15 @@ export default function Home(props) {
         <h2 className="text-2xl">DESKTOP WALLPAPERS</h2>
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
           {data?.map((data, key) => {
-            return (
-              <CardDesktop key={key} data={data} />
-            );
+            return <CardDesktop key={key} data={data} />;
           })}
         </div>
-        <div className="flex sm:justify-end justify-center">
-          <a className="bg-purple-700 text-white px-2 cursor-pointer">
-            MORE WALLPAPERS
-          </a>
+        <div className="flex sm:justify-end justify-center mt-1">
+          <Link href="/desktop">
+            <a className="bg-purple-700 text-white px-2 cursor-pointer">
+              MORE WALLPAPERS
+            </a>
+          </Link>
         </div>
 
         <br />
