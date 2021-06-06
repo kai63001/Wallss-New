@@ -32,7 +32,7 @@ router.get("/", async (req: Request, res: Response) => {
     lean: true,
   };
   const data = await WallpaperDesktop.paginate(
-    { categoly: { $regex: "^" + name + "$", $options: "i" } },
+    { categoly: { $in : name } },
     options,
     async function (err: any, result: any) {
       // console.log(result);

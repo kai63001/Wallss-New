@@ -9,7 +9,7 @@ const router: Router = express.Router();
 router.get("/", async (req: Request, res: Response) => {
   const { name, page } = req.query;
   if (!name) return res.send("name request query");
-
+//   console.log(name);
   const pageNow = page || 1;
 
   const myCustomLabels = {
@@ -24,7 +24,7 @@ router.get("/", async (req: Request, res: Response) => {
     meta: "paginator",
   };
 
-  const options:any = {
+  const options: any = {
     page: pageNow,
     limit: 21,
     sort: { _id: -1 },
@@ -32,7 +32,7 @@ router.get("/", async (req: Request, res: Response) => {
     lean: true,
   };
   const data = await WallpaperDesktop.paginate(
-    { tags: { $regex: "^" + name + "$", $options: "i" } },
+    { tags: { $in: name } },
     options,
     async function (err: any, result: any) {
       // console.log(result);
