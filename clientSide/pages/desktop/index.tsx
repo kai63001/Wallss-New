@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useEffect, useState, useRef } from "react";
 const Pagination = dynamic(import("@/components/core/Pagination"));
 
-
 const WallIndex = (props) => {
   return (
     <Layout
@@ -19,11 +18,11 @@ const WallIndex = (props) => {
           Wallpapers Desktop PC
         </h1>
         <p className="text-center max-w-screen-m mx-auto">
-          Looking for the best Desktop PC
-          Wallpapers? We have amazing background pictures carefully picked by
-          our community. If you have your own one, just join us community and
-          share and we will show it on the web-site. Feel free to download,
-          share, comment and discuss every wallpaper you like.
+          Looking for the best Desktop PC Wallpapers? We have amazing background
+          pictures carefully picked by our community. If you have your own one,
+          just join us community and share and we will show it on the web-site.
+          Feel free to download, share, comment and discuss every wallpaper you
+          like.
         </p>
         <br />
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
@@ -40,17 +39,15 @@ const WallIndex = (props) => {
 };
 
 export async function getServerSideProps({ params, req, query }) {
-    const page = query?.page || 1;
-    const data = await (
-      await axios.get(
-        `${process.env.HOST}/desktop/all?page=${page}`
-      )
-    ).data;
-    return {
-      props: {
-        data,
-      },
-    };
-  }
+  const page = query?.page || 1;
+  const data = await (
+    await axios.get(`${process.env.HOST}/desktop/all?page=${page}`)
+  ).data;
+  return {
+    props: {
+      data,
+    },
+  };
+}
 
 export default WallIndex;
