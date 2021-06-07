@@ -9,7 +9,9 @@ var path = require("path");
 const stream = require("stream");
 
 router.get("/index", async (req: Request, res: Response) => {
-  const wall = await WallpaperDesktop.find({})
+  let type = req.query.type || 0;
+  type = parseInt(type.toString());
+  const wall = await WallpaperDesktop.find({type})
     .select({ image: 1, name: 1, type: 1 })
     .sort({ _id: -1 })
     .limit(12)
@@ -68,12 +70,16 @@ router.get("/wall/:id", async (req: Request, res: Response) => {
 router.post("/more/random", async (req: Request, res: Response) => {
   const { category } = req.body;
   const data = [...category];
+  let type = req.query.type || 0;
+  type = parseInt(type.toString());
   // const wall:any = await WallpaperDesktop.find(
   //   { categoly: {$in: data} }
   // ).lean();
   let wall: any = [];
   wall = await WallpaperDesktop.aggregate([
-    { $match: { categoly: { $in: data } } },
+    {
+      $match: { $and: [{ categoly: { $in: data } }, { type: { $eq: type } }] },
+    },
     { $sample: { size: 6 } },
   ]);
   return res.send(wall);
@@ -81,11 +87,13 @@ router.post("/more/random", async (req: Request, res: Response) => {
 
 router.get("/more/by/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
+  let type = req.query.type || 0;
+  type = parseInt(type.toString());
   // const wall:any = await WallpaperDesktop.find(
   //   { categoly: {$in: data} }
   // ).lean();
   const wall: any = await WallpaperDesktop.aggregate([
-    { $match: { user: ObjectId(id) } },
+    { $match: { $and: [{ user: ObjectId(id) }, { type: { $eq: type } }] } },
     { $sample: { size: 3 } },
   ]);
   return res.send(wall);
