@@ -34,25 +34,51 @@ const CardDesktop = (props) => {
     <>
       <Link href={`/desktop/wall/${props.data._id}`}>
         <a className={`group relative overflow-hidden`}>
-          <Image
-            key={props.data._id}
-            className="bg-purple-300 h-full"
-            // src={props.data.image
-            //   .replace(/=w0-h0/g, "=w533-h300")
-            //   .replace(/-1920-/g, "big-")}
-            src={`/api/wallss?id=${encode(
-              props.data.image
-                .replace(/=w0-h0/g, "=w533-h300")
-                ?.replace(/-1920-/g, "big-")
-            )}`}
-            title={`Wallpaper Desktop ${props.data.name}`}
-            alt={`Wallpaper Desktop ${props.data.name}`}
-            width={800}
-            height={450}
-            unoptimized={true}
-            layout="responsive"
-            quality={100}
-          />
+          {props.data.type == 1 ? (
+            <div className="bg-purple-300 h-full flex justify-center">
+              <Image
+                key={props.data._id}
+                className="bg-purple-300 h-full"
+                // src={props.data.image
+                //   .replace(/=w0-h0/g, "=w533-h300")
+                //   .replace(/-1920-/g, "big-")}
+                src={`/api/wallss?id=${encode(
+                  props.data.image
+                    .replace(/=w0-h0/g, "=w533-h300")
+                    ?.replace(/-1920-/g, "big-")
+                )}`}
+                title={`Wallpaper Desktop ${props.data.name}`}
+                alt={`Wallpaper Desktop ${props.data.name}`}
+                width={160}
+                height={236}
+                objectFit="cover"
+                unoptimized={true}
+                layout="fixed"
+                quality={100}
+              />
+            </div>
+          ) : (
+            <Image
+              key={props.data._id}
+              className="bg-purple-300 h-full"
+              // src={props.data.image
+              //   .replace(/=w0-h0/g, "=w533-h300")
+              //   .replace(/-1920-/g, "big-")}
+              src={`/api/wallss?id=${encode(
+                props.data.image
+                  .replace(/=w0-h0/g, "=w533-h300")
+                  ?.replace(/-1920-/g, "big-")
+              )}`}
+              title={`Wallpaper Desktop ${props.data.name}`}
+              alt={`Wallpaper Desktop ${props.data.name}`}
+              width={800}
+              height={450}
+              unoptimized={true}
+              layout="responsive"
+              quality={100}
+            />
+          )}
+
           {/* background hover */}
           <div className="absolute top-0 bg-black w-full h-full opacity-0 group-hover:opacity-50"></div>
           <div className="absolute top-3 p-1 right-3 bg-purple-700 text-white opacity-0 group-hover:opacity-100">

@@ -46,6 +46,7 @@ const WallpaperSchema = new mongoose.Schema({
     type : {
         type: Number,
         index: true,
+        default: 0
     }
 })
 

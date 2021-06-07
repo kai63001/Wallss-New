@@ -27,7 +27,7 @@ const WallIndex = (props) => {
         </p>
         <br />
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
-          {props?.data?.itemsList.map((data, key) => (
+          {props?.data?.itemsList?.map((data, key) => (
             <Card key={key} data={data} />
           ))}
         </div>

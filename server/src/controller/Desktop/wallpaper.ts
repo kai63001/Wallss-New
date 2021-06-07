@@ -10,7 +10,7 @@ const stream = require("stream");
 
 router.get("/index", async (req: Request, res: Response) => {
   const wall = await WallpaperDesktop.find({})
-    .select({ image: 1, name: 1 })
+    .select({ image: 1, name: 1, type: 1 })
     .sort({ _id: -1 })
     .limit(12)
     .lean();
@@ -19,6 +19,8 @@ router.get("/index", async (req: Request, res: Response) => {
 
 router.get("/all", async (req: Request, res: Response) => {
   const { page } = req.query;
+  let type = req.query.type || 0;
+  type = parseInt(type.toString());
   // if (!name) return res.send("name request query");
   //   console.log(name);
   const pageNow = page || 1;
@@ -43,7 +45,7 @@ router.get("/all", async (req: Request, res: Response) => {
     lean: true,
   };
   const data = await WallpaperDesktop.paginate(
-    {},
+    { type: type },
     options,
     async function (err: any, result: any) {
       // console.log(result);
