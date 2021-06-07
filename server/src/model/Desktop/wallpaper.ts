@@ -43,8 +43,9 @@ const WallpaperSchema = new mongoose.Schema({
         index: true,
         trim: true
     }],
-    uuid : {
-        type: String
+    type : {
+        type: Number,
+        index: true,
     }
 })
 
