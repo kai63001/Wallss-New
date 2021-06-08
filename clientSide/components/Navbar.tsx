@@ -21,7 +21,7 @@ const Navbar = (props) => {
           </div>
         </div>
         <div className="flex-grow sm:block hidden">
-          <form className="relative">
+          <form className="relative" action="/search" method="GET">
             <svg
               width="20"
               height="20"
@@ -37,6 +37,7 @@ const Navbar = (props) => {
             <input
               className="focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 py-2 pl-10"
               type="text"
+              name="s"
               aria-label="Search wallpaper"
               placeholder="Search wallpaper"
             />
