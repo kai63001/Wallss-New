@@ -32,7 +32,11 @@ const CardDesktop = (props) => {
   }, [onDownload, num]);
   return (
     <>
-      <Link href={`/desktop/wall/${props.data._id}`}>
+      <Link
+        href={`/${props.data.type == 1 ? "mobile" : "desktop"}/wall/${
+          props.data._id
+        }`}
+      >
         <a className={`group relative overflow-hidden`}>
           {props.data.type == 1 ? (
             <div className="bg-purple-300 h-full flex justify-center">

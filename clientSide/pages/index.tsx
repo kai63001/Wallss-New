@@ -132,9 +132,11 @@ export default function Home(props) {
           })}
         </div>
         <div className="flex sm:justify-end justify-center">
-          <a className="bg-purple-700 text-white px-2 cursor-pointer">
-            MORE FEATURED DESKTOP WALLPAPERS
-          </a>
+          <Link href="/mobile">
+            <a className="bg-purple-700 text-white px-2 cursor-pointer">
+              MORE FEATURED MOBILE WALLPAPERS
+            </a>
+          </Link>
         </div>
         <br />
         <h2 className="text-2xl">DESKTOP WALLPAPERS</h2>

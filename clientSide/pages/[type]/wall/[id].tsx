@@ -7,9 +7,12 @@ import Link from "next/link";
 import { isAuth } from "@/lib/auth";
 import encode from "@/lib/encode";
 import { useEffect, useState, useRef } from "react";
+import { useRouter } from "next/router";
 
 const DesktopWallpaperPage = (props) => {
-  console.log(props.data);
+  // console.log(props.data);
+  const router = useRouter();
+  const nowType = router.query.type;
   const [onDownload, setOnDownload] = useState(false);
   const modle = useRef(null);
   const [num, setNum] = useState(5);
@@ -147,7 +150,9 @@ const DesktopWallpaperPage = (props) => {
           {props.data?.categoly?.map((data, i) => {
             return (
               <Link
-                href={`/desktop/category/${data?.replace(/ /g, "+")}`}
+                href={`/${
+                  nowType == "desktop" ? "desktop" : "mobile"
+                }/category/${data?.replace(/ /g, "+")}`}
                 key={i}
               >
                 <a className="bg-purple-600 whitespace-nowrap inline-block text-white mr-2 px-2 py-1 select-none uppercase cursor-pointer mb-2">
@@ -160,7 +165,12 @@ const DesktopWallpaperPage = (props) => {
         <div className="flex flex-wrap">
           {props.data?.tags?.map((data, i) => {
             return (
-              <Link href={`/desktop/tag/${data?.replace(/ /g, "+")}`} key={i}>
+              <Link
+                href={`/${
+                  nowType == "desktop" ? "desktop" : "mobile"
+                }/tag/${data?.replace(/ /g, "+")}`}
+                key={i}
+              >
                 <a className="bg-purple-200 whitespace-nowrap inline-block text-purple-900 mr-2 px-2 py-0 select-none uppercase cursor-pointer mb-2">
                   {data}
                 </a>
@@ -311,11 +321,13 @@ export async function getServerSideProps({ params, req }) {
 
   let dataMoreRandom = [];
   let dataResMoreBy = [];
-  console.log(data._id)
+  console.log(data._id);
   if (data._id) {
     console.time("more random");
     const resMoreRandom = await axios.post(
-      `${process.env.HOST}/desktop/more/random`,
+      `${process.env.HOST}/desktop/more/random${
+        params.type == "mobile" && "?type=1"
+      }`,
       {
         category: [...data?.categoly],
         tags: [...data?.tags],
@@ -326,7 +338,9 @@ export async function getServerSideProps({ params, req }) {
 
     console.time("more by id");
     const resMoreBy = await axios.get(
-      `${process.env.HOST}/desktop/more/by/${data?.user?._id}`
+      `${process.env.HOST}/desktop/more/by/${data?.user?._id}${
+        params.type == "mobile" && "?type=1"
+      }`
     );
     dataResMoreBy = await resMoreBy.data;
     console.timeEnd("more by id");
