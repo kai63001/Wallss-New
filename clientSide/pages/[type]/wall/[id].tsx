@@ -45,10 +45,12 @@ const DesktopWallpaperPage = (props) => {
         ?.toLowerCase()
         ?.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()))} ${
         props.data?.resolution
-      } - Download`}
+      } ${nowType == "desktop" ? "Desktop PC" : "Mobile Phone"} - Download`}
       des={`download wallpaper ${props.data?.categoly?.join(
         " "
-      )} ${props.data?.tags?.join(" ")} hd 4k`}
+      )} ${props.data?.tags?.join(" ")} ${
+        nowType == "desktop" ? "Desktop PC" : "Mobile Phone"
+      } hd 4k`}
       image={props.data?.image}
     >
       <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
@@ -70,7 +72,8 @@ const DesktopWallpaperPage = (props) => {
               </div>
               <div className="row-span-2 ml-2 mt-2">
                 <h1 className="text-2xl uppercase font-romeo2">
-                  {props.data?.name} {props.data?.resolution}
+                  {props.data?.name} {props.data?.resolution}{" "}
+                  {nowType == "desktop" ? "Desktop" : "Mobile"}
                 </h1>
               </div>
               <div className="row-span-2 ml-2 -mt-1">
@@ -325,9 +328,7 @@ export async function getServerSideProps({ params, req }) {
   if (data._id) {
     console.time("more random");
     const resMoreRandom = await axios.post(
-      `${process.env.HOST}/desktop/more/random${
-        params.type == "mobile" && "?type=1"
-      }`,
+      `${process.env.HOST}/desktop/more/random?type=${data?.type}`,
       {
         category: [...data?.categoly],
         tags: [...data?.tags],
@@ -338,9 +339,7 @@ export async function getServerSideProps({ params, req }) {
 
     console.time("more by id");
     const resMoreBy = await axios.get(
-      `${process.env.HOST}/desktop/more/by/${data?.user?._id}${
-        params.type == "mobile" && "?type=1"
-      }`
+      `${process.env.HOST}/desktop/more/by/${data?.user?._id}?type=${data?.type}`
     );
     dataResMoreBy = await resMoreBy.data;
     console.timeEnd("more by id");

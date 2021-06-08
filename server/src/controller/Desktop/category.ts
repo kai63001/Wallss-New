@@ -9,7 +9,8 @@ const router: Router = express.Router();
 router.get("/", async (req: Request, res: Response) => {
   const { name, page } = req.query;
   if (!name) return res.send("name request query");
-
+  let type = req.query.type || 0;
+  type = parseInt(type.toString());
   const pageNow = page || 1;
 
   const myCustomLabels = {
@@ -26,13 +27,13 @@ router.get("/", async (req: Request, res: Response) => {
 
   const options:any = {
     page: pageNow,
-    limit: 21,
+    limit: 24,
     sort: { _id: -1 },
     customLabels: myCustomLabels,
     lean: true,
   };
   const data = await WallpaperDesktop.paginate(
-    { categoly: { $in : name } },
+    {$and: [{ categoly: { $in: name } },{type: {$eq: type}}]},
     options,
     async function (err: any, result: any) {
       // console.log(result);

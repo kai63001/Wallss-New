@@ -7,6 +7,7 @@ import { useState } from "react";
 import axios from "axios";
 import useSWR from "swr";
 import CardDesktop from "@/components/core/CardDesktop";
+import CardMobile from "@/components/core/CardMobile";
 
 async function fetcher(url) {
   const res = await fetch(url);
@@ -21,20 +22,6 @@ export default function Home(props) {
     "https://images4.alphacoders.com/113/1133047.jpg",
   ];
 
-  const [wallpaperDesktop, setWallpaperDesktop] = useState([]);
-
-  const getWallpaperDesktop = async () => {
-    const data = await axios.get(``);
-    const raw = await data.data;
-    return raw;
-  };
-
-  const { data, error } = useSWR(`${process.env.HOST}/desktop/index`, fetcher);
-  console.log(data);
-  if (error) return <div>failed to load</div>;
-  // if (!data) return <div>loading...</div>;
-
-  // getWallpaperDesktop();
   return (
     <Layout>
       <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
@@ -115,23 +102,11 @@ export default function Home(props) {
         <br />
         <h2 className="text-2xl">FEATURED MOBILE</h2>
         <div className="grid sm:grid-cols-6 grid-cols-2 gap-2">
-          {[...Array(12)].map((i, key) => {
-            return (
-              <div key={key} className={``}>
-                <Image
-                  className="bg-purple-300"
-                  src={`https://mfiles.alphacoders.com/916/thumb-1920-916633.png`}
-                  alt="Picture of the author"
-                  width={500}
-                  height={900}
-                  quality={100}
-                  layout="intrinsic"
-                />
-              </div>
-            );
+        {props?.dataMobile?.map((data, key) => {
+            return <CardMobile key={key} data={data} />;
           })}
         </div>
-        <div className="flex sm:justify-end justify-center">
+        <div className="flex sm:justify-end justify-center mt-1">
           <Link href="/mobile">
             <a className="bg-purple-700 text-white px-2 cursor-pointer">
               MORE FEATURED MOBILE WALLPAPERS
@@ -141,7 +116,7 @@ export default function Home(props) {
         <br />
         <h2 className="text-2xl">DESKTOP WALLPAPERS</h2>
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
-          {data?.map((data, key) => {
+          {props?.dataDesktop?.map((data, key) => {
             return <CardDesktop key={key} data={data} />;
           })}
         </div>
@@ -157,4 +132,18 @@ export default function Home(props) {
       </div>
     </Layout>
   );
+}
+export async function getServerSideProps({ params, req, query }) {
+  const dataDesktop = await (
+    await axios.get(`${process.env.HOST}/desktop/index?type=0`)
+  ).data;
+  const dataMobile = await (
+    await axios.get(`${process.env.HOST}/desktop/index?type=1`)
+  ).data;
+  return {
+    props: {
+      dataDesktop,
+      dataMobile
+    },
+  };
 }

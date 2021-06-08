@@ -14,8 +14,12 @@ const WallIndex = (props) => {
   const nowType = router.query.type;
   return (
     <Layout
-      title="Desktop PC"
-      des="Download Wallpapers desktop pc image HD 4k Background"
+      title={`${nowType == "desktop" ? "Desktop PC" : "Mobile Phone"}`}
+      des={`Download Wallpapers ${
+        nowType == "desktop"
+          ? "Desktop PC"
+          : "Mobile Phone iphone android samsung"
+      } image HD 4k Background`}
     >
       <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
         <h1 className="text-center text-3xl uppercase font-romeo2 my-5">
@@ -55,7 +59,11 @@ const WallIndex = (props) => {
 export async function getServerSideProps({ params, req, query }) {
   const page = query?.page || 1;
   const data = await (
-    await axios.get(`${process.env.HOST}/desktop/all?page=${page}${params.type == 'mobile' && '&type=1'}`)
+    await axios.get(
+      `${process.env.HOST}/desktop/all?page=${page}${
+        params.type == "mobile" && "&type=1"
+      }`
+    )
   ).data;
   return {
     props: {
