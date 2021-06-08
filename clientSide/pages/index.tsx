@@ -100,7 +100,7 @@ export default function Home(props) {
         </div>
 
         <br />
-        <h2 className="text-2xl">FEATURED MOBILE</h2>
+        <h2 className="text-2xl">MOBILE WALLPAPERS</h2>
         <div className="grid sm:grid-cols-6 grid-cols-2 gap-2">
         {props?.dataMobile?.map((data, key) => {
             return <CardMobile key={key} data={data} />;
