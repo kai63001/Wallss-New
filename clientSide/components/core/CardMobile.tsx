@@ -11,7 +11,7 @@ const CardMobile = (props) => {
     return joint;
   };
   return (
-    <div key={props.key} className={``}>
+    <div className={``}>
       <Link href={`/mobile/wall/${props?.data?._id}`}>
         <a>
           <Image
