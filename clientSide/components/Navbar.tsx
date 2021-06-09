@@ -5,10 +5,26 @@ import { isAuth } from "@/lib/auth";
 import dynamic from "next/dynamic";
 const Profile = dynamic(import("@/components/Navbar/profile"));
 // import Profile from '@/components/Navbar'
+import { useRouter } from 'next/router'
+import { useState,useEffect } from 'react'
 
 
 const cookies = new Cookies();
 const Navbar = (props) => {
+  const router = useRouter()
+  const [text,setText] = useState('');
+  useEffect(() => {
+    if(router.query.name){
+      setText(router.query.name.toString().replace(/\+/g,' '))
+    }
+    return () => {
+      text
+    }
+  }, [setText])
+  const search = (e) => {
+    e.preventDefault()
+    router.push(`/search/${e.target.name.value.replace(/ /g,'+')}`)
+  }
   const auth = isAuth(cookies.get("token"));
   return (
     <nav className="bg-white py-2">
@@ -21,7 +37,7 @@ const Navbar = (props) => {
           </div>
         </div>
         <div className="flex-grow sm:block hidden">
-          <form className="relative" action="/search" method="GET">
+          <form className="relative" onSubmit={search} method="GET">
             <svg
               width="20"
               height="20"
@@ -36,8 +52,11 @@ const Navbar = (props) => {
             </svg>
             <input
               className="focus:border-purple-500 focus:ring-2 focus:ring-purple-500 focus:outline-none w-full text-sm text-black placeholder-gray-500 border border-gray-200 py-2 pl-10"
+              name="name"
+              id="name"
+              value={text}
+              onChange={(e)=>setText(e.target.value)}
               type="text"
-              name="s"
               aria-label="Search wallpaper"
               placeholder="Search wallpaper"
             />
