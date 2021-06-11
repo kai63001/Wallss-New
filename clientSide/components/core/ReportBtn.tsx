@@ -3,7 +3,21 @@ import { useEffect, useState, useRef } from "react";
 const ReportBTN = (props) => {
   const modle = useRef(null);
   const [onReport, setOnReport] = useState(false);
+  const [errors, setErrors] = useState({});
 
+  const arrayReport = [
+    "Nudity",
+    "Offensive",
+    "Violence",
+    "Spam",
+    "Promotes hate",
+    "Bad quality",
+    "Duplicate",
+    "Delete",
+    "Copyright",
+    "Author",
+    "Other",
+  ];
   const report = (e) => {
     setOnReport(true);
   };
@@ -17,6 +31,27 @@ const ReportBTN = (props) => {
     window.addEventListener("click", handleClick);
     return () => window.removeEventListener("click", handleClick);
   }, [onReport]);
+
+  const sendReport = (e) => {
+    e.preventDefault();
+    let checked = [];
+    setErrors({});
+    arrayReport.map((data, key) => {
+      if (e.target[`r${key}`].checked) {
+        checked = [...checked, data];
+      }
+    });
+    if (checked.length <= 0) {
+      setErrors({ checked: "Select type to report" });
+      return;
+    }
+    if (checked.indexOf("Other") >= 0) {
+      setErrors({ other: "Please let us know why" });
+      return;
+    }
+    console.log(checked.indexOf("Other"));
+  };
+
   return (
     <>
       <button
@@ -40,9 +75,40 @@ const ReportBTN = (props) => {
         <div className="fixed bg-black bg-opacity-30 z-30 w-full h-full top-0 left-0 flex">
           <div ref={modle} className="m-auto w-full max-w-md relative">
             <div className="bg-white m-auto p-3 w-full">
-              <p className="text-2xl text-center">
-                Report Wallpaper {props.id}
-              </p>
+              <p className="text-2xl text-center mb-1">Report Wallpaper</p>
+              <form onSubmit={sendReport}>
+                <div className="grid grid-cols-3 gap-1">
+                  {arrayReport.map((data, i) => (
+                    <div className="" key={i}>
+                      <input
+                        name={`r${i}`}
+                        className="form-checkbox border-purple-700 text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                        id={`r${i}`}
+                        type="checkbox"
+                      />
+                      <label htmlFor={`r${i}`} className="ml-2 select-none">
+                        {data}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+                {errors["checked"] && (
+                  <div className="text-sm text-red-500">
+                    {errors["checked"]}
+                  </div>
+                )}
+                <textarea className="mt-1 w-full" placeholder="whyy..."></textarea>
+                {errors["other"] && (
+                  <div className="text-sm text-red-500">
+                    {errors["other"]}
+                  </div>
+                )}
+                <div className="flex justify-end">
+                  <button className="mt-2 bg-purple-600 text-white px-3 py-2">
+                    Report
+                  </button>
+                </div>
+              </form>
             </div>
             {/* close */}
             <div
