@@ -4,7 +4,8 @@ import mongoose from "mongoose";
 const router: Router = express.Router();
 
 router.post("/", async (req: Request, res: Response) => {
-  res.send('romeoo')
+  const reported = await Report.create(req.body);
+  res.send(reported);
 });
 
 export default router;

@@ -32,7 +32,7 @@ const ReportBTN = (props) => {
     return () => window.removeEventListener("click", handleClick);
   }, [onReport]);
 
-  const sendReport = (e) => {
+  const sendReport = async (e) => {
     e.preventDefault();
     let checked = [];
     setErrors({});
@@ -45,11 +45,26 @@ const ReportBTN = (props) => {
       setErrors({ checked: "Select type to report" });
       return;
     }
-    if (checked.indexOf("Other") >= 0) {
+    if (checked.indexOf("Other") >= 0 && e.target?.detail?.value?.length <= 0) {
       setErrors({ other: "Please let us know why" });
       return;
     }
-    console.log(checked.indexOf("Other"));
+    let body = {
+      wallId: props.id,
+      type: checked,
+      detail: e.target?.detail?.value,
+    };
+    const data = await (
+      await fetch(`${process.env.HOST}/report`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      })
+    ).text();
+    setOnReport(false);
+    console.log(data);
   };
 
   return (
@@ -97,11 +112,14 @@ const ReportBTN = (props) => {
                     {errors["checked"]}
                   </div>
                 )}
-                <textarea className="mt-1 w-full" placeholder="whyy..."></textarea>
+                <textarea
+                  name="detail"
+                  id="detail"
+                  className="mt-1 w-full"
+                  placeholder="whyy..."
+                ></textarea>
                 {errors["other"] && (
-                  <div className="text-sm text-red-500">
-                    {errors["other"]}
-                  </div>
+                  <div className="text-sm text-red-500">{errors["other"]}</div>
                 )}
                 <div className="flex justify-end">
                   <button className="mt-2 bg-purple-600 text-white px-3 py-2">
