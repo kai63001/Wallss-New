@@ -8,6 +8,7 @@ import {
   CategoryDesktop,
   TagDesktop,
   Search,
+  Report
 } from "./controller";
 import db from "./db/connect";
 import cors from "cors";
@@ -40,6 +41,7 @@ app.use("/desktop", WallpaperDesktop);
 app.use("/desktop/category", CategoryDesktop);
 app.use("/desktop/tag", TagDesktop);
 app.use("/search", Search);
+app.use("/report", Report);
 
 app.listen(3001, () => {
   console.log(colors.green("SERVER START ON PORT :"), colors.bgGreen(" 3001 "));

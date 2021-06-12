@@ -5,6 +5,7 @@ import Search from "./search";
 import WallpaperDesktop from "./Desktop/wallpaper";
 import CategoryDesktop from "./Desktop/category";
 import TagDesktop from "./Desktop/tag";
+import Report from "./Desktop/report";
 
 export {
   Register,
@@ -14,4 +15,5 @@ export {
   CategoryDesktop,
   TagDesktop,
   Search,
+  Report,
 };
