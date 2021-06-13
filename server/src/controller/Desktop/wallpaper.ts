@@ -11,7 +11,7 @@ const stream = require("stream");
 router.get("/index", async (req: Request, res: Response) => {
   let type = req.query.type || 0;
   type = parseInt(type.toString());
-  const wall = await WallpaperDesktop.find({type})
+  const wall = await WallpaperDesktop.find({ type })
     .select({ image: 1, name: 1, type: 1 })
     .sort({ _id: -1 })
     .limit(12)
@@ -109,6 +109,17 @@ var mime: any = {
   svg: "image/svg+xml",
   js: "application/javascript",
 };
+
+router.get("/download/:id", async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const DownloadWallpaper = await WallpaperDesktop.updateOne(
+    { _id: id },
+    {
+      $inc: {download: 1}
+    }
+  );
+  res.send(DownloadWallpaper);
+});
 
 router.get("/test/test", async (req: Request, res: Response) => {
   const url =
