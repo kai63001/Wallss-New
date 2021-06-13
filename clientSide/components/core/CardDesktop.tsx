@@ -8,9 +8,11 @@ const CardDesktop = (props) => {
   const modle = useRef(null);
   const [num, setNum] = useState(5);
 
-  const download = (e) => {
+  const download = async (e) => {
     e.preventDefault();
     setOnDownload(true);
+    // fetch downloaded
+    const downloadCount = await fetch(`${process.env.HOST}/desktop/download/${props.data._id}`)
   };
 
   useEffect(() => {

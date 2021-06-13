@@ -18,8 +18,10 @@ const DesktopWallpaperPage = (props) => {
   const modle = useRef(null);
   const [num, setNum] = useState(5);
 
-  const download = (e) => {
+  const download = async (e) => {
     setOnDownload(true);
+    // downloaded
+    const downloadCount = await fetch(`${process.env.HOST}/desktop/download/${props.data._id}`)
   };
   useEffect(() => {
     if (num != 0 && onDownload) {
