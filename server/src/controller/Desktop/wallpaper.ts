@@ -3,9 +3,7 @@ import { WallpaperDesktop } from "../../model";
 import mongoose from "mongoose";
 const ObjectId = mongoose.Types.ObjectId;
 const fetch = require("node-fetch");
-var fs = require("fs");
 const router: Router = express.Router();
-var path = require("path");
 const stream = require("stream");
 
 router.get("/index", async (req: Request, res: Response) => {
@@ -17,6 +15,14 @@ router.get("/index", async (req: Request, res: Response) => {
     .limit(12)
     .lean();
   return res.send(wall);
+});
+
+router.get("/index/top", async (req: Request, res: Response) => {
+  const topWall = await WallpaperDesktop.find({})
+    .sort({ download: -1 })
+    .limit(6)
+    .lean();
+  res.send(topWall);
 });
 
 router.get("/all", async (req: Request, res: Response) => {
@@ -115,7 +121,7 @@ router.get("/download/:id", async (req: Request, res: Response) => {
   const DownloadWallpaper = await WallpaperDesktop.updateOne(
     { _id: id },
     {
-      $inc: {download: 1}
+      $inc: { download: 1 },
     }
   );
   res.send(DownloadWallpaper);

@@ -26,20 +26,8 @@ export default function Home(props) {
     <Layout>
       <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
-          {image.map((i, key) => {
-            return (
-              <div key={key} className={``}>
-                <Image
-                  className="bg-purple-300"
-                  src={i}
-                  alt="Picture of the author"
-                  width={500}
-                  height={300}
-                  quality={100}
-                  layout="intrinsic"
-                />
-              </div>
-            );
+          {props?.dataOneTop?.map((data, key) => {
+            return <CardDesktop key={key} data={data} />;
           })}
         </div>
 
@@ -76,24 +64,12 @@ export default function Home(props) {
 
         <div className="mt-2">
           <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
-            {[...Array(6)].map((i, key) => {
-              return (
-                <div key={key} className={``}>
-                  <Image
-                    className="bg-purple-300"
-                    src={`https://images4.alphacoders.com/113/1133047.jpg`}
-                    alt="Picture of the author"
-                    width={500}
-                    height={300}
-                    quality={100}
-                    layout="intrinsic"
-                  />
-                </div>
-              );
-            })}
+          {props?.dataTwoTop?.map((data, key) => {
+            return <CardDesktop key={key} data={data} />;
+          })}
           </div>
         </div>
-        <div className="flex sm:justify-end justify-center">
+        <div className="flex sm:justify-end justify-center mt-1">
           <a className="bg-purple-700 text-white px-2 cursor-pointer">
             MORE FEATURED DESKTOP WALLPAPERS
           </a>
@@ -102,7 +78,7 @@ export default function Home(props) {
         <br />
         <h2 className="text-2xl">MOBILE WALLPAPERS</h2>
         <div className="grid sm:grid-cols-6 grid-cols-2 gap-2">
-        {props?.dataMobile?.map((data, key) => {
+          {props?.dataMobile?.map((data, key) => {
             return <CardMobile key={key} data={data} />;
           })}
         </div>
@@ -140,10 +116,17 @@ export async function getServerSideProps({ params, req, query }) {
   const dataMobile = await (
     await axios.get(`${process.env.HOST}/desktop/index?type=1`)
   ).data;
+  const dataTopDesktop = await (
+    await axios.get(`${process.env.HOST}/desktop/index/top`)
+  ).data;
+  const dataOneTop = dataTopDesktop.slice(0,3);
+  const dataTwoTop = dataTopDesktop.slice(3,6);
   return {
     props: {
       dataDesktop,
-      dataMobile
+      dataMobile,
+      dataOneTop,
+      dataTwoTop
     },
   };
 }
