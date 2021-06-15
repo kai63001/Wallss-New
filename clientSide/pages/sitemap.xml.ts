@@ -6,7 +6,7 @@ export const getServerSideProps = ({ res, req }) => {
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
-    <loc> https://${req.headers.host}/sitemap.xml?page=1</loc>
+    <loc>https://${req.headers.host}/sitemap.xml?page=1</loc>
   </sitemap>
 </sitemapindex>
 `.trim();
