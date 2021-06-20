@@ -3,9 +3,10 @@ import React from "react";
 
 const Sitemap = () => {};
 
-export const getServerSideProps = async ({ res, req }) => {
+export const getServerSideProps = async ({ res, req, query }) => {
+  const page = query.page || "1"
   const data = await (
-    await axios.get("http://localhost:3001/sitemap/category")
+    await axios.get(`http://localhost:3001/sitemap/category?page=${page}`)
   ).data;
   // console.log(data);
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
