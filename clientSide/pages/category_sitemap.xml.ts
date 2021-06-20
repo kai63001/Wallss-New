@@ -17,12 +17,14 @@ export const getServerSideProps = async ({ res, req }) => {
         / /g,
         "+"
       )}</loc>
-  </url><url>
+  </url>
+  <url>
   <loc>https://${req.headers.host}/mobile/category/${data.name.replace(
         / /g,
         "+"
       )}</loc>
-</url>`
+</url>
+`
     )
     .join("")}
 </urlset>
