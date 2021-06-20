@@ -6,7 +6,8 @@ import WallpaperDesktop from "./Desktop/wallpaper";
 import CategoryDesktop from "./Desktop/category";
 import TagDesktop from "./Desktop/tag";
 import Report from "./Desktop/report";
-import SitemapCategory from './sitemap/category'
+import SitemapCategory from "./sitemap/category";
+import SitemapWallpaper from "./sitemap/wallpaper";
 
 export {
   Register,
@@ -17,5 +18,6 @@ export {
   TagDesktop,
   Search,
   Report,
-  SitemapCategory
+  SitemapCategory,
+  SitemapWallpaper,
 };
