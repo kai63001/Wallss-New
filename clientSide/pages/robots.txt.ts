@@ -5,27 +5,14 @@ export default class extends React.Component {
     res.write(
       `User-agent: *
 Allow: /*
-${sitemap(req)}
-${sitemap_topic(req)}`.trim()
+${sitemap(req)}`.trim()
     );
     res.end();
   }
 }
 
 function sitemap(req) {
-  let sitemap = ``;
-  for (let i = 1; i <= 100; i++) {
-    sitemap += `Sitemap: https://${req.headers.host}/api/sitemap.xml?page=${i}
+  let sitemap = `Sitemap: https://${req.headers.host}/sitemap.xml
 `;
-  }
-  return sitemap.trim();
-}
-
-function sitemap_topic(req) {
-  let sitemap = ``;
-  for (let i = 1; i <= 100; i++) {
-    sitemap += `Sitemap: https://${req.headers.host}/api/sitemap_topic.xml?page=${i}
-`;
-  }
   return sitemap.trim();
 }
