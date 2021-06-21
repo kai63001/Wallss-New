@@ -8,6 +8,8 @@ import TagDesktop from "./Desktop/tag";
 import Report from "./Desktop/report";
 import SitemapCategory from "./sitemap/category";
 import SitemapWallpaper from "./sitemap/wallpaper";
+import Sitemap from "./sitemap/main";
+
 
 export {
   Register,
@@ -20,4 +22,5 @@ export {
   Report,
   SitemapCategory,
   SitemapWallpaper,
+  Sitemap
 };

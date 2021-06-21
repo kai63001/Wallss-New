@@ -11,6 +11,7 @@ import {
   Report,
   SitemapCategory,
   SitemapWallpaper,
+  Sitemap,
 } from "./controller";
 import db from "./db/connect";
 import cors from "cors";
@@ -46,6 +47,7 @@ app.use("/search", Search);
 app.use("/report", Report);
 app.use("/sitemap/category", SitemapCategory);
 app.use("/sitemap/wallpaper", SitemapWallpaper);
+app.use("/sitemap", Sitemap);
 
 app.listen(3001, () => {
   console.log(colors.green("SERVER START ON PORT :"), colors.bgGreen(" 3001 "));
