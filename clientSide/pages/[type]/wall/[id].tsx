@@ -160,7 +160,7 @@ const DesktopWallpaperPage = (props) => {
               <Link
                 href={`/${
                   nowType == "desktop" ? "desktop" : "mobile"
-                }/category/${encodeURIComponent(data?.replace(/ /g, "+"))}`}
+                }/category/${data?.replace(/ /g, "+")}`}
                 key={i}
               >
                 <a className="bg-purple-600 whitespace-nowrap inline-block text-white mr-2 px-2 py-1 select-none uppercase cursor-pointer mb-2">
@@ -176,7 +176,7 @@ const DesktopWallpaperPage = (props) => {
               <Link
                 href={`/${
                   nowType == "desktop" ? "desktop" : "mobile"
-                }/tag/${encodeURIComponent(data?.replace(/ /g, "+"))}`}
+                }/tag/${data?.replace(/ /g, "+")}`}
                 key={i}
               >
                 <a className="bg-purple-200 whitespace-nowrap inline-block text-purple-900 mr-2 px-2 py-0 select-none uppercase cursor-pointer mb-2">
