@@ -143,6 +143,19 @@ const UploadPage = (props) => {
   };
 
   // console.log(props.romeo)
+
+  const dev = true;
+  if (dev)
+    return (
+      <Layout
+        title="Upload - Wallss download wallpapers 4k"
+        des="Upload to wallpaper community share the things you create, or share the things you love. download wallpaper 4k hd"
+      >
+        <div className="max-w-2xl mx-auto mt-14 px-2 sm:px-0">
+          <div className="text-center"><h1>UPLOAD WALLPAPER SOON..</h1></div>
+        </div>
+      </Layout>
+    );
   return (
     <Layout
       title="Upload - Wallss download wallpapers 4k"
