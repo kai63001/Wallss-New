@@ -9,7 +9,7 @@ db("mongodb://localhost:27017/wallss");
 
 const main = async () => {
   if (myArgs.length < 3) {
-    console.log(colors.bold.red('ts-node ./src/index.ts ["wallpaper[all]","mobile[all]"] start end'));
+    console.log(colors.bold.red('ts-node ./src/index.ts ["wallpaper[all]","mobile[all]","categoryall"] start end'));
     return process.exit(1);
   } else {
     if (myArgs[0] == "wallpaper") {
