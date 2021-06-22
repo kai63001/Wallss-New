@@ -13,13 +13,13 @@ ${[...Array(data?.wallpaper)].map(
     `<sitemap>
 <loc>https://${req.headers.host}/wallpaper_sitemap.xml?page=${i + 1}</loc>
 </sitemap>`
-)}
+).join("")}
 ${[...Array(data?.category)].map(
   (data, i) =>
     `<sitemap>
 <loc>https://${req.headers.host}/category_sitemap.xml?page=${i + 1}</loc>
 </sitemap>`
-)}
+).join("")}
   
 </sitemapindex>
 `.trim();
