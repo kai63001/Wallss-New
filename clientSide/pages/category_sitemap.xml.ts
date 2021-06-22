@@ -14,16 +14,16 @@ export const getServerSideProps = async ({ res, req, query }) => {
   ${data?.itemsList
     ?.map(
       (data, i) => `<url>
-    <loc>https://${req.headers.host}/desktop/category/${data.name.replace(
+    <loc>https://${req.headers.host}/desktop/category/${encodeURIComponent(data.name.replace(
         / /g,
         "+"
-      )}</loc>
+      ))}</loc>
   </url>
   <url>
-  <loc>https://${req.headers.host}/mobile/category/${data.name.replace(
-        / /g,
-        "+"
-      )}</loc>
+  <loc>https://${req.headers.host}/mobile/category/${encodeURIComponent(data.name.replace(
+    / /g,
+    "+"
+  ))}</loc>
 </url>
 `
     )
