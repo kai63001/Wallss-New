@@ -5,6 +5,7 @@ import WallpapersDesktop from "../model/Desktop/wallpaper";
 import Category from "../model/Category";
 
 class Steal {
+  public userID = ["60a43e07a0af5b1e041d971f","60d1eedf93bc9a2684682c49","60d1eeed93bc9a2684682c4a"]
   constructor() {}
 
   public async stealWallpaperSetUp(start: string, end: string) {
@@ -95,7 +96,7 @@ class Steal {
           }
           listWallpaper["type"] = 0;
           listWallpaper["date"] = new Date();
-          listWallpaper["user"] = "60a43e07a0af5b1e041d971f";
+          listWallpaper["user"] = this.userID[Math.floor(Math.random()*this.userID.length)];
           // console.log(listWallpaper);
           console.log(colors.bold.blue(`${i} success`));
           dataWallpaper.push(listWallpaper);
@@ -194,7 +195,7 @@ class Steal {
           }
           listWallpaper["type"] = 0;
           listWallpaper["date"] = new Date();
-          listWallpaper["user"] = "60a43e07a0af5b1e041d971f";
+          listWallpaper["user"] = this.userID[Math.floor(Math.random()*this.userID.length)];
           // console.log(listWallpaper);
           console.log(colors.bold.blue(`${i} success`));
           // insert
@@ -275,7 +276,7 @@ class Steal {
 
           listWallpaper["type"] = 1;
           listWallpaper["date"] = new Date();
-          listWallpaper["user"] = "60a43e07a0af5b1e041d971f";
+          listWallpaper["user"] = this.userID[Math.floor(Math.random()*this.userID.length)];
           // console.log(listWallpaper);
           console.log(colors.bold.blue(`${i} success`));
           dataWallpaper.push(listWallpaper);
@@ -354,7 +355,7 @@ class Steal {
 
           listWallpaper["type"] = 1;
           listWallpaper["date"] = new Date();
-          listWallpaper["user"] = "60a43e07a0af5b1e041d971f";
+          listWallpaper["user"] = this.userID[Math.floor(Math.random()*this.userID.length)];
           // console.log(listWallpaper);
           console.log(colors.bold.blue(`${i} success`));
           const insert = await WallpapersDesktop.create(listWallpaper);
