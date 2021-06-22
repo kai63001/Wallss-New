@@ -72,7 +72,7 @@ export async function getServerSideProps({ params, req, query }) {
   const categoryName = params.name.replace(/\+/g, " ");
   const data = await (
     await axios.get(
-      `${process.env.HOST}/desktop/category?name=${categoryName}&page=${page}${
+      `${process.env.HOST}/desktop/category?name=${encodeURI(categoryName)}&page=${page}${
         params.type == "mobile" && "&type=1"
       }`
     )

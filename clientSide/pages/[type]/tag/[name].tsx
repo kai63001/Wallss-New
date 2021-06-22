@@ -56,7 +56,7 @@ export async function getServerSideProps({ params, req, query }) {
   const tagName = params.name.replace(/\+/g, " ");
   const data = await (
     await axios.get(
-      `${process.env.HOST}/desktop/tag?name=${tagName}&page=${page}${
+      `${process.env.HOST}/desktop/tag?name=${encodeURI(tagName)}&page=${page}${
         params.type == "mobile" && "&type=1"
       }`
     )
