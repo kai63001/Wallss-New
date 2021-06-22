@@ -359,6 +359,12 @@ class Steal {
     });
   }
 
+  public async stealCategory(start: string, end: string){
+    return new Promise(async (resolve, reject) => {
+      
+    });
+  }
+
 }
 
 export default Steal;
