@@ -24,6 +24,9 @@ const main = async () => {
     } else if(myArgs[0] == "wallpaperall"){
       const data = await Stealer.stealWallpaperSetUpAll(myArgs[1],myArgs[2])
       if(data) console.log(colors.bgMagenta('All Done Wallpaper All'))
+    }else if(myArgs[0] == "mobileall"){
+      const data = await Stealer.stealMobileSetUpAll(myArgs[1],myArgs[2])
+      if(data) console.log(colors.bgMagenta('All Done Mobile All'))
     } else {
       console.log(colors.bold.red("only wallpaper and mobile"));
       return process.exit(1);

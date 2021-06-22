@@ -112,7 +112,7 @@ class Steal {
   }
 
   private letStealWallpaperAll(start: number, end: number) {
-    let dataWallpaper: any = [];
+    let dataWallpaper: any = ['123'];
     return new Promise(async (resolve, reject) => {
       for (let i = start; i <= end; i++) {
         const data = await axios.get(
@@ -206,8 +206,6 @@ class Steal {
     });
   }
 
-  
-
   public async stealMobileSetUp(start: string, end: string) {
     const startN = parseInt(start);
     const endN = parseInt(end);
@@ -283,6 +281,84 @@ class Steal {
       }
     });
   }
+
+  public async stealMobileSetUpAll(start: string, end: string) {
+    const startN = parseInt(start);
+    const endN = parseInt(end);
+    return this.letStealMobileAll(startN, endN);
+  }
+
+  private letStealMobileAll(start: number, end: number) {
+    let dataWallpaper: any = ['123'];
+    return new Promise(async (resolve, reject) => {
+      for (let i = start; i <= end; i++) {
+        const data = await axios.get(
+          `https://mobile.alphacoders.com/wallpapers/view/${i}`
+        );
+        const raw = await data.data;
+        // console.log(raw)
+        const $ = cheerio.load(raw);
+        if (
+          $("title").text() ==
+            "Wallpaper Abyss - HD Wallpapers, Background Images" ||
+          data?.request?.res?.responseUrl !=
+            `https://mobile.alphacoders.com/wallpapers/view/${i}`
+        ) {
+          console.log(colors.bold.red(`id: ${i} : not found`));
+        } else {
+          let listWallpaper: any = {};
+          // title
+          listWallpaper["name"] =
+            $("title")
+              .text()
+              ?.split("(")[0]
+              ?.replace(" HD Wallpaper", "")
+              ?.replace("/", " ")
+              ?.trim() || "title not found";
+          // resolution
+          listWallpaper["resolution"] = $("title")
+            .text()
+            ?.split("(")[1]
+            ?.slice(0, $("title").text()?.split("(")[1]?.indexOf(")"))
+            ?.trim();
+          // tags
+          const tags: any[] = [];
+          $(".well").each((i: any, elem: any) => {
+            tags[i] = $(elem).children().text();
+          });
+          listWallpaper["tags"] = tags;
+          // category
+          listWallpaper["categoly"] =
+            $("title")
+              .text()
+              ?.split("(")[0]
+              ?.replace(" HD Wallpaper", "")
+              ?.trim()
+              .split("/") || "title not found";
+
+          // image
+          listWallpaper["image"] =
+            $('meta[name="twitter:image:src"]').attr("content") ||
+            "image not found";
+
+          // author
+          listWallpaper["author"] = $('#author_container').children().text().trim()
+          listWallpaper["authorLink"] = ''
+
+          listWallpaper["type"] = 1
+          listWallpaper["date"] = new Date();
+          listWallpaper["user"] = "60a43e07a0af5b1e041d971f";
+          // console.log(listWallpaper);
+          console.log(colors.bold.blue(`${i} success`));
+          const insert = await WallpapersDesktop.create(listWallpaper)
+          if(insert) console.log(colors.bgMagenta(`insert ${i} success`))
+        }
+
+        if (i == end) resolve(dataWallpaper);
+      }
+    });
+  }
+
 }
 
 export default Steal;
