@@ -30,8 +30,8 @@ const main = async () => {
     }else if(myArgs[0] == "categoryall"){
       const data = await Stealer.stealCategory(myArgs[1],myArgs[2])
       if(data) console.log(colors.bgMagenta('All Done Category All'))
-    } else if(myArgs[0] == "lazy"){
-      // const data = await Stealer.updateLazy(1,"wallpaper")
+    } else if(myArgs[0] == "lazydesktop"){
+      const data = await Stealer.lazyDesktop()
     } else {
       console.log(colors.bold.red("only wallpaper and mobile"));
       return process.exit(1);

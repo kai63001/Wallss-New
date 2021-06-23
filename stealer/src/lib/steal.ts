@@ -3,19 +3,23 @@ const cheerio = require("cheerio");
 import axios from "axios";
 import WallpapersDesktop from "../model/Desktop/wallpaper";
 import Category from "../model/Category";
-import fs from 'fs'
+import fs from "fs";
+import { setInterval } from "timers";
 
 class Steal {
-  public userID = ["60a43e07a0af5b1e041d971f","60d1eedf93bc9a2684682c49","60d1eeed93bc9a2684682c4a"]
-  constructor() {
-  }
+  public userID = [
+    "60a43e07a0af5b1e041d971f",
+    "60d1eedf93bc9a2684682c49",
+    "60d1eeed93bc9a2684682c4a",
+  ];
+  constructor() {}
 
-  private updateLazy(now:number,type:string) {
-    let rawdata:string = fs.readFileSync('./data/lazy.json').toString();
+  private updateLazy(now: number, type: string) {
+    let rawdata: string = fs.readFileSync("./data/lazy.json").toString();
     let wall = JSON.parse(rawdata);
-    wall[type == "0"?"wallpaper":"mobile"] = now;
+    wall[type == "0" ? "wallpaper" : "mobile"] = now;
     const data = JSON.stringify(wall);
-    fs.writeFileSync("./data/lazy.json",data)
+    fs.writeFileSync("./data/lazy.json", data);
     // console.log(wall)
   }
 
@@ -107,11 +111,12 @@ class Steal {
           }
           listWallpaper["type"] = 0;
           listWallpaper["date"] = new Date();
-          listWallpaper["user"] = this.userID[Math.floor(Math.random()*this.userID.length)];
+          listWallpaper["user"] =
+            this.userID[Math.floor(Math.random() * this.userID.length)];
           // console.log(listWallpaper);
           console.log(colors.bold.blue(`${i} success`));
           dataWallpaper.push(listWallpaper);
-          this.updateLazy(i,listWallpaper["type"])
+          this.updateLazy(i, listWallpaper["type"]);
         }
 
         if (i == end) resolve(dataWallpaper);
@@ -207,12 +212,13 @@ class Steal {
           }
           listWallpaper["type"] = 0;
           listWallpaper["date"] = new Date();
-          listWallpaper["user"] = this.userID[Math.floor(Math.random()*this.userID.length)];
+          listWallpaper["user"] =
+            this.userID[Math.floor(Math.random() * this.userID.length)];
           // console.log(listWallpaper);
           console.log(colors.bold.blue(`${i} success`));
           // insert
           const insert = await WallpapersDesktop.create(listWallpaper);
-          this.updateLazy(i,listWallpaper["type"])
+          this.updateLazy(i, listWallpaper["type"]);
           if (insert) console.log(colors.bgMagenta(`insert ${i} success`));
         }
 
@@ -289,10 +295,11 @@ class Steal {
 
           listWallpaper["type"] = 1;
           listWallpaper["date"] = new Date();
-          listWallpaper["user"] = this.userID[Math.floor(Math.random()*this.userID.length)];
+          listWallpaper["user"] =
+            this.userID[Math.floor(Math.random() * this.userID.length)];
           // console.log(listWallpaper);
           console.log(colors.bold.blue(`${i} success`));
-          this.updateLazy(i,listWallpaper["type"])
+          this.updateLazy(i, listWallpaper["type"]);
           dataWallpaper.push(listWallpaper);
         }
 
@@ -369,11 +376,12 @@ class Steal {
 
           listWallpaper["type"] = 1;
           listWallpaper["date"] = new Date();
-          listWallpaper["user"] = this.userID[Math.floor(Math.random()*this.userID.length)];
+          listWallpaper["user"] =
+            this.userID[Math.floor(Math.random() * this.userID.length)];
           // console.log(listWallpaper);
           console.log(colors.bold.blue(`${i} success`));
           const insert = await WallpapersDesktop.create(listWallpaper);
-          this.updateLazy(i,listWallpaper["type"])
+          this.updateLazy(i, listWallpaper["type"]);
           if (insert) console.log(colors.bgMagenta(`insert ${i} success`));
         }
 
@@ -383,8 +391,38 @@ class Steal {
   }
 
   public async stealCategory(start: string, end: string) {
-    const id = [1,2,3,4,7,8,9,10,11,12,14,15,13,16,17,18,19,20,22,24,25,26,27,28,29,30,31,32,34,33];
-    const letter = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+    const id = [
+      1, 2, 3, 4, 7, 8, 9, 10, 11, 12, 14, 15, 13, 16, 17, 18, 19, 20, 22, 24,
+      25, 26, 27, 28, 29, 30, 31, 32, 34, 33,
+    ];
+    const letter = [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z",
+    ];
     return new Promise(async (resolve, reject) => {
       id?.map(async (idata, i) => {
         letter?.map(async (ldata, li) => {
@@ -396,19 +434,38 @@ class Steal {
           const $ = cheerio.load(data);
           let listCategory: any = [];
           $(".sub_category_container").each((i: any, elem: any) => {
-            let catData:any = {}
-            catData["name"] = $(elem).children("a").text().replace(/\»/g,'').trim();
-            listCategory[i] = catData
+            let catData: any = {};
+            catData["name"] = $(elem)
+              .children("a")
+              .text()
+              .replace(/\»/g, "")
+              .trim();
+            listCategory[i] = catData;
           });
-          const insert = await Category.insertMany(listCategory)
-          if(insert) console.log('success')
-          console.log(listCategory)
+          const insert = await Category.insertMany(listCategory);
+          if (insert) console.log("success");
+          console.log(listCategory);
         });
       });
     });
   }
-  
 
+  public async lazyDesktop() {
+    let rawdata: string = fs.readFileSync("./data/lazy.json").toString();
+    let wall = JSON.parse(rawdata);
+    let count = wall["wallpaper"]
+    setInterval(() => {
+      // console.log(wall)
+      if(count < wall["wallpaperEnd"]){
+        this.letStealWallpaperAll(count, count);
+        this.updateLazy(count + 1, "0");
+        count += 1
+      }else{
+        console.log("fuck it end lazy desktop")
+        return
+      }
+    }, 3000);
+  }
 }
 
 export default Steal;
