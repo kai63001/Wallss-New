@@ -453,18 +453,35 @@ class Steal {
   public async lazyDesktop() {
     let rawdata: string = fs.readFileSync("./data/lazy.json").toString();
     let wall = JSON.parse(rawdata);
-    let count = wall["wallpaper"]
+    let count = wall["wallpaper"];
     setInterval(() => {
       // console.log(wall)
-      if(count < wall["wallpaperEnd"]){
+      count += 1;
+      if (count < wall["wallpaperEnd"]) {
         this.letStealWallpaperAll(count, count);
         this.updateLazy(count + 1, "0");
-        count += 1
-      }else{
-        console.log("fuck it end lazy desktop")
-        return
+      } else {
+        console.log("fuck it end lazy desktop");
+        return;
       }
-    }, 3000);
+    }, 60000);
+  }
+
+  public async lazyMobile() {
+    let rawdata: string = fs.readFileSync("./data/lazy.json").toString();
+    let wall = JSON.parse(rawdata);
+    let count = wall["mobile"];
+    setInterval(() => {
+      // console.log(wall)
+      count += 1;
+      if (count < wall["mobileEnd"]) {
+        this.stealMobileSetUpAll(count, count);
+        this.updateLazy(count + 1, "1");
+      } else {
+        console.log("fuck it end lazy desktop");
+        return;
+      }
+    }, 60000);
   }
 }
 

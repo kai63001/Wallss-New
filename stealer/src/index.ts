@@ -32,7 +32,9 @@ const main = async () => {
       if(data) console.log(colors.bgMagenta('All Done Category All'))
     } else if(myArgs[0] == "lazydesktop"){
       const data = await Stealer.lazyDesktop()
-    } else {
+    } else if(myArgs[0] == "lazymobile"){
+      const data = await Stealer.lazyMobile()
+    }else {
       console.log(colors.bold.red("only wallpaper and mobile"));
       return process.exit(1);
     }
