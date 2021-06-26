@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "60a43e07a0af5b1e041d971f"
+  },
+  "profile": "/astronaut.png",
+  "username": "romeo",
+  "password": "qw123456",
+  "email": "romeo@gmail.com",
+  "name": "Romeo Winters",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1eedf93bc9a2684682c49"
+  },
+  "profile": "/astronaut.png",
+  "username": "leo",
+  "password": "qw123456",
+  "email": "leo@gmail.com",
+  "name": "Leonard",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "60d1eeed93bc9a2684682c4a"
+  },
+  "profile": "/astronaut.png",
+  "username": "reder",
+  "password": "qw123456",
+  "email": "reder@gmail.com",
+  "name": "Reder",
+  "__v": 0
+}]
