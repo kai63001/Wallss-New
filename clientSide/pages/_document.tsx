@@ -15,10 +15,10 @@ class MyDocument extends Document {
             data-ad-client="ca-pub-9787491065456428"
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          ></script>
+          ></script> */}
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-T9JYN04R08"
+            src="https://www.googletagmanager.com/gtag/js?id=G-R4KQC6E3FP"
           ></script>
           <script
             dangerouslySetInnerHTML={{
@@ -27,10 +27,10 @@ class MyDocument extends Document {
                   function gtag(){dataLayer.push(arguments);}
                   gtag('js', new Date());
                 
-                  gtag('config', 'G-T9JYN04R08');
+                  gtag('config', 'G-R4KQC6E3FP');
                 `,
             }}
-          /> */}
+          />
         </Head>
         <body>
           <Main />
