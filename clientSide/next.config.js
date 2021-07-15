@@ -6,7 +6,7 @@ module.exports = {
     includePaths: [path.join(__dirname, "styles")],
   },
   env: {
-    HOST: 'http://localhost:3001',
+    HOST: process.env.DB_HOST,
   },
   images: {
     domains: [
