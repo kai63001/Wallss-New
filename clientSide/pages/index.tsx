@@ -33,7 +33,7 @@ export default function Home(props) {
 
         <div className="bg-white py-10 px-5 mt-1 flex justify-center items-center">
           <div className="block text-center">
-            <h1 className="text-4xl font-romeo2">Welcome to WALLSS</h1>
+            <h1 className="text-4xl font-romeo2">Welcome to WALLSS.</h1>
             is an image discovery platform. Share the things you create, or
             share the things you love.
             <br />
