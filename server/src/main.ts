@@ -15,9 +15,13 @@ import {
 } from "./controller";
 import db from "./db/connect";
 import cors from "cors";
+const dotenv = require("dotenv");
+dotenv.config();
+
+const uriDB = process.env.MONGO || "mongodb://localhost:27017/wallss";
 
 const app: Application = express();
-db("mongodb://localhost:27017/wallss");
+db(uriDB);
 app.use(cors());
 
 app.use(
