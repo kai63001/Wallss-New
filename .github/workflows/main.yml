@@ -17,5 +17,11 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
         script: |
-          whoami
-          ls -la
+          cd wallssNew/
+          git pull origin master
+          cd clientSide/
+          npm run build
+          cd ..
+          pm2 restart client
+          pm2 restart server
+          pm2 status
