@@ -16,6 +16,7 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         port: ${{ secrets.PORT }}
+        command_timeout: 20m
         script: |
           cd wallssNew/
           git pull origin master
@@ -25,3 +26,4 @@ jobs:
           pm2 restart client
           pm2 restart server
           pm2 status
+          systemctl restart mongodb
