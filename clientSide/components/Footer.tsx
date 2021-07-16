@@ -45,7 +45,7 @@ const Footer = () => {
               <a className="hover:text-purple-600 block">Privacy Policy</a>
             </Link>
             <Link href="/terms">
-              <a className="hover:text-purple-600 block">Terms of Service</a>
+              <a className="hover:text-purple-600 block">Terms of Use</a>
             </Link>
             <Link href="/rules">
               <a className="hover:text-purple-600 block">Community Rules</a>

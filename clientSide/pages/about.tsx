@@ -3,7 +3,7 @@ const Layout = dynamic(import("@/components/Layout"));
 
 const About = () => {
   return (
-    <Layout>
+    <Layout title="About us - Wallss">
       <div className="max-w-screen-lg mx-auto mt-3 px-2 sm:px-0">
         <div className="text-center">
           <h1 className="text-4xl font-romeo2 mb-3">
