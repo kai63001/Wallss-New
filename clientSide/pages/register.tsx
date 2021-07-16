@@ -131,8 +131,8 @@ const Register = () => {
                 onChange={onHanndleChangeValidate}
               />
               <label htmlFor="checkbox" className="ml-2 select-none">
-                By creating an account, you agree to our Terms of Use and
-                Privacy Policy.
+                By creating an account, you agree to our <Link href="/terms"><a className="text-purple-600">Terms of Use</a></Link> and
+                .<Link href="/privacy"><a className="text-purple-600">Privacy Policy</a></Link>
                 {errors["checkbox"] && (
                   <div className="text-sm text-red-500">
                     {errors["checkbox"]}
