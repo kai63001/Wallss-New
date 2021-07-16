@@ -49,7 +49,7 @@ const Register = () => {
     if (!e.target.checkbox.checked) {
       formIsValid = false;
       errorser["checkbox"] =
-        "You must read and agree to the Terms of Service to continue";
+        "You must read and agree to the Terms of Use to continue";
     }
     setErrors(errorser);
     return formIsValid;
@@ -131,7 +131,7 @@ const Register = () => {
                 onChange={onHanndleChangeValidate}
               />
               <label htmlFor="checkbox" className="ml-2 select-none">
-                By creating an account, you agree to our Terms of Service and
+                By creating an account, you agree to our Terms of Use and
                 Privacy Policy.
                 {errors["checkbox"] && (
                   <div className="text-sm text-red-500">
