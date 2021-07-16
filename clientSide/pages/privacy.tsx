@@ -8,11 +8,11 @@ const Privacy = () => {
         <div className="text-center">
           <h1 className="text-4xl font-romeo2 mb-3">
             <span className="text-purple-700">P</span>rivacy
-            <span className="text-purple-700">P</span>olicy
+            <span className="text-purple-700"> P</span>olicy
           </h1>
         </div>
         <div className="bg-white p-10 shadow-md text-lg">
-          <h1 className="text-2xl font-romeo2 mb-3">Privacy Policy for Wallss</h1>
+          <h2 className="text-2xl font-romeo2 mb-3">Privacy Policy for Wallss</h2>
           <p>
             At Wallss, accessible from https://wallss.net, one of our main
             priorities is the privacy of our visitors. This Privacy Policy
