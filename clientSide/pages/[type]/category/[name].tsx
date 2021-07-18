@@ -40,7 +40,7 @@ const Category = (props) => {
             ?.replace(/\w\S*/g, (w) =>
               w.replace(/^\w/, (c) => c.toUpperCase())
             )}{" "}
-          Wallpapers? We have amazing background pictures carefully picked by
+          Wallpapers to download? We have amazing background pictures carefully picked by
           our community. If you have your own one, just join us community and
           share and we will show it on the web-site. Feel free to download,
           share, comment and discuss every wallpaper you like.
