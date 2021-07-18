@@ -21,7 +21,7 @@ const Terms = () => {
           <br />
           If you have questions about what you are legally permitted to do with
           content found on this web site, please consult our{" "}
-          <Link href="/">
+          <Link href="/copyright">
             <a className="text-purple-600">Copyright Policy</a>
           </Link>
           .<h2 className="text-2xl font-romeo2 mb-3 mt-2">Access</h2>
