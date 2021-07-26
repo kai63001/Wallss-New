@@ -4,7 +4,9 @@ export default class extends React.Component {
     //res.writeHead(302, { Location: '/redirect' }) //sample how to response custom header
     res.write(
       `User-agent: *
-Allow: /*
+Disallow: /api
+Disallow: /search
+
 ${sitemap(req)}`.trim()
     );
     res.end();
@@ -12,7 +14,6 @@ ${sitemap(req)}`.trim()
 }
 
 function sitemap(req) {
-  let sitemap = `Sitemap: https://${req.headers.host}/sitemap.xml
-`;
+  let sitemap = `Sitemap: https://${req.headers.host}/sitemap.xml`;
   return sitemap.trim();
 }
