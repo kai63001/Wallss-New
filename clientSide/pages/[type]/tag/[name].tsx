@@ -53,7 +53,7 @@ const Category = (props) => {
 
 export async function getServerSideProps({ params, req, query }) {
   const page = query?.page || 1;
-  const tagName = params.name.replace(/\+/g, " ");
+  const tagName = params.name.replace(/\-/g, " ");
   const data = await (
     await axios.get(
       `${process.env.HOST}/desktop/tag?name=${encodeURI(tagName)}&page=${page}${

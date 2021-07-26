@@ -69,7 +69,7 @@ const Category = (props) => {
 
 export async function getServerSideProps({ params, req, query }) {
   const page = query?.page || 1;
-  const categoryName = params.name.replace(/\+/g, " ");
+  const categoryName = params.name.replace(/\-/g, " ");
   const data = await (
     await axios.get(
       `${process.env.HOST}/desktop/category?name=${encodeURI(categoryName)}&page=${page}${

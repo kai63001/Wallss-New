@@ -23,7 +23,7 @@ const Navbar = (props) => {
   }, [setText])
   const search = (e) => {
     e.preventDefault()
-    router.push(`/search/${e.target.name.value.replace(/ /g,'+')}`)
+    router.push(`/search/${e.target.name.value.replace(/ /g,'-')}`)
   }
   const auth = isAuth(cookies.get("token"));
   return (
