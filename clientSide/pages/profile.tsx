@@ -4,7 +4,7 @@ const Layout = dynamic(import("@/components/Layout"));
 const ProfilePage = () => {
   return (
     <Layout>
-      <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">asd</div>
+      <div className="max-w-screen-xl mx-auto mt-3 px-2 xs:px-0">asd</div>
     </Layout>
   );
 };

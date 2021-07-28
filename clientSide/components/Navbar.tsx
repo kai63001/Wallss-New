@@ -28,7 +28,7 @@ const Navbar = (props) => {
   const auth = isAuth(cookies.get("token"));
   return (
     <nav className="bg-white py-2">
-      <div className="flex max-w-screen-xl mx-auto px-2 sm:px-0">
+      <div className="flex max-w-screen-xl mx-auto px-2 xs:px-0">
         <div className="flex-1 sm:flex-none w-2/12">
           <div className={"logo text-3xl font-romeo2"}>
             <Link href="/">

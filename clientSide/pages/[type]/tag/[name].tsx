@@ -20,7 +20,7 @@ const Category = (props) => {
           w.replace(/^\w/, (c) => c.toUpperCase())
         )} Background Images HD 4K`}
     >
-      <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
+      <div className="max-w-screen-xl mx-auto mt-3 px-2 xs:px-0">
         <h1 className="text-center text-3xl uppercase font-romeo2 my-5">
           {props.tagName?.trim()} Wallpapers
         </h1>

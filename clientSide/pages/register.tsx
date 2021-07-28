@@ -84,7 +84,7 @@ const Register = () => {
       title="Register - Wallss download wallpapers 4k"
       des="Register or create an account to wallpaper community share the things you create, or share the things you love. download wallpaper 4k hd"
     >
-      <div className="max-w-2xl mx-auto mt-14 px-2 sm:px-0">
+      <div className="max-w-2xl mx-auto mt-14 px-2 xs:px-0">
         <div className="bg-white sm:p-11 p-5 shadow-md">
           <h1 className="text-3xl font-romeo2">Create an Account</h1>
           <span className="text-lg mt-1 block">

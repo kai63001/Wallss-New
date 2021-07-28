@@ -75,16 +75,52 @@ router.get("/wall/:id", async (req: Request, res: Response) => {
 
 router.post("/more/random", async (req: Request, res: Response) => {
   const { category } = req.body;
-  const data = [...category];
+  let data = [...category];
   let type = req.query.type || 0;
   type = parseInt(type.toString());
   // const wall:any = await WallpaperDesktop.find(
   //   { categoly: {$in: data} }
   // ).lean();
+  const rmArray = [
+    "abstract",
+    "animal",
+    "anime",
+    "artistic",
+    "celebrity",
+    "comics",
+    "dark",
+    "earth",
+    "fantasy",
+    "food",
+    "game",
+    "holiday",
+    "humor",
+    "man made",
+    "men",
+    "military",
+    "misc",
+    "movie",
+    "music",
+    "photography",
+    "products",
+    "religious",
+    "sci fi",
+    "sports",
+    "tv show",
+    "technology",
+    "vehicles",
+    "video game",
+    "weapons",
+    "women",
+  ];
+  const fiData = data.filter(function (e:any):any {
+    return this.indexOf(e) < 0;
+  }, rmArray);
+  console.log(fiData);
   let wall: any = [];
   wall = await WallpaperDesktop.aggregate([
     {
-      $match: { $and: [{ categoly: { $in: data } }, { type: { $eq: type } }] },
+      $match: { $and: [{ categoly: { $in: fiData } }, { type: { $eq: type } }] },
     },
     { $sample: { size: 6 } },
   ]);

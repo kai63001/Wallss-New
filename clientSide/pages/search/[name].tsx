@@ -17,7 +17,7 @@ const SearchWallpaper = (props) => {
       title={`Search ${router.query?.name?.toString()?.replace(/\+/," ")} Wallpaper`}
       des={`Download Wallpapers  image HD 4k Background`}
     >
-      <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
+      <div className="max-w-screen-xl mx-auto mt-3 px-2 xs:px-0">
         <h1 className="text-center text-3xl uppercase font-romeo2 my-5">
          Search: {router.query?.name?.toString()?.replace(/\+/," ")} Wallpapers
         </h1>
