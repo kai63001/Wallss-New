@@ -24,7 +24,7 @@ export default function Home(props) {
 
   return (
     <Layout>
-      <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
+      <div className="max-w-screen-xl mx-auto mt-3 px-2 xs:px-0">
         <div className="grid sm:grid-cols-3 grid-cols-1 gap-2">
           {props?.dataOneTop?.map((data, key) => {
             return <CardDesktop key={key} data={data} />;

@@ -56,7 +56,7 @@ const DesktopWallpaperPage = (props) => {
       } hd 4k`}
       image={props.data?.image}
     >
-      <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
+      <div className="max-w-screen-xl mx-auto mt-3 px-2 xs:px-0">
         <div className="sm:flex sm:justify-between justify-start">
           <div className="">
             {/* <h1 className="text-4xl uppercase">{props.data?.name}</h1> */}

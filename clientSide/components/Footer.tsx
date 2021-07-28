@@ -3,7 +3,7 @@ import Link from "next/link";
 const Footer = () => {
   return (
     <footer>
-      <div className="max-w-screen-xl mx-auto mt-3 px-2 sm:px-0">
+      <div className="max-w-screen-xl mx-auto mt-3 px-2 xs:px-0">
         <div className="grid grid-cols-3 gap-4">
           <div className="">
             <div className={"logo text-5xl font-romeo2 mb-1"}>
