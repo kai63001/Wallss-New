@@ -116,7 +116,7 @@ router.post("/more/random", async (req: Request, res: Response) => {
   const fiData = data.filter(function (e:any):any {
     return this.indexOf(e) < 0;
   }, rmArray);
-  console.log(fiData);
+  // console.log(fiData);
   let wall: any = [];
   wall = await WallpaperDesktop.aggregate([
     {
