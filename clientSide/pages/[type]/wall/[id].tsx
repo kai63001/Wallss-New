@@ -49,11 +49,11 @@ const DesktopWallpaperPage = (props) => {
         ?.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()))} ${
         props.data?.resolution
       } ${nowType == "desktop" ? "Desktop PC" : "Mobile Phone"} - Download`}
-      des={`download wallpaper ${props.data?.categoly?.join(
+      des={`Download wallpaper ${props.data?.categoly?.join(
         " "
       )} ${props.data?.tags?.join(" ")} ${
         nowType == "desktop" ? "Desktop PC" : "Mobile Phone"
-      } hd 4k`}
+      } hd 4k for free on all your devices.The best quality and size only with us!`}
       image={props.data?.image}
     >
       <div className="max-w-screen-xl mx-auto mt-3 px-2 xs:px-0">
