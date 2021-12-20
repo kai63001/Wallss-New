@@ -18,13 +18,13 @@ const Category = (props) => {
         ?.trim()
         ?.toLowerCase()
         ?.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()))} ${
-        nowType == "desktop" ? "Desktop PC" : "Mobile Phone"
+        nowType == "desktop" ? "Desktop" : "Mobile Phone"
       }`}
       des={`Download Wallpapers ${props.categoryName
         ?.trim()
         ?.toLowerCase()
         ?.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()))} ${
-        nowType == "desktop" ? "Desktop PC" : "Mobile Phone"
+        nowType == "desktop" ? "Desktop" : "Mobile Phone"
       } Background Images HD 4K`}
     >
       <div className="max-w-screen-xl mx-auto mt-3 px-2 xs:px-0">
