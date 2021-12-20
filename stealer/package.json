@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "steal": "tsc-node src/index.ts",
+    "steal": "ts-node --transpile-only src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

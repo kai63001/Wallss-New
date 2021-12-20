@@ -8,6 +8,7 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const uriDB = process.env.MONGO || "mongodb://localhost:27017/wallss";
+console.log(uriDB)
 db(uriDB);
 
 const main = async () => {
