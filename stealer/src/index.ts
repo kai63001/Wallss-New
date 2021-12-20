@@ -4,8 +4,11 @@ var myArgs = process.argv.slice(2);
 import db from "./db/connect";
 import colors from "colors";
 import WallpapersDesktop from './model/Desktop/wallpaper'
+const dotenv = require("dotenv");
+dotenv.config();
 
-db("mongodb://localhost:27017/wallss");
+const uriDB = process.env.MONGO || "mongodb://localhost:27017/wallss";
+db(uriDB);
 
 const main = async () => {
   if (myArgs.length < 3) {

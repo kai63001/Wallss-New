@@ -26,4 +26,3 @@ jobs:
           pm2 restart Client
           pm2 restart Server
           pm2 status
-          systemctl restart mongodb
