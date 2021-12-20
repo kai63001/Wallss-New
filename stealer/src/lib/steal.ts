@@ -461,7 +461,7 @@ class Steal {
   }
 
   public async lazyDesktop() {
-    let rawdata: string = fs.readFileSync("./data/lazy.json").toString();
+    let rawdata: string = fs.readFileSync("./src/data/lazy.json").toString();
     let wall = JSON.parse(rawdata);
     let count = wall["wallpaper"];
     setInterval(() => {
@@ -478,7 +478,7 @@ class Steal {
   }
 
   public async lazyMobile() {
-    let rawdata: string = fs.readFileSync("./data/lazy.json").toString();
+    let rawdata: string = fs.readFileSync("./src/data/lazy.json").toString();
     let wall = JSON.parse(rawdata);
     let count = wall["mobile"];
     setInterval(() => {
