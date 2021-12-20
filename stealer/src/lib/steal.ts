@@ -15,11 +15,11 @@ class Steal {
   constructor() {}
 
   private updateLazy(now: number, type: string) {
-    let rawdata: string = fs.readFileSync("./data/lazy.json").toString();
+    let rawdata: string = fs.readFileSync("./src/data/lazy.json").toString();
     let wall = JSON.parse(rawdata);
     wall[type == "0" ? "wallpaper" : "mobile"] = now;
     const data = JSON.stringify(wall);
-    fs.writeFileSync("./data/lazy.json", data);
+    fs.writeFileSync("./src/data/lazy.json", data);
     // console.log(wall)
   }
 
