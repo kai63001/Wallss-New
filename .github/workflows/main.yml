@@ -18,7 +18,7 @@ jobs:
         port: ${{ secrets.PORT }}
         command_timeout: 20m
         script: |
-          cd wallssNew/
+          cd Wallss-New/
           git pull origin master
           cd clientSide/
           npm run build
