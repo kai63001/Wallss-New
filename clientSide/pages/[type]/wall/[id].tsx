@@ -48,8 +48,8 @@ const DesktopWallpaperPage = (props) => {
         ?.toLowerCase()
         ?.replace(/\w\S*/g, (w) => w.replace(/^\w/, (c) => c.toUpperCase()))} ${
         props.data?.resolution
-      } ${nowType == "desktop" ? "Desktop PC" : "Mobile Phone"} - Download`}
-      des={`Download wallpaper ${props.data?.categoly?.join(
+      } ${nowType == "desktop" ? "Desktop" : "Phone"}`}
+      des={`wallpaper ${props.data?.categoly?.join(
         " "
       )} ${props.data?.tags?.join(" ")} ${
         nowType == "desktop" ? "Desktop PC" : "Mobile Phone"
