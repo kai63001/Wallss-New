@@ -144,7 +144,7 @@ const UploadPage = (props) => {
 
   // console.log(props.romeo)
 
-  const dev = true;
+  const dev = false;
   if (dev)
     return (
       <Layout
