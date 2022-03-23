@@ -11,11 +11,11 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
             <link rel="shortcut icon" href="/icon.ico" />
-          {/* <script
+          <script
             data-ad-client="ca-pub-9787491065456428"
             async
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-          ></script> */}
+          ></script>
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-R4KQC6E3FP"
